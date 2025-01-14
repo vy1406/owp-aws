@@ -1,27 +1,25 @@
 {
   "name": "owp-aws",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+
+    "build": "cd ./next && npx next build",
+    "export": "cd ./next && npx next build && move out ..",
+    "upload": "aws s3 sync ./out s3://owp-aws-bucket",
+
+    "deploy": "aws cloudformation deploy --template-file template.yml --stack-name OwpAppStack --capabilities CAPABILITY_NAMED_IAM",
+    "delete": "aws cloudformation delete-stack --stack-name OwpAppStack",
+    "events": "aws cloudformation describe-stack-events --stack-name OwpAppStack",
+    "stack" : "aws cloudformation describe-stacks --stack-name OwpAppStack",
+    "validate": "aws cloudformation validate-template --template-body file://template.yml",
+
+    "deploy:full": "npm run build && npm run export && npm run upload && npm run deploy",
+
+    "invalidate": "aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths \"/*\""
   },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.4"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.4",
-    "@eslint/eslintrc": "^3"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
