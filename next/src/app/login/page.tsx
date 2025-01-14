@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 const Login = () => {
   const {
@@ -46,6 +47,11 @@ const Login = () => {
           <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
             Login
           </button>
+        </div>
+        <div className="text-center">
+          <Link href="/signup">
+            <span className="text-blue-500 hover:underline">Create Account</span>
+          </Link>
         </div>
       </form>
     </div>
