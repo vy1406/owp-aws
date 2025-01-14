@@ -14,25 +14,6 @@ const Login = () => {
     const onSubmit = async (data) => {
         console.log('Signup Submitted:', data);
 
-        try {
-            const response = await fetch(
-                'https://<your-cloudfront-domain>/signup',
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
-                }
-            );
-
-            const result = await response.json();
-            if (response.ok) {
-                alert('User created successfully');
-            } else {
-                alert(`Error: ${result.message}`);
-            }
-        } catch (error) {
-            console.error('Error during signup:', error);
-        }
     };
 
     return (

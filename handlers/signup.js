@@ -1,4 +1,5 @@
 const AWS = require('aws-sdk');
+const bcrypt = require('bcryptjs');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
@@ -12,9 +13,12 @@ exports.handler = async (event) => {
             };
         }
 
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const params = {
             TableName: 'UsersTable',
-            Item: { username, password },
+            Item: { username, password: hashedPassword },
         };
 
         await dynamoDB.put(params).promise();

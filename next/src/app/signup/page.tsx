@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,12 +11,33 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log('Signup Submitted:', data);
-    // TODO: Integrate with Lambda for user registration
-  };
-
   const password = watch('password', '');
+
+  const onSubmit = async (data) => {
+    if (data.password !== data.confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    console.log('Signup Submitted:', data);
+
+    const response = await fetch('https://YOUR_API_GATEWAY_URL/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: data.username,
+        password: data.password,
+      }),
+    });
+
+    if (response.ok) {
+      alert('Signup successful!');
+    } else {
+      alert('Signup failed!');
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto p-4">
