@@ -7,6 +7,9 @@ const Navbar = () => {
         <Link href="/" className="text-xl font-bold hover:text-gray-300">
           MyApp
         </Link>
+        <Link href="/protected" className="text-xl font-bold hover:text-gray-300">
+          Protected
+        </Link>
         <div className="flex gap-4">
           <Link
             href="/login"
