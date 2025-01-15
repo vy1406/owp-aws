@@ -1,5 +1,3 @@
-export const dynamic = 'force-static'
-
 import { validateToken } from "@/utils/validateToken";
 
 export async function GET(request: Request) {
