@@ -12,6 +12,9 @@ exports.handler = async (event) => {
         if (!username || !password) {
             return {
                 statusCode: 400,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
                 body: JSON.stringify({ message: 'Missing username or password' }),
             };
         }
@@ -27,6 +30,9 @@ exports.handler = async (event) => {
         if (!user) {
             return {
                 statusCode: 401,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
                 body: JSON.stringify({ message: 'Invalid username or password' }),
             };
         }
@@ -36,6 +42,9 @@ exports.handler = async (event) => {
         if (!isValidPassword) {
             return {
                 statusCode: 401,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
                 body: JSON.stringify({ message: 'Invalid username or password' }),
             };
         }
@@ -44,12 +53,18 @@ exports.handler = async (event) => {
 
         return {
             statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+            },
             body: JSON.stringify({ message: 'Login successful', token }),
         };
     } catch (error) {
         console.error('Error in login handler:', error);
         return {
             statusCode: 500,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+            },
             body: JSON.stringify({ message: 'Internal server error', error }),
         };
     }

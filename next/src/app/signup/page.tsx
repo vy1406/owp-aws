@@ -14,30 +14,91 @@ const Signup = () => {
   const password = watch('password', '');
 
   const onSubmit = async (data: any) => {
-    if (data.password !== data.confirmPassword) {
-      alert('Passwords do not match');
-      return;
-    }
-
     console.log('Signup Submitted:', data);
 
-    const response = await fetch('https://YOUR_API_GATEWAY_URL/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: data.username,
-        password: data.password,
-      }),
-    });
+    try {
+      // Validate password confirmation
+      if (data.password !== data.confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
 
-    if (response.ok) {
-      alert('Signup successful!');
-    } else {
-      alert('Signup failed!');
+      console.log('Signup Submitted:', data);
+
+      // Make API request
+      data = {
+        username: 'testUser',
+        password: 'Aa1234567!',
+      }
+      const response = await fetch('https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
+      });
+
+      // Handle the response
+      if (response.ok) {
+        alert('Signup successful!');
+      } else {
+        const errorData = await response.json();
+        alert(`Signup failed: ${errorData.message || 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+      alert('An error occurred during signup. Please try again.');
     }
   };
+
+  const handlePostRequest = async () => {
+    try {
+      const apiResponse = await fetch('https://reqres.in/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'Vova',
+          job: 'Developer',
+        }),
+      });
+
+      if (!apiResponse.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await apiResponse.json();
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  const handleTest = async () => {
+    try {
+      const data = {
+        username: 'testUser',
+        password: 'Aa1234567!',
+      }
+      const response = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: data.username,
+          password: data.password,
+        }),
+      });
+
+    }
+    catch (error) {
+      console.error('Error during test:', error);
+      alert('An error occurred during test. Please try again');
+    }
+
+  }
 
   return (
     <div className="max-w-md mx-auto p-4">
@@ -85,6 +146,12 @@ const Signup = () => {
           </button>
         </div>
       </form>
+      <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handleTest}>
+        test
+      </button>
+      <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handlePostRequest}>
+        handlePostRequest
+      </button>
     </div>
   );
 };
