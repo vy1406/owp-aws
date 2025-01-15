@@ -1,7 +1,8 @@
-export async function POST(req) {
+export const dynamic = 'force-static'
+
+export async function POST(request: Request) {
     try {
-        const body = await req.json();
-        console.log("lol", body)
+        const body = await request.json();
         const response = await fetch(
             'https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/signup',
             {
@@ -10,7 +11,6 @@ export async function POST(req) {
                 body: JSON.stringify(body),
             }
         );
-        console.log("lol", response)
         const responseData = await response.json();
 
         return new Response(JSON.stringify(responseData), {
@@ -18,7 +18,6 @@ export async function POST(req) {
             headers: { 'Content-Type': 'application/json' },
         });
     } catch (error) {
-        console.error('Error in API route:', error);
         return new Response(
             JSON.stringify({ message: 'Internal Server Error' }),
             { status: 500 }

@@ -25,12 +25,7 @@ const Signup = () => {
 
       console.log('Signup Submitted:', data);
 
-      // Make API request
-      data = {
-        username: 'testUser',
-        password: 'Aa1234567!',
-      }
-      const response = await fetch('https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/signup', {
+      const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,49 +49,26 @@ const Signup = () => {
     }
   };
 
-  const handlePostRequest = async () => {
-    try {
-      const apiResponse = await fetch('https://reqres.in/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: 'Vova',
-          job: 'Developer',
-        }),
-      });
-
-      if (!apiResponse.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const result = await apiResponse.json();
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
 
   const handleTest = async () => {
     try {
-      const data = {
-        "username": "testUser",
-        "password": "Aa1234567!",
-      }
-      const response = await fetch('/api/signup', {
-        method: 'POST',
+      const response = await fetch('/api/test', {
+        method: 'GET',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-
       });
 
-    }
-    catch (error) {
-      console.error('Error during test:', error);
-      alert('An error occurred during test. Please try again');
-    }
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-  }
+      const result = await response.json();
+      console.log('Test endpoint result:', result);
+      alert(`Response from test endpoint: ${JSON.stringify(result)}`);
+    } catch (error) {
+      console.error('Error during test:', error);
+      alert('An error occurred while testing the endpoint.');
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto p-4">
@@ -146,9 +118,6 @@ const Signup = () => {
       </form>
       <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handleTest}>
         test
-      </button>
-      <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handlePostRequest}>
-        handlePostRequest
       </button>
     </div>
   );
