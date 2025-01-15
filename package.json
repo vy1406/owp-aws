@@ -15,14 +15,15 @@
     "stack" : "aws cloudformation describe-stacks --stack-name OwpAppStack",
     "validate": "aws cloudformation validate-template --template-body file://template.yml",
 
+    "deploy:auth": "aws cloudformation deploy --template-file dynamo-auth.yml --stack-name DynamoAuthStack --capabilities CAPABILITY_NAMED_IAM",
+    "deploy:lambdas": "aws cloudformation deploy --template-file api-auth.yml --stack-name ApiAuthStack --capabilities CAPABILITY_NAMED_IAM",
     "deploy:full": "npm run build && npm run export && npm run upload && npm run deploy",
-
     "invalidate": "aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths \"/*\"",
 
-
+    "create:deployBucket": "aws s3 mb s3://owp-aws-deploy-bucket",
     "handlers:zip": "powershell Compress-Archive -Path ./handlers/* -DestinationPath handlers.zip",
     "handlers:clear-zip": "powershell Remove-Item -Path ./handlers.zip -Force",
-    "handlers:upload": "aws s3 cp handlers.zip s3://owp-aws-lambda-deploys"
+    "handlers:upload": "aws s3 cp handlers.zip s3://owp-aws-deploy-bucket"
   },
   "keywords": [],
   "author": "",

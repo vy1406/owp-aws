@@ -13,7 +13,7 @@ const Signup = () => {
 
   const password = watch('password', '');
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     if (data.password !== data.confirmPassword) {
       alert('Passwords do not match');
       return;
