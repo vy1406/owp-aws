@@ -1,16 +1,15 @@
-export async function POST(req) {
+export async function GET(req) {
     try {
         const body = await req.json();
-        console.log("lol", body)
+
         const response = await fetch(
-            'https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/signup',
+            'https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/test',
             {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
             }
         );
-        console.log("lol", response)
+
         const responseData = await response.json();
 
         return new Response(JSON.stringify(responseData), {

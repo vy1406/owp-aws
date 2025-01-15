@@ -1,0 +1,187 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  TestFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt TestFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
+  LoginFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt LoginFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
+  SignupFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt SignupFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+  # Lambda Execution Role
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/UsersTable"
+
+        - PolicyName: CloudWatchLogsAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "arn:aws:logs:*:*:*"
+
+  # Lambda Functions
+  LoginFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: LoginFunction
+      Handler: login.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: login.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          JWT_SECRET: "mysecretkey3"
+          USERS_TABLE: "UsersTable"
+
+  SignupFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: SignupFunction
+      Handler: signup.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: signup.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          USERS_TABLE: "UsersTable"
+
+  TestFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: TestFunction
+      Handler: test.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: login.zip
+      PackageType: Zip
+
+  # API Gateway Rest API
+  ApiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: AuthApi
+
+  # API Gateway Resources
+  LoginResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: login
+      RestApiId: !Ref ApiGateway
+
+  SignupResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: signup
+      RestApiId: !Ref ApiGateway
+
+  TestResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: test
+      RestApiId: !Ref ApiGateway
+
+  # API Gateway Methods
+  LoginMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref LoginResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LoginFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+
+  SignupMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref SignupResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SignupFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+
+  TestMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref TestResource
+      HttpMethod: GET
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${TestFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+
+Outputs:
+  ApiUrl:
+    Description: URL of the API Gateway
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/"

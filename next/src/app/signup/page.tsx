@@ -80,16 +80,14 @@ const Signup = () => {
   const handleTest = async () => {
     try {
       const data = {
-        username: 'testUser',
-        password: 'Aa1234567!',
+        "username": "testUser",
+        "password": "Aa1234567!",
       }
       const response = await fetch('/api/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username: data.username,
-          password: data.password,
-        }),
+        body: JSON.stringify(data),
+
       });
 
     }

@@ -20,11 +20,11 @@
     "invalidate": "aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths \"/*\"",
     
     "create:deployBucket": "aws s3 mb s3://owp-aws-deploy-bucket",
-    "handlers:zip": "powershell Compress-Archive -Path ./handlers/* -DestinationPath ./handlers.zip",
+    "handlers:zip": "powershell Compress-Archive -Path ./handlers/test* -DestinationPath ./test.zip",
     "handlers:unzip": "powershell Expand-Archive -Path ./handlers.zip -DestinationPath ./handlers_unzipped -Force",
     "handlers:clear-zip": "powershell Remove-Item -Path ./handlers.zip -Force",
     "handlers:upload": "aws s3 cp handlers.zip s3://owp-aws-deploy-bucket",
-    "handlers:updateSpecific": "aws lambda update-function-code --function-name TestFunction --s3-bucket owp-aws-deploy-bucket --s3-key handlers.zip && aws lambda update-function-configuration --function-name TestFunction --layers arn:aws:lambda:us-east-1:491085397542:layer:AuthLayer:2",
+    "handlers:updateSpecific": "aws lambda update-function-code --function-name TestFunction --s3-bucket owp-aws-deploy-bucket --s3-key test.zip && aws lambda update-function-configuration --function-name TestFunction",
 
     "auth:deploy": "aws cloudformation deploy --template-file api-auth.yml --stack-name ApiAuthStack --capabilities CAPABILITY_NAMED_IAM",
     "auth:outputs": "aws cloudformation describe-stacks --stack-name ApiAuthStack --query \"Stacks[0].Outputs\"",
