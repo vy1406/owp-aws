@@ -1,0 +1,208 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  ApplicationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ApplicationsTable
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ApplicationsTable"
+        - PolicyName: CloudWatchLogsAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: "arn:aws:logs:*:*:*"
+
+  GetApplicationFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: GetApplicationFunction
+      Handler: get.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: applicationHandlers.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          APPLICATIONS_TABLE: "ApplicationsTable"
+          JWT_SECRET: "mysecretkey3"
+
+  CreateApplicationFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: CreateApplicationFunction
+      Handler: create.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: applicationHandlers.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          APPLICATIONS_TABLE: "ApplicationsTable"
+          JWT_SECRET: "mysecretkey3"
+
+  UpdateApplicationFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: UpdateApplicationFunction
+      Handler: update.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: applicationHandlers.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          APPLICATIONS_TABLE: "ApplicationsTable"
+          JWT_SECRET: "mysecretkey3"
+
+  DeleteApplicationFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: DeleteApplicationFunction
+      Handler: delete.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: applicationHandlers.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          APPLICATIONS_TABLE: "ApplicationsTable"
+          JWT_SECRET: "mysecretkey3"
+
+  ApiGateway:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: ApplicationsApi
+
+  ApplicationsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt ApiGateway.RootResourceId
+      PathPart: applications
+      RestApiId: !Ref ApiGateway
+
+  GetMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref ApplicationsResource
+      HttpMethod: GET
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetApplicationFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+
+  PostMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref ApplicationsResource
+      HttpMethod: POST
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CreateApplicationFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+
+  PutMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref ApplicationsResource
+      HttpMethod: PUT
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UpdateApplicationFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+
+  DeleteMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref ApplicationsResource
+      HttpMethod: DELETE
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DeleteApplicationFunction.Arn}/invocations"
+      MethodResponses:
+        - StatusCode: 200
+
+  OptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref ApplicationsResource
+      HttpMethod: OPTIONS
+      AuthorizationType: NONE
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'GET,POST,PUT,DELETE,OPTIONS'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+      Integration:
+        Type: MOCK
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'GET,POST,PUT,DELETE,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+
+Outputs:
+  ApiUrl:
+    Description: URL of the API Gateway
+    Value: !Sub "https://${ApiGateway}.execute-api.${AWS::Region}.amazonaws.com/prod/"
