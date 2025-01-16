@@ -19,7 +19,7 @@ export default function ApplicationForm() {
     const handleGetAll = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications?submission_city=Toronto', {
+            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -31,7 +31,6 @@ export default function ApplicationForm() {
             }
             const result = await response.json();
             console.log('Test endpoint result:', result);
-            alert('Application created successfully!');
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
@@ -114,7 +113,7 @@ export default function ApplicationForm() {
     };
 
     const getById = async () => {
-        const id = "b308c63c-6a53-494f-bc2a-c3d9c009a1b8"
+        const id = "5c5f9527-680c-4894-8cbc-fc3f22be0742"
         const token = localStorage.getItem('token');
         try {
             const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
@@ -137,21 +136,19 @@ export default function ApplicationForm() {
     }
 
     const handleUpdate = async () => {
-        const id = "b308c63c-6a53-494f-bc2a-c3d9c009a1b8"
+        const id = "5c5f9527-680c-4894-8cbc-fc3f22be0742"
         const generatedindex = Math.floor(Math.random() * 1000);
         const token = localStorage.getItem('token');
         const body = {
+            id,
             additional_info: "updated" + generatedindex,
-            application_date: "2025-01-01",
-            biometric_date: "2025-01-16",
-            decision_date: "2025-01-21",
             is_self_submitted: true,
             status: "Pending",
             submission_city: "Calgary"
         }
 
         try {
-            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
+            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -5,40 +5,83 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const SECRET = process.env.JWT_SECRET || "mysecretkey3";
 
 exports.handler = async (event) => {
-    const token = event.headers?.Authorization;
+    const authHeader = event.headers?.Authorization;
 
-    if (!token) {
-        return { statusCode: 401, body: JSON.stringify({ message: 'Unauthorized' }) };
+    // Return 401 if no valid authorization header is found
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return {
+            statusCode: 401,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+            },
+            body: JSON.stringify({ message: 'Unauthorized' })
+        };
     }
+
+    const token = authHeader.split(" ")[1];
 
     try {
         jwt.verify(token, SECRET);
-        const queryParams = event.queryStringParameters || {};
+
+        const { dateFrom, dateTo, submission_city, status, additional_info } = event.queryStringParameters || {};
+
+        let filterExpression = [];
+        let expressionAttributeValues = {};
+
+        if (dateFrom && dateTo) {
+            filterExpression.push("application_date BETWEEN :dateFrom AND :dateTo");
+            expressionAttributeValues[":dateFrom"] = dateFrom;
+            expressionAttributeValues[":dateTo"] = dateTo;
+        }
+
+        if (submission_city) {
+            filterExpression.push("submission_city = :submission_city");
+            expressionAttributeValues[":submission_city"] = submission_city;
+        }
+
+        if (status) {
+            filterExpression.push("#st = :status");
+            expressionAttributeValues[":status"] = status;
+        }
+
+        if (additional_info) {
+            filterExpression.push("contains(additional_info, :additional_info)");
+            expressionAttributeValues[":additional_info"] = additional_info;
+        }
 
         const params = {
             TableName: process.env.APPLICATIONS_TABLE,
-            FilterExpression: '',
-            ExpressionAttributeNames: {},
-            ExpressionAttributeValues: {},
+            FilterExpression: filterExpression.length > 0 ? filterExpression.join(" AND ") : undefined,
+            ExpressionAttributeValues: Object.keys(expressionAttributeValues).length > 0 ? expressionAttributeValues : undefined,
+            ExpressionAttributeNames: { "#st": "status" }
         };
-
-        if (queryParams.status) {
-            params.FilterExpression += '#status = :status';
-            params.ExpressionAttributeNames['#status'] = 'status';
-            params.ExpressionAttributeValues[':status'] = queryParams.status;
-        }
-
-        if (queryParams.submission_city) {
-            if (params.FilterExpression) params.FilterExpression += ' AND ';
-            params.FilterExpression += '#submission_city = :submission_city';
-            params.ExpressionAttributeNames['#submission_city'] = 'submission_city';
-            params.ExpressionAttributeValues[':submission_city'] = queryParams.submission_city;
-        }
 
         const result = await dynamoDB.scan(params).promise();
 
-        return { statusCode: 200, body: JSON.stringify(result.Items) };
+        return {
+            statusCode: 200,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+            },
+            body: JSON.stringify(result.Items),
+        };
+
     } catch (error) {
-        return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
+        return {
+            statusCode: 500,
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+            },
+            body: JSON.stringify({ message: error.message })
+        };
     }
 };

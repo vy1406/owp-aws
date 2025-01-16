@@ -6,3 +6,14 @@ Todo:
 4. separated app for login
 5. toast
 6. city api
+
+
+stopped at:
+get by id.
+get all ( add json ) 
+create. ( add json ) 
+
+continue to:
+get all by params.
+delete
+update
