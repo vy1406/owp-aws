@@ -141,10 +141,7 @@ export default function ApplicationForm() {
         const token = localStorage.getItem('token');
         const body = {
             id,
-            additional_info: "updated" + generatedindex,
-            is_self_submitted: true,
-            status: "Pending",
-            submission_city: "Calgary"
+            submission_city: "New Toronto"
         }
 
         try {
@@ -161,7 +158,7 @@ export default function ApplicationForm() {
             }
             const result = await response.json();
             console.log('Test endpoint result:', result);
-            alert('Application created successfully!');
+            alert('Application updated successfully!');
         } catch (error) {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
