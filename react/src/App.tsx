@@ -1,14 +1,22 @@
 import './App.css'
+import Footer from './components/Footer'
+import NavBar from './components/NavBar'
+import ApplicationForm from './forms/application'
 import Signup from './pages/signUp'
+
 
 function App() {
 
   return (
     <>
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <h1 className="text-4xl font-bold text-blue-500">Hello, Tailwind with Vite!</h1>
+      <header className="sticky z-50 top-0">
+        <NavBar />
+      </header>
+      <main className="pt-16 px-4 md:px-16">
         <Signup />
-      </div>
+        <ApplicationForm />
+      </main>
+      <Footer />
     </>
   )
 }
