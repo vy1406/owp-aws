@@ -110,8 +110,8 @@ export default function ApplicationForm() {
             const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json'
-                    // 'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 }
             });
             if (!response.ok) {
