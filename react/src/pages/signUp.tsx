@@ -89,6 +89,7 @@ const Signup = () => {
 
             if (response.ok) {
                 const result = await response.json();
+                localStorage.setItem('token', result.token);
                 console.log('Login endpoint result:', result);
                 alert(`Response from login endpoint: ${JSON.stringify(result)}`);
             } else {

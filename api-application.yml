@@ -12,6 +12,46 @@ Resources:
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
 
+  GetApplicationFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt GetApplicationFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
+  GetApplicationByIdFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt GetApplicationByIdFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
+  CreateApplicationFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt CreateApplicationFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
+  UpdateApplicationFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt UpdateApplicationFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
+  DeleteApplicationFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt DeleteApplicationFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ApiGateway}/*"
+
   LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -34,6 +74,7 @@ Resources:
                   - dynamodb:Query
                   - dynamodb:UpdateItem
                   - dynamodb:DeleteItem
+                  - dynamodb:Scan
                 Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ApplicationsTable"
         - PolicyName: CloudWatchLogsAccess
           PolicyDocument:
@@ -55,7 +96,23 @@ Resources:
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
         S3Bucket: owp-aws-deploy-bucket
-        S3Key: applicationHandlers.zip
+        S3Key: get.zip
+      PackageType: Zip
+      Environment:
+        Variables:
+          APPLICATIONS_TABLE: "ApplicationsTable"
+          JWT_SECRET: "mysecretkey3"
+
+  GetApplicationByIdFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: GetApplicationByIdFunction
+      Handler: getById.handler
+      Runtime: nodejs16.x
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Code:
+        S3Bucket: owp-aws-deploy-bucket
+        S3Key: getById.zip
       PackageType: Zip
       Environment:
         Variables:
@@ -71,7 +128,7 @@ Resources:
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
         S3Bucket: owp-aws-deploy-bucket
-        S3Key: applicationHandlers.zip
+        S3Key: create.zip
       PackageType: Zip
       Environment:
         Variables:
@@ -87,7 +144,7 @@ Resources:
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
         S3Bucket: owp-aws-deploy-bucket
-        S3Key: applicationHandlers.zip
+        S3Key: update.zip
       PackageType: Zip
       Environment:
         Variables:
@@ -103,7 +160,7 @@ Resources:
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
         S3Bucket: owp-aws-deploy-bucket
-        S3Key: applicationHandlers.zip
+        S3Key: delete.zip
       PackageType: Zip
       Environment:
         Variables:
@@ -122,6 +179,13 @@ Resources:
       PathPart: applications
       RestApiId: !Ref ApiGateway
 
+  ByIdResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref ApplicationsResource
+      PathPart: "{id}"
+      RestApiId: !Ref ApiGateway
+
   GetMethod:
     Type: AWS::ApiGateway::Method
     Properties:
@@ -135,6 +199,30 @@ Resources:
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetApplicationFunction.Arn}/invocations"
       MethodResponses:
         - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+
+  GetByIdMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ApiGateway
+      ResourceId: !Ref ByIdResource
+      HttpMethod: GET
+      AuthorizationType: NONE
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetApplicationByIdFunction.Arn}/invocations"
+      RequestParameters:
+        method.request.path.id: true
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
 
   PostMethod:
     Type: AWS::ApiGateway::Method
@@ -149,6 +237,10 @@ Resources:
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${CreateApplicationFunction.Arn}/invocations"
       MethodResponses:
         - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
 
   PutMethod:
     Type: AWS::ApiGateway::Method
@@ -163,6 +255,10 @@ Resources:
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${UpdateApplicationFunction.Arn}/invocations"
       MethodResponses:
         - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
 
   DeleteMethod:
     Type: AWS::ApiGateway::Method
@@ -177,6 +273,10 @@ Resources:
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${DeleteApplicationFunction.Arn}/invocations"
       MethodResponses:
         - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'GET,POST,OPTIONS'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
 
   OptionsMethod:
     Type: AWS::ApiGateway::Method

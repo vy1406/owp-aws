@@ -15,6 +15,27 @@ export default function ApplicationForm() {
         formState: { isSubmitting },
     } = useForm();
 
+    const handleGetAll = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to submit form');
+            }
+            const result = await response.json();
+            console.log('Test endpoint result:', result);
+            alert('Application created successfully!');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    }
     const onSubmit = async (data) => {
         console.log(data);
 
@@ -134,6 +155,9 @@ export default function ApplicationForm() {
                     </button>
                 </div>
             </form>
+            <button onClick={handleGetAll}>
+                test get all
+            </button>
         </div>
     );
 }
