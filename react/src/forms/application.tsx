@@ -103,6 +103,29 @@ export default function ApplicationForm() {
         }
     };
 
+    const getById = async () => {
+        const id = "b308c63c-6a53-494f-bc2a-c3d9c009a1b8"
+        const token = localStorage.getItem('token');
+        try {
+            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                    // 'Authorization': `Bearer ${token}`,
+                }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to submit form');
+            }
+            const result = await response.json();
+            console.log('Test endpoint result:', result);
+            alert('Application created successfully!');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    }
+
     return (
         <div className="max-w-md mx-auto p-4">
             <h1 className="text-2xl font-bold text-center mb-6">Create an Application</h1>
@@ -197,6 +220,10 @@ export default function ApplicationForm() {
             <div>----</div>
             <button onClick={addOneDummy}>
                 test add dummy
+            </button>
+            <div>----</div>
+            <button onClick={getById}>
+                test get by id
             </button>
         </div>
     );
