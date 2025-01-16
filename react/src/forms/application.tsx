@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { format } from 'date-fns';
 
 export const STATUS_MAP = {
     Pending: 'Pending',
@@ -18,7 +19,7 @@ export default function ApplicationForm() {
     const handleGetAll = async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
+            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications?submission_city=Toronto', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,23 +42,24 @@ export default function ApplicationForm() {
         const token = localStorage.getItem('token');
 
         const generatedindex = Math.floor(Math.random() * 1000);
-        const body = {
-            additional_info: "additional generated:" + generatedindex,
-            application_date: "2025-01-01",
-            biometric_date: "2025-01-16",
-            decision_date: "2025-01-21",
+        const tempData = {
+            additional_info: "generated index:" + generatedindex,
+            application_date: "2025-03-23",
+            biometric_date: "2025-03-24",
+            decision_date: "2025-03-25",
             is_self_submitted: true,
-            status: "Pending",
-            submission_city: "Calgary"
+            status: "Declined",
+            submission_city: "Toronto"
         }
 
         try {
             const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(body),
+                body: JSON.stringify(tempData),
             });
             if (!response.ok) {
                 console.log(response);
@@ -73,25 +75,33 @@ export default function ApplicationForm() {
     }
 
     const onSubmit = async (data) => {
-        console.log(data);
+        const formattedData = {
+            ...data,
+            application_date: format(new Date(data.application_date), 'yyyy-MM-dd'),
+            biometric_date: format(new Date(data.biometric_date), 'yyyy-MM-dd'),
+            decision_date: format(new Date(data.decision_date), 'yyyy-MM-dd'),
+        }
+        console.log(formattedData);
 
+        const token = localStorage.getItem('token');
         const tempData = {
             additional_info: "this is my additional info",
-            application_date: "2025-01-01",
-            biometric_date: "2025-01-16",
-            decision_date: "2025-01-21",
+            application_date: "2025-01-20",
+            biometric_date: "2025-01-21",
+            decision_date: "2025-01-22",
             is_self_submitted: true,
             status: "Pending",
             submission_city: "Calgary"
         }
 
         try {
-            const response = await fetch('https://dummyapi.com/api/application/create', {
+            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(formattedData),
             });
             if (!response.ok) {
                 throw new Error('Failed to submit form');
@@ -113,6 +123,41 @@ export default function ApplicationForm() {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 }
+            });
+            if (!response.ok) {
+                throw new Error('Failed to submit form');
+            }
+            const result = await response.json();
+            console.log('Test endpoint result:', result);
+            alert('Application created successfully!');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    }
+
+    const handleUpdate = async () => {
+        const id = "b308c63c-6a53-494f-bc2a-c3d9c009a1b8"
+        const generatedindex = Math.floor(Math.random() * 1000);
+        const token = localStorage.getItem('token');
+        const body = {
+            additional_info: "updated" + generatedindex,
+            application_date: "2025-01-01",
+            biometric_date: "2025-01-16",
+            decision_date: "2025-01-21",
+            is_self_submitted: true,
+            status: "Pending",
+            submission_city: "Calgary"
+        }
+
+        try {
+            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(body),
             });
             if (!response.ok) {
                 throw new Error('Failed to submit form');
@@ -224,6 +269,10 @@ export default function ApplicationForm() {
             <div>----</div>
             <button onClick={getById}>
                 test get by id
+            </button>
+            <div>----</div>
+            <button onClick={handleUpdate}>
+                update
             </button>
         </div>
     );
