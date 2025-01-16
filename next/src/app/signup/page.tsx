@@ -52,16 +52,18 @@ const Signup = () => {
 
   const handleTest = async () => {
     try {
-      const response = await fetch('/api/test', {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const res = await fetch('https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/test', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
 
-      if (!response.ok) {
+      console.log("lol test", res)
+      if (!res.ok) {
         throw new Error('Network response was not ok');
       }
 
-      const result = await response.json();
+      const result = await res.json();
       console.log('Test endpoint result:', result);
       alert(`Response from test endpoint: ${JSON.stringify(result)}`);
     } catch (error) {
