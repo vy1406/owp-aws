@@ -17,6 +17,17 @@ export default function ApplicationForm() {
 
     const onSubmit = async (data) => {
         console.log(data);
+
+        const tempData = {
+            additional_info: "this is my additional info",
+            application_date: "2025-01-01",
+            biometric_date: "2025-01-16",
+            decision_date: "2025-01-21",
+            is_self_submitted: true,
+            status: "Pending",
+            submission_city: "Calgary"
+        }
+
         try {
             const response = await fetch('https://dummyapi.com/api/application/create', {
                 method: 'POST',
