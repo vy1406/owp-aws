@@ -22,8 +22,8 @@ export default function ApplicationForm() {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
+                    'Authorization': `Bearer ${token}`,
+                }
             });
             if (!response.ok) {
                 throw new Error('Failed to submit form');
@@ -36,6 +36,42 @@ export default function ApplicationForm() {
             alert('An error occurred. Please try again.');
         }
     }
+
+    const addOneDummy = async () => {
+        const token = localStorage.getItem('token');
+
+        const generatedindex = Math.floor(Math.random() * 1000);
+        const body = {
+            additional_info: "additional generated:" + generatedindex,
+            application_date: "2025-01-01",
+            biometric_date: "2025-01-16",
+            decision_date: "2025-01-21",
+            is_self_submitted: true,
+            status: "Pending",
+            submission_city: "Calgary"
+        }
+
+        try {
+            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body),
+            });
+            if (!response.ok) {
+                console.log(response);
+                throw new Error('Failed to submit form');
+            }
+            const result = await response.json();
+            console.log('Test endpoint result:', result);
+            alert('Application created successfully!');
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
+    }
+
     const onSubmit = async (data) => {
         console.log(data);
 
@@ -157,6 +193,10 @@ export default function ApplicationForm() {
             </form>
             <button onClick={handleGetAll}>
                 test get all
+            </button>
+            <div>----</div>
+            <button onClick={addOneDummy}>
+                test add dummy
             </button>
         </div>
     );
