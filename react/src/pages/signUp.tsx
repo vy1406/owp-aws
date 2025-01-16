@@ -10,7 +10,7 @@ const Signup = () => {
 
     const password = watch('password', '');
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async () => {
 
     };
 
@@ -36,6 +36,70 @@ const Signup = () => {
             alert('An error occurred while testing the endpoint.');
         }
     };
+
+    const handleAddUser = async () => {
+        try {
+
+            const data = {
+                "username": "testUser1",
+                "password": "Aa1234567!"
+            }
+
+            const response = await fetch('https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: data.username,
+                    password: data.password,
+                }),
+            });
+
+            if (response.ok) {
+                alert('added successful!');
+            } else {
+                const errorData = await response.json();
+                alert(`Signup failed: ${errorData.message || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error('Error during signup:', error);
+            alert('An error occurred during signup. Please try again.');
+        }
+    }
+
+
+    const handleLogin = async () => {
+        try {
+            const data = {
+                "username": "admin",
+                "password": "Aa1234567!"
+            }
+
+            const response = await fetch('https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: data.username,
+                    password: data.password,
+                }),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Login endpoint result:', result);
+                alert(`Response from login endpoint: ${JSON.stringify(result)}`);
+            } else {
+                const errorData = await response.json();
+                alert(`Login failed: ${errorData.message || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            alert('An error occurred during login. Please try again.');
+        }
+    }
 
     return (
         <div className="max-w-md mx-auto p-4">
@@ -85,6 +149,12 @@ const Signup = () => {
             </form>
             <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handleTest}>
                 test
+            </button>
+            <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handleAddUser}>
+                add User
+            </button>
+            <button className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600" onClick={handleLogin}>
+                login ( get token )
             </button>
         </div>
     );

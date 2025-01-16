@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-const SECRET = process.env.JWT_SECRET || "mysecretkey";
+const SECRET = process.env.JWT_SECRET || "mysecretkey3";
 
 exports.handler = async (event) => {
     try {
@@ -13,7 +13,10 @@ exports.handler = async (event) => {
             return {
                 statusCode: 400,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
                 },
                 body: JSON.stringify({ message: 'Missing username or password' }),
             };
@@ -31,7 +34,10 @@ exports.handler = async (event) => {
             return {
                 statusCode: 401,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
                 },
                 body: JSON.stringify({ message: 'Invalid username or password' }),
             };
@@ -43,7 +49,10 @@ exports.handler = async (event) => {
             return {
                 statusCode: 401,
                 headers: {
-                    "Access-Control-Allow-Origin": "*",
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
                 },
                 body: JSON.stringify({ message: 'Invalid username or password' }),
             };
@@ -54,7 +63,10 @@ exports.handler = async (event) => {
         return {
             statusCode: 200,
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             },
             body: JSON.stringify({ message: 'Login successful', token }),
         };
@@ -63,7 +75,10 @@ exports.handler = async (event) => {
         return {
             statusCode: 500,
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             },
             body: JSON.stringify({ message: 'Internal server error', error }),
         };
