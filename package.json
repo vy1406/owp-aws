@@ -30,8 +30,11 @@
     "authApi:outputs": "aws cloudformation describe-stacks --stack-name ApiAuthStack --query \"Stacks[0].Outputs\"",
     "applicationApi:deploy": "aws cloudformation deploy --template-file api-application.yml --stack-name ApiApplicationStack --capabilities CAPABILITY_NAMED_IAM",
     "applicationApi:outputs": "aws cloudformation describe-stacks --stack-name ApiApplicationStack --query \"Stacks[0].Outputs\"",
-    "layer:output": "aws lambda list-layer-versions --layer-name AuthLayer"
+    "layer:output": "aws lambda list-layer-versions --layer-name AuthLayer",
     
+    "resourceApi:deploy": "aws cloudformation deploy --template-file api-resource.yml --stack-name ApiResourceStack --capabilities CAPABILITY_NAMED_IAM",
+    "resourceApi:outputs": "aws cloudformation describe-stacks --stack-name ApiResourceStack --query \"Stacks[0].Outputs\""
+
     
   },
   "keywords": [],

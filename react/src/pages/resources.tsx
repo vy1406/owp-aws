@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import Tabs from "../components/Tabs";
 import ResourceForm from "../forms/resource";
 import ServiceForm from "../forms/service";
@@ -11,6 +12,7 @@ const ResourceServiceForm = () => {
     };
 
     const onSubmit = (data) => {
+        const id = uuidv4();
         data.type = activeTab;
         console.log(data); // Log the submitted data
     };
