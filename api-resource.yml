@@ -96,6 +96,12 @@ Resources:
           }
         }
 
+  # Amazon SES Email Identity
+  SESIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: 'vladimir.elisavetsky@gmail.com'
+
   # API Gateway for Approval/Decline
   ApiGateway:
     Type: AWS::ApiGateway::RestApi
@@ -235,6 +241,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - ses:SendEmail
+                  - ses:VerifyEmailIdentity
                 Resource: "*"
 
 Outputs:
