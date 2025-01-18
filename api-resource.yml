@@ -29,17 +29,27 @@ Resources:
         RequestTemplates:
           application/json: |
             {
-              "body": $input.json('$'),
-              "headers": {
-                #foreach($header in $input.params().header.keySet())
-                "$header": "$util.escapeJavaScript($input.params().header.get($header))" #if($foreach.hasNext),#end
-                #end
-              },
-              "method": "$context.httpMethod",
-              "query": {
-                #foreach($queryParam in $input.params().querystring.keySet())
-                "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))" #if($foreach.hasNext),#end
-                #end
+              "entireInput": {
+                "body" : $input.json('$'),
+                "headers": {
+                  #foreach($header in $input.params().header.keySet())
+                    "$header": "$util.escapeJavaScript($input.params().header.get($header))"
+                    #if($foreach.hasNext),#end
+                  #end
+                },
+                "method": "$context.httpMethod",
+                "params": {
+                  #foreach($param in $input.params().path.keySet())
+                    "$param": "$util.escapeJavaScript($input.params().path.get($param))"
+                    #if($foreach.hasNext),#end
+                  #end
+                },
+                "query": {
+                  #foreach($queryParam in $input.params().querystring.keySet())
+                    "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))"
+                    #if($foreach.hasNext),#end
+                  #end
+                }
               }
             }
       ResourceId: !Ref ExecutionResource
@@ -69,28 +79,57 @@ Resources:
               method.response.header.Location: "integration.response.body.headers.Location"
         RequestTemplates:
           application/json: |
+            #if($input.json('$') && $input.json('$').size() > 0)
             {
-              "body" : $input.json('$'),
-              "headers": {
-                #foreach($header in $input.params().header.keySet())
-                "$header": "$util.escapeJavaScript($input.params().header.get($header))" #if($foreach.hasNext),#end
-
-                #end
-              },
-              "method": "$context.httpMethod",
-              "params": {
-                #foreach($param in $input.params().path.keySet())
-                "$param": "$util.escapeJavaScript($input.params().path.get($param))" #if($foreach.hasNext),#end
-
-                #end
-              },
-              "query": {
-                #foreach($queryParam in $input.params().querystring.keySet())
-                "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))" #if($foreach.hasNext),#end
-
-                #end
-              }  
+              "entireInput": {
+                "body": $input.json('$'),
+                "headers": {
+                  #foreach($header in $input.params().header.keySet())
+                    "$header": "$util.escapeJavaScript($input.params().header.get($header))"
+                    #if($foreach.hasNext),#end
+                  #end
+                },
+                "method": "$context.httpMethod",
+                "params": {
+                  #foreach($param in $input.params().path.keySet())
+                    "$param": "$util.escapeJavaScript($input.params().path.get($param))"
+                    #if($foreach.hasNext),#end
+                  #end
+                },
+                "query": {
+                  #foreach($queryParam in $input.params().querystring.keySet())
+                    "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))"
+                    #if($foreach.hasNext),#end
+                  #end
+                }
+              }
             }
+            #else
+            {
+              "entireInput": {
+                "body": {},
+                "headers": {
+                  #foreach($header in $input.params().header.keySet())
+                    "$header": "$util.escapeJavaScript($input.params().header.get($header))"
+                    #if($foreach.hasNext),#end
+                  #end
+                },
+                "method": "$context.httpMethod",
+                "params": {
+                  #foreach($param in $input.params().path.keySet())
+                    "$param": "$util.escapeJavaScript($input.params().path.get($param))"
+                    #if($foreach.hasNext),#end
+                  #end
+                },
+                "query": {
+                  #foreach($queryParam in $input.params().querystring.keySet())
+                    "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))"
+                    #if($foreach.hasNext),#end
+                  #end
+                }
+              }
+            }
+            #end
       ResourceId: !Ref ExecutionResource
       RestApiId: !Ref ExecutionApi
       MethodResponses:
@@ -391,7 +430,7 @@ Resources:
                 }
 
                 const entireInputlol = event.entireInput;
-                console.log('entireInput lol = ' + JSON.stringify(entireInputlol));
+                console.log("Full Event:", JSON.stringify(event, null, 2));
 
                 const executionContext = event.ExecutionContext;
                 console.log('executionContext= ' + JSON.stringify(executionContext));
