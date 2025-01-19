@@ -5,15 +5,12 @@ Todo:
 3. constants
 4. separated app for login
 5. toast
-6. city api
 
 
 stopped at:
-get by id.
-get all ( add json ) 
-create. ( add json ) 
+manual approval works
 
-continue to:
-get all by params.
-delete
-update
+todo:
+1. make email with the whole template
+2. implement in client... 
+3. generate cities using gpt.
