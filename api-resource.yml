@@ -26,32 +26,6 @@ Resources:
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${InvokeStateMachineFunction.Arn}/invocations"
         IntegrationResponses:
           - StatusCode: 200
-        RequestTemplates:
-          application/json: |
-            {
-              "entireInput": {
-                "body" : $input.json('$'),
-                "headers": {
-                  #foreach($header in $input.params().header.keySet())
-                    "$header": "$util.escapeJavaScript($input.params().header.get($header))"
-                    #if($foreach.hasNext),#end
-                  #end
-                },
-                "method": "$context.httpMethod",
-                "params": {
-                  #foreach($param in $input.params().path.keySet())
-                    "$param": "$util.escapeJavaScript($input.params().path.get($param))"
-                    #if($foreach.hasNext),#end
-                  #end
-                },
-                "query": {
-                  #foreach($queryParam in $input.params().querystring.keySet())
-                    "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))"
-                    #if($foreach.hasNext),#end
-                  #end
-                }
-              }
-            }
       ResourceId: !Ref ExecutionResource
       RestApiId: !Ref ExecutionApi
       MethodResponses:
@@ -77,59 +51,7 @@ Resources:
           - StatusCode: 302
             ResponseParameters:
               method.response.header.Location: "integration.response.body.headers.Location"
-        RequestTemplates:
-          application/json: |
-            #if($input.json('$') && $input.json('$').size() > 0)
-            {
-              "entireInput": {
-                "body": $input.json('$'),
-                "headers": {
-                  #foreach($header in $input.params().header.keySet())
-                    "$header": "$util.escapeJavaScript($input.params().header.get($header))"
-                    #if($foreach.hasNext),#end
-                  #end
-                },
-                "method": "$context.httpMethod",
-                "params": {
-                  #foreach($param in $input.params().path.keySet())
-                    "$param": "$util.escapeJavaScript($input.params().path.get($param))"
-                    #if($foreach.hasNext),#end
-                  #end
-                },
-                "query": {
-                  #foreach($queryParam in $input.params().querystring.keySet())
-                    "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))"
-                    #if($foreach.hasNext),#end
-                  #end
-                }
-              }
-            }
-            #else
-            {
-              "entireInput": {
-                "body": {},
-                "headers": {
-                  #foreach($header in $input.params().header.keySet())
-                    "$header": "$util.escapeJavaScript($input.params().header.get($header))"
-                    #if($foreach.hasNext),#end
-                  #end
-                },
-                "method": "$context.httpMethod",
-                "params": {
-                  #foreach($param in $input.params().path.keySet())
-                    "$param": "$util.escapeJavaScript($input.params().path.get($param))"
-                    #if($foreach.hasNext),#end
-                  #end
-                },
-                "query": {
-                  #foreach($queryParam in $input.params().querystring.keySet())
-                    "$queryParam": "$util.escapeJavaScript($input.params().querystring.get($queryParam))"
-                    #if($foreach.hasNext),#end
-                  #end
-                }
-              }
-            }
-            #end
+
       ResourceId: !Ref ExecutionResource
       RestApiId: !Ref ExecutionApi
       MethodResponses:
@@ -250,12 +172,7 @@ Resources:
               const region = lambdaArnTokens[3];
               const accountId = lambdaArnTokens[4];
 
-              console.log("partition=" + partition);
-              console.log("region=" + region);
-              console.log("accountId=" + accountId);
-
               const executionArn = "arn:" + partition + ":states:" + region + ":" + accountId + ":execution:" + statemachineName + ":" + executionName;
-              console.log("executionArn=" + executionArn);
 
               const url = "https://console.aws.amazon.com/states/home?region=" + region + "#/executions/details/" + executionArn;
               callback(null, {
@@ -265,6 +182,15 @@ Resources:
                   }
               });
             };
+
+            var addToDeadLetterQueque = function(msgId) {
+                console.log("remove from letter quequeu")
+                console.log("add to DeadLetter queque")
+            } 
+            var addToDb = function(msgId) {
+                console.log("TODO: get from letter quequeu")
+                console.log("TODO: add to Resource table")
+            }
 
             exports.handler = (event, context, callback) => {
               console.log('Event= ' + JSON.stringify(event));
@@ -279,9 +205,12 @@ Resources:
 
               if (action === "approve") {
                 message = { "Status": "Approved! Task approved by ${Email}" };
+                addToDb()
               } else if (action === "reject") {
                 message = { "Status": "Rejected! Task rejected by ${Email}" };
+                addToDeadLetterQueque()
               } else {
+                addToDeadLetterQueque()
                 console.error("Unrecognized action. Expected: approve, reject.");
                 callback({"Status": "Failed to process the request. Unrecognized Action."});
               }
@@ -367,8 +296,7 @@ Resources:
                         "FunctionName": "${LambdaHumanApprovalSendEmailFunction.Arn}",
                         "Payload": {
                           "ExecutionContext.$": "$$",
-                          "APIGatewayEndpoint": "https://${ExecutionApi}.execute-api.${AWS::Region}.amazonaws.com/states",
-                          "entireInput.$": "$"
+                          "APIGatewayEndpoint": "https://${ExecutionApi}.execute-api.${AWS::Region}.amazonaws.com/states"
                         }
                       },
                       "Next": "ManualApprovalChoiceState"
@@ -417,44 +345,30 @@ Resources:
       Code:
         ZipFile:
           Fn::Sub: |
-            console.log('Loading function');
             const { SNS } = require("@aws-sdk/client-sns");
+
+            const addToQue = (someInput) => {
+              console.log('add to que...')
+              console.log("example", {
+                "someInput": "{\"id\":\"5c5f9527-680c-4894-8cbc-fc3f22be0742\",\"title\":\"Test Resource lol10 \",\"description\":\"A test resource from test from api. = lol10\",\"link\":\"https://vladimirelisavetsky.netlify.app/\",\"tags\":\"test,resource\",\"submitterEmail\":\"yvova88@yahoo.com\"}"
+              });
+            }
+
             exports.lambda_handler = (event, context, callback) => {
-                console.log('lol event= ' + JSON.stringify(event));
-                console.log('context= ' + JSON.stringify(context));
-
-                if (event.Body) {
-                  console.log('lol Body: ', JSON.stringify(event.Body, null, 2)); 
-                } else {
-                  console.log('No body found in the event!');
-                }
-
-                const entireInputlol = event.entireInput;
-                console.log("Full Event:", JSON.stringify(event, null, 2));
+                const fullEvent = JSON.stringify(event, null, 2);
+                console.log("Full Event:", fullEvent);
+                addToQue(fullEvent.Input)
 
                 const executionContext = event.ExecutionContext;
                 console.log('executionContext= ' + JSON.stringify(executionContext));
 
                 const executionName = executionContext.Execution.Name;
-                console.log('executionName= ' + executionName);
-
                 const statemachineName = executionContext.StateMachine.Name;
-                console.log('statemachineName= ' + statemachineName);
-
                 const taskToken = executionContext.Task.Token;
-                console.log('taskToken= ' + taskToken);
-
                 const apigwEndpint = event.APIGatewayEndpoint;
-                console.log('apigwEndpint = ' + apigwEndpint)
-
                 const approveEndpoint = apigwEndpint + "/execution?action=approve&ex=" + executionName + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
-                console.log('approveEndpoint= ' + approveEndpoint);
-
                 const rejectEndpoint = apigwEndpint + "/execution?action=reject&ex=" + executionName + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
-                console.log('rejectEndpoint= ' + rejectEndpoint);
-
                 const emailSnsTopic = "${SNSHumanApprovalEmailTopic}";
-                console.log('emailSnsTopic= ' + emailSnsTopic);
 
                 var emailMessage = 'Welcome! \n\n';
                 emailMessage += 'This is an email requiring an approval for a step functions execution. \n\n'
