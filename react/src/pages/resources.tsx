@@ -26,9 +26,8 @@ const ResourceServiceForm = () => {
                 method: 'POST',
                 body: JSON.stringify(payload),
                 headers: {
-                    'Content-Type': 'text/plain'
-                },
-                mode: 'cors'
+                    'Content-Type': 'application/json'
+                }
             });
             if (response.ok) {
                 console.log('Data successfully submitted');
