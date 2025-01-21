@@ -440,6 +440,7 @@ Resources:
                   description: input.description,
                   link: input.link,
                   tags: input.tags,
+                  type: input.type,
                   submitterEmail: input.submitterEmail,
                   status: 'Pending',
                 },

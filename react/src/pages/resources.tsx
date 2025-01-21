@@ -11,6 +11,24 @@ const ResourceServiceForm = () => {
         setActiveTab(tab);
     };
 
+    const handleOnGetResources = async () => {
+        const url = "https://qn6tw91djc.execute-api.us-east-1.amazonaws.com/states/retrieve"
+        try {
+            const response = await fetch(url, {
+                method: 'GET'
+            });
+            if (response.ok) {
+                console.log('fecthed successfully', response);
+                const result = await response.json();
+                console.log('Test endpoint result:', result);
+            } else {
+                console.error('Failed to fetch data', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
     const onSubmit = async (data) => {
         const id = uuidv4();
         data.id = id;
@@ -20,7 +38,7 @@ const ResourceServiceForm = () => {
             type: activeTab,
             ...data,
         }
-        const url = "https://zdv7d0sic9.execute-api.us-east-1.amazonaws.com/states/execution"
+        const url = "https://qn6tw91djc.execute-api.us-east-1.amazonaws.com/states/execution"
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -51,6 +69,10 @@ const ResourceServiceForm = () => {
             ) : (
                 <ServiceForm onSubmit={onSubmit} />
             )}
+
+            <button onClick={handleOnGetResources}>
+                get resources
+            </button>
         </div>
     );
 };

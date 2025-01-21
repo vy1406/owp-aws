@@ -112,7 +112,11 @@ Resources:
       ResourceId: !Ref RetrieveResource
       RestApiId: !Ref ExecutionApi
       MethodResponses:
-        - StatusCode: 200      
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"     
 
   ExecutionMethod:
     Type: "AWS::ApiGateway::Method"
@@ -339,6 +343,14 @@ Resources:
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ExecutionApi}/*"
 
+  GetResourcesFunctionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt RetrieveResourcesFunction.Arn
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${ExecutionApi}/*"
+
   LambdaApiGatewayInvoke:
     Type: "AWS::Lambda::Permission"
     Properties:
@@ -472,6 +484,7 @@ Resources:
                   description: input.description,
                   link: input.link,
                   tags: input.tags,
+                  type: input.type,
                   submitterEmail: input.submitterEmail,
                   status: 'Pending',
                 },
@@ -509,7 +522,7 @@ Resources:
               const id = payload.id;
               const approveEndpoint = apigwEndpint + "/execution?action=approve&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
               const rejectEndpoint = apigwEndpint + "/execution?action=reject&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
-              const emailSnsTopic = "arn:aws:sns:us-east-1:491085397542:ApiResourceStack-SNSHumanApprovalEmailTopic-kjNyjPxLIcP0";
+              const emailSnsTopic = "${SNSHumanApprovalEmailTopic}"
 
               var emailMessage = 'Welcome! \n\n';
               emailMessage += 'This is an email requiring an approval for a step functions execution. \n\n'
@@ -552,7 +565,11 @@ Resources:
         ZipFile: |
           const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
           const { DynamoDBDocumentClient, QueryCommand } = require("@aws-sdk/lib-dynamodb");
-
+          const headers = {
+            'Access-Control-Allow-Origin': '*', 
+            'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type,Authorization', 
+          };
           const client = new DynamoDBClient({});
           const docClient = DynamoDBDocumentClient.from(client);
 
@@ -576,11 +593,13 @@ Resources:
 
               return {
                 statusCode: 200,
+                headers,
                 body: JSON.stringify({ resources, services })
               };
             } catch (err) {
               return {
                 statusCode: 500,
+                headers,
                 body: JSON.stringify(err)
               };
             }
