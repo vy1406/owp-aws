@@ -56,7 +56,7 @@ Resources:
       AuthorizationType: NONE
       HttpMethod: GET
       Integration:
-        Type: AWS
+        Type: AWS_PROXY
         IntegrationHttpMethod: POST
         Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${LambdaApprovalFunction.Arn}/invocations"
         IntegrationResponses:
@@ -131,15 +131,14 @@ Resources:
           Fn::Sub: |
             const { SFN } = require("@aws-sdk/client-sfn");
             exports.handler = async (event) => {
-              console.log("Event: ", event);
-
+              console.log("1 Event: ", event);
               const stepFunctions = new SFN();
-              const body = JSON.parse(event.body);
+              console.log("2 Event Body: ", event.body);
               const stateMachineArn = process.env.STATE_MACHINE_ARN;
 
               const params = {
                 stateMachineArn,
-                input: JSON.stringify(body.input || {})
+                input: JSON.stringify(event)
               };
 
               try {
@@ -163,6 +162,7 @@ Resources:
                 };
               }
             };
+
       Handler: "index.handler"
       Runtime: "nodejs18.x"
       Role: !GetAtt InvokeStateMachineExecutionRole.Arn
@@ -225,21 +225,21 @@ Resources:
 
             exports.handler = (event, context, callback) => {
               console.log('Event= ' + JSON.stringify(event));
-              const action = event.query.action;
-              const taskToken = event.query.taskToken;
-              const statemachineName = event.query.sm;
-              const executionName = event.query.ex;
-              const itemId = event.query.id;
+              const action = event.queryStringParameters.action;
+              const taskToken = event.queryStringParameters.taskToken;
+              const statemachineName = event.queryStringParameters.sm;
+              const executionName = event.queryStringParameters.ex;
+              const itemId = event.queryStringParameters.id;
 
               const stepfunctions = new StepFunctions();
 
               var message = "";
 
               if (action === "approve") {
-                message = { "Status": "Approved! Task approved by ${Email}" };
+                message = { "Status": "Approved! Task approved by vladimir.elisavetsky@gmail.com" };
                 updateItem(itemId, "Approved");
               } else if (action === "reject") {
-                message = { "Status": "Rejected! Task rejected by ${Email}" };
+                message = { "Status": "Rejected! Task rejected by vladimir.elisavetsky@gmail.com" };
                 updateItem(itemId, "Rejected");
               } else {
                 updateItem(itemId, "Failed");
@@ -249,7 +249,7 @@ Resources:
 
               stepfunctions.sendTaskSuccess({
                 output: JSON.stringify(message),
-                taskToken: event.query.taskToken
+                taskToken: event.queryStringParameters.taskToken
               })
               .then(function(data) {
                 redirectToStepFunctions(context.invokedFunctionArn, statemachineName, executionName, callback);
@@ -257,7 +257,7 @@ Resources:
                 console.error(err, err.stack);
                 callback(err);
               });
-            }
+            };
       Description: Lambda function that callback to AWS Step Functions
       FunctionName: LambdaApprovalFunction
       Handler: index.handler
@@ -423,47 +423,57 @@ Resources:
             }
 
             exports.lambda_handler = (event, context, callback) => {
-                const fullEvent = JSON.stringify(event, null, 2);
-                console.log("Full Event:", fullEvent);
-                const executionContext = event.ExecutionContext;
-                console.log('executionContext= ' + JSON.stringify(executionContext));
 
-                const executionName = executionContext.Execution.Name;
-                const payload = JSON.parse(executionContext.Execution.Input);
-                addToDB(payload)
-                const statemachineName = executionContext.StateMachine.Name;
-                const taskToken = executionContext.Task.Token;
-                const apigwEndpint = event.APIGatewayEndpoint;
-                const id = payload.id;
-                const approveEndpoint = apigwEndpint + "/execution?action=approve&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
-                const rejectEndpoint = apigwEndpint + "/execution?action=reject&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
-                const emailSnsTopic = "${SNSHumanApprovalEmailTopic}";
+              const fullEvent = JSON.stringify(event, null, 2);
+              console.log("Full Event:", fullEvent);
+              const executionContext = event.ExecutionContext;
+              console.log('executionContext= ' + JSON.stringify(executionContext));
 
-                var emailMessage = 'Welcome! \n\n';
-                emailMessage += 'This is an email requiring an approval for a step functions execution. \n\n'
-                emailMessage += 'Check the following information and click "Approve" link if you want to approve. \n\n'
-                emailMessage += 'Execution Name -> ' + executionName + '\n\n'
-                emailMessage += 'Approve ' + approveEndpoint + '\n\n'
-                emailMessage += 'Reject ' + rejectEndpoint + '\n\n'
-                emailMessage += 'Thanks for using Step functions!'
-                
-                const sns = new SNS();
-                var params = {
-                  Message: emailMessage,
-                  Subject: "Required approval from AWS Step Functions",
-                  TopicArn: emailSnsTopic
-                };
+              const executionName = executionContext.Execution.Name;
+              const payload = executionContext.Execution.Input;
+              addToDB(payload)
 
-                sns.publish(params)
-                  .then(function(data) {
-                    console.log("MessageID is " + data.MessageId);
-                    callback(null);
-                  }).catch(
-                    function(err) {
+              const statemachineName = executionContext.StateMachine.Name;
+              const taskToken = executionContext.Task.Token;
+              const apigwEndpint = event.APIGatewayEndpoint;
+              console.log("-------------------------------");
+              console.log("apigwEndpint:", apigwEndpint);
+              console.log("payload",payload)
+              console.log("executionName",executionName)
+              console.log("statemachineName",statemachineName)
+
+              const id = payload.id;
+              const approveEndpoint = apigwEndpint + "/execution?action=approve&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
+              const rejectEndpoint = apigwEndpint + "/execution?action=reject&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
+              const emailSnsTopic = "arn:aws:sns:us-east-1:491085397542:ApiResourceStack-SNSHumanApprovalEmailTopic-kjNyjPxLIcP0";
+
+              var emailMessage = 'Welcome! \n\n';
+              emailMessage += 'This is an email requiring an approval for a step functions execution. \n\n'
+              emailMessage += 'Check the following information and click "Approve" link if you want to approve. \n\n'
+              emailMessage += 'Execution Name -> ' + executionName + '\n\n'
+              emailMessage += 'Approve ' + approveEndpoint + '\n\n'
+              emailMessage += 'Reject ' + rejectEndpoint + '\n\n'
+              emailMessage += 'Thanks for using Step functions!'
+
+              const sns = new SNS();
+              var params = {
+                Message: emailMessage,
+                Subject: "Required approval from AWS Step Functions",
+                TopicArn: emailSnsTopic
+              };
+
+              sns.publish(params)
+                .then(function (data) {
+                  console.log("MessageID is " + data.MessageId);
+                  callback(null);
+                }).catch(
+                  function (err) {
                     console.error(err, err.stack);
                     callback(err);
                   });
-            }
+
+            };
+
       Environment:
         Variables:
           RESOURCE_TABLE: !Ref ResourceTable

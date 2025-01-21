@@ -11,10 +11,34 @@ const ResourceServiceForm = () => {
         setActiveTab(tab);
     };
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const id = uuidv4();
+        data.id = id;
         data.type = activeTab;
-        console.log(data); // Log the submitted data
+        const payload = {
+            id,
+            type: activeTab,
+            ...data,
+        }
+        const url = "https://dqvpualmn8.execute-api.us-east-1.amazonaws.com/states/execution"
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                mode: 'cors'
+            });
+            if (response.ok) {
+                console.log('Data successfully submitted');
+            } else {
+                console.error('Failed to submit data', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
     };
 
     return (
