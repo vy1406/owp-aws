@@ -20,7 +20,7 @@ const ResourceServiceForm = () => {
             type: activeTab,
             ...data,
         }
-        const url = "https://dqvpualmn8.execute-api.us-east-1.amazonaws.com/states/execution"
+        const url = "https://zdv7d0sic9.execute-api.us-east-1.amazonaws.com/states/execution"
         try {
             const response = await fetch(url, {
                 method: 'POST',

@@ -22,10 +22,19 @@ Resources:
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
+        - AttributeName: status
+          AttributeType: S
       KeySchema:
         - AttributeName: id
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: StatusIndex
+          KeySchema:
+            - AttributeName: status
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
 
   ExecutionPostMethod:
     Type: "AWS::ApiGateway::Method"
@@ -81,6 +90,29 @@ Resources:
       RestApiId: !Ref ExecutionApi
       ParentId: !GetAtt "ExecutionApi.RootResourceId"
       PathPart: execution
+
+  RetrieveResource:
+      Type: 'AWS::ApiGateway::Resource'
+      Properties:
+        RestApiId: !Ref ExecutionApi
+        ParentId: !GetAtt "ExecutionApi.RootResourceId"
+        PathPart: retrieve
+
+  RetrieveResourcesMethod:
+    Type: "AWS::ApiGateway::Method"
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      Integration:
+        Type: AWS_PROXY
+        IntegrationHttpMethod: POST
+        Uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RetrieveResourcesFunction.Arn}/invocations"
+        IntegrationResponses:
+          - StatusCode: 200
+      ResourceId: !Ref RetrieveResource
+      RestApiId: !Ref ExecutionApi
+      MethodResponses:
+        - StatusCode: 200      
 
   ExecutionMethod:
     Type: "AWS::ApiGateway::Method"
@@ -477,7 +509,8 @@ Resources:
               const id = payload.id;
               const approveEndpoint = apigwEndpint + "/execution?action=approve&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
               const rejectEndpoint = apigwEndpint + "/execution?action=reject&ex=" + executionName + "&id=" + id + "&sm=" + statemachineName + "&taskToken=" + encodeURIComponent(taskToken);
-              const emailSnsTopic = "${SNSHumanApprovalEmailTopic}";
+              const emailSnsTopic = "arn:aws:sns:us-east-1:491085397542:ApiResourceStack-SNSHumanApprovalEmailTopic-kjNyjPxLIcP0";
+
               var emailMessage = 'Welcome! \n\n';
               emailMessage += 'This is an email requiring an approval for a step functions execution. \n\n'
               emailMessage += 'Check the following information and click "Approve" link if you want to approve. \n\n'
@@ -505,6 +538,53 @@ Resources:
 
             };
 
+      Environment:
+        Variables:
+          RESOURCE_TABLE: !Ref ResourceTable
+
+  RetrieveResourcesFunction:
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Handler: "index.handler"
+      Runtime: "nodejs18.x"
+      Role: !GetAtt LambdaRetrieveRole.Arn
+      Code:
+        ZipFile: |
+          const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+          const { DynamoDBDocumentClient, QueryCommand } = require("@aws-sdk/lib-dynamodb");
+
+          const client = new DynamoDBClient({});
+          const docClient = DynamoDBDocumentClient.from(client);
+
+          exports.handler = async (event) => {
+            const params = {
+              TableName: process.env.RESOURCE_TABLE,
+              IndexName: "StatusIndex", 
+              KeyConditionExpression: "#status = :approved",
+              ExpressionAttributeNames: {
+                "#status": "status"
+              },
+              ExpressionAttributeValues: {
+                ":approved": "Approved"
+              }
+            };
+
+            try {
+              const data = await docClient.send(new QueryCommand(params));
+              const resources = data.Items.filter(item => item.type === "Resource");
+              const services = data.Items.filter(item => item.type === "Service");
+
+              return {
+                statusCode: 200,
+                body: JSON.stringify({ resources, services })
+              };
+            } catch (err) {
+              return {
+                statusCode: 500,
+                body: JSON.stringify(err)
+              };
+            }
+          };
       Environment:
         Variables:
           RESOURCE_TABLE: !Ref ResourceTable
@@ -556,14 +636,6 @@ Resources:
                   - "logs:CreateLogStream"
                   - "logs:PutLogEvents"
                 Resource: "*"
-        - PolicyName: SNSSendEmailPolicy
-          PolicyDocument:
-            Statement:
-              - Effect: Allow
-                Action:
-                  - "SNS:Publish"
-                Resource:
-                  - !Sub "${SNSHumanApprovalEmailTopic}"
 
   LambdaSendEmailExecutionRole:
     Type: "AWS::IAM::Role"
@@ -604,8 +676,44 @@ Resources:
               - Effect: Allow
                 Action:
                   - "SNS:Publish"
+                Resource: 
+                  - !GetAtt SNSHumanApprovalEmailTopic.TopicArn
+
+  LambdaRetrieveRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+      Policies:
+        - PolicyName: DynamoDBAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:GetItem
+                  - dynamodb:PutItem
+                  - dynamodb:Query
+                  - dynamodb:UpdateItem
+                  - dynamodb:DeleteItem
+                  - dynamodb:Scan
                 Resource:
-                  - !Sub "${SNSHumanApprovalEmailTopic}"
+                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ResourceTable"
+                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ResourceTable/index/StatusIndex"
+        - PolicyName: CloudWatchLogsPolicy
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - "logs:CreateLogGroup"
+                  - "logs:CreateLogStream"
+                  - "logs:PutLogEvents"
+                Resource: !Sub "arn:${AWS::Partition}:logs:*:*:*"
 
 # End state machine that publishes to Lambda and sends an email with the link for approval
 Outputs:
