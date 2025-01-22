@@ -1,11 +1,13 @@
+import { LANG, RESOURCE_MAP } from "../utils/constants";
+
 const Toggle = ({ activeTab, onTabSwitch }) => {
-    const isResource = activeTab === 'Resource';
+    const isResource = activeTab === RESOURCE_MAP.RESOURCE;
 
     return (
         <div className="flex items-center justify-center w-full mb-6">
             <label className="flex items-center cursor-pointer">
                 <span className={`mr-3 text-lg font-medium ${isResource ? 'text-indigo-600' : 'text-gray-500'}`}>
-                    Resource
+                    {LANG.EN.RESOURCE}
                 </span>
 
                 <div className="relative">
@@ -13,7 +15,7 @@ const Toggle = ({ activeTab, onTabSwitch }) => {
                         type="checkbox"
                         className="sr-only"
                         checked={!isResource}
-                        onChange={() => onTabSwitch(isResource ? 'Service' : 'Resource')}
+                        onChange={() => onTabSwitch(isResource ? RESOURCE_MAP.SERVICE : RESOURCE_MAP.RESOURCE)}
                     />
                     <div className="w-12 h-6 bg-white rounded-full shadow-inner transition-all"></div>
                     <div
@@ -24,7 +26,7 @@ const Toggle = ({ activeTab, onTabSwitch }) => {
                 </div>
 
                 <span className={`ml-3 text-lg font-medium ${!isResource ? 'text-indigo-600' : 'text-gray-500'}`}>
-                    Service
+                    {LANG.EN.SERVICE}
                 </span>
             </label>
         </div>

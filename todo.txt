@@ -10,6 +10,7 @@ todo:
 - make email with the whole template at step function
 - generate cities using gpt ( make constant ) 
 - react toastify
+- find different text style.
 
 
 learn about react table. master it. from Codevolution ( same  channel as useForm)
