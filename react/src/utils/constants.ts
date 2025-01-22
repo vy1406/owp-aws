@@ -13,6 +13,8 @@ export const LANG = {
         CANCEL: "Cancel",
         DELETE: "Delete",
         EDIT: "Edit",
+        EMAIL: "Email",
+        SUBMITTER_EMAIL: "Submitter Email",
         ADD: "Add",
         SAVE: "Save",
         CLOSE: "Close",
@@ -41,10 +43,14 @@ export const LANG = {
         DESCRIPTION_MAX_LENGTH: "Description cannot exceed 300 characters.",
         
         LINK_CANNOT_BE_EMPTY: "Link cannot be empty.",
-        LINK_INVALID_FORMAT: "Please enter a valid URL.",
+        LINK_TOO_SHORT: "Link is too short",
 
         TAGS_CANNOT_BE_EMPTY: "Tags cannot be empty.",
         TAGS_MAX_COUNT: `You can only add up to ${CONSTANTS.MAX_TAGS} tags.`,
+
+        EMAIL_INVALID: "Invalid email address.",
+
+        EMAIL_NOTIFIED: "Email will be notified when the resource is approved / decline.",
     }
 };
 

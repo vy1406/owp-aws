@@ -4,13 +4,16 @@ import { CONSTANTS, LANG } from '../utils/constants';
 import { IResourceForm, ResourceRules } from './rules';
 
 const ResourceForm = ({ onSubmit }) => {
-    const { register, handleSubmit, reset, watch, control } = useForm<IResourceForm>();
+    const { register, handleSubmit, reset, watch, control, clearErrors } = useForm<IResourceForm>();
     const { isSubmitSuccessful, isSubmitting, errors } = useFormState({ control });
 
     const tags = (watch('tags') || '').split(',').filter((tag) => tag.trim() !== '').slice(0, CONSTANTS.MAX_TAGS);
 
     useEffect(() => {
-        if (isSubmitSuccessful) reset();
+        if (isSubmitSuccessful) {
+            clearErrors()
+            reset()
+        }
     }, [isSubmitSuccessful, reset]);
 
     const handleOnDeleteTag = (tag: string) => {
@@ -89,6 +92,7 @@ const ResourceForm = ({ onSubmit }) => {
                     ))}
                 </div>
             </div>
+        
 
             <div>
                 <label htmlFor="description" className="block text-sm font-medium text-gray-400 mb-3">
@@ -105,7 +109,24 @@ const ResourceForm = ({ onSubmit }) => {
                     {errors.description?.message || '\u00A0'}
                 </span>
             </div>
-
+            <div className="relative z-0 w-full mb-5 group">
+                <input
+                    type="text"
+                    id="submitterEmail"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
+                    placeholder=" "
+                    {...register('submitterEmail', ResourceRules.submitterEmail)}
+                />
+                <label
+                    htmlFor="submitterEmail"
+                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                    {LANG.EN.EMAIL}
+                </label>
+                <p className="mt-2 italic text-xs text-gray-400">
+                    ( {LANG.EN.EMAIL_NOTIFIED} )
+                </p>
+            </div>
             <button
                 type="submit"
                 disabled={isSubmitting}

@@ -10,6 +10,7 @@ export interface IResourceForm {
     description?: string;
     link?: string;
     tags?: string;
+    submitterEmail?: string;
 }
 
 export const ResourceRules: FormValidationRules<IResourceForm> = {
@@ -37,9 +38,9 @@ export const ResourceRules: FormValidationRules<IResourceForm> = {
     },
     link: {
         required: LANG.EN.LINK_CANNOT_BE_EMPTY,
-        pattern: {
-            value: /^(https?:\/\/[^\s$.?#].[^\s]*)$/i,
-            message: LANG.EN.LINK_INVALID_FORMAT,
+        minLength: {
+            value: 9,
+            message: LANG.EN.LINK_TOO_SHORT,
         },
     },
     tags: {
@@ -47,4 +48,10 @@ export const ResourceRules: FormValidationRules<IResourceForm> = {
         validate: (value) =>
             value.split(',').length <= CONSTANTS.MAX_TAGS || LANG.EN.TAGS_MAX_COUNT,
     },
+    submitterEmail: {
+        pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            message: LANG.EN.EMAIL_INVALID,
+        }
+    }
 };
