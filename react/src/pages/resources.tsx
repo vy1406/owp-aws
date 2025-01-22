@@ -3,9 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 import Tabs from "../components/Tabs";
 import ResourceForm from "../forms/resource";
 import ServiceForm from "../forms/service";
+import Toggle from "../components/Toggle";
 
 const ResourceServiceForm = () => {
-    const [activeTab, setActiveTab] = useState('Resource'); // Default to "Resource"
+    const [activeTab, setActiveTab] = useState('Resource');
 
     const handleTabSwitch = (tab) => {
         setActiveTab(tab);
@@ -30,45 +31,47 @@ const ResourceServiceForm = () => {
     }
 
     const onSubmit = async (data) => {
-        const id = uuidv4();
-        data.id = id;
-        data.type = activeTab;
-        const payload = {
-            id,
-            type: activeTab,
-            ...data,
-        }
-        const url = "https://qn6tw91djc.execute-api.us-east-1.amazonaws.com/states/execution"
-        try {
-            const response = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(payload),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (response.ok) {
-                console.log('Data successfully submitted');
-            } else {
-                console.error('Failed to submit data', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+
+        return new Promise((resolve) => {
+            console.log('Submitting data:', data);
+            setTimeout(() => {
+                console.log('Data submitted successfully');
+                resolve();
+            }, 3000);
+        });
+        // const id = uuidv4();
+        // data.id = id;
+        // data.type = activeTab;
+        // const payload = {
+        //     id,
+        //     type: activeTab,
+        //     ...data,
+        // }
+        // const url = "https://qn6tw91djc.execute-api.us-east-1.amazonaws.com/states/execution"
+        // try {
+        //     const response = await fetch(url, {
+        //         method: 'POST',
+        //         body: JSON.stringify(payload),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
+        //     });
+        //     if (response.ok) {
+        //         console.log('Data successfully submitted');
+        //     } else {
+        //         console.error('Failed to submit data', response.statusText);
+        //     }
+        // } catch (error) {
+        //     console.error('Error:', error);
+        // }
 
     };
 
     return (
-        <div className="max-w-md mx-auto p-4">
-            <Tabs activeTab={activeTab} onTabSwitch={handleTabSwitch} />
-
-            <h1 className="text-2xl font-bold text-center mb-6">{activeTab}</h1>
-
-            {activeTab === 'Resource' ? (
-                <ResourceForm onSubmit={onSubmit} />
-            ) : (
-                <ServiceForm onSubmit={onSubmit} />
-            )}
+        <div className="max-w-md mx-auto p-2">
+            <Toggle activeTab={activeTab} onTabSwitch={handleTabSwitch} />
+        
+            <ResourceForm onSubmit={onSubmit} />
 
             <button onClick={handleOnGetResources}>
                 get resources

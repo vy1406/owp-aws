@@ -4,16 +4,12 @@ Todo:
 2. multilanguage support
 3. constants
 4. separated app for login
-5. toast
 
 todo:
-2. fix cors from retrieve 
-1. make email with the whole template
-3. generate cities using gpt ( make constant ) 
+
+- make email with the whole template at step function
+- generate cities using gpt ( make constant ) 
+- react toastify
 
 
-i need to upload with new table with LSI, so i deleted the previous table...
-but now getting erros to deploy the template.
-fix it.
-
-delete the stack, upload again, and update the url in postman and client.
+learn about react table. master it. from Codevolution ( same  channel as useForm)
