@@ -1,29 +1,40 @@
 
 import React, { useRef, useState } from 'react';
+import { Link } from 'wouter';
 import useClickOutside from '../hooks/useClickOutside';
+import { LANG, ROUTES } from '../utils/constants';
+
 
 const routes = [
   {
-    name: 'Experience',
-    link: '#experience',
+    name: LANG.EN.RESOURCES,
+    path: ROUTES.RESOURCES,
   },
   {
-    name: 'Education',
-    link: '#education',
+    name: LANG.EN.NEW_RESOURCE,
+    path: ROUTES.NEW_RESOURCE,
   },
   {
-    name: 'Skills',
-    link: '#skills',
+    name: LANG.EN.APPLICATIONS,
+    path: ROUTES.APPLICATIONS,
   },
   {
-    name: 'Certificates',
-    link: '#certificates',
+    name: LANG.EN.NEW_APPLICATION,
+    path: ROUTES.NEW_APPLICATION,
   },
   {
-    name: 'Random',
-    link: '#random',
+    name: LANG.EN.ABOUT,
+    path: ROUTES.ABOUT,
   },
-]
+  {
+    name: LANG.EN.LOGIN,
+    path: ROUTES.LOGIN,
+  },
+  {
+    name: LANG.EN.SIGNUP,
+    path: ROUTES.SIGNUP,
+  },
+];
 
 const NavBar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -54,13 +65,13 @@ const NavBar = () => {
         <div className="hidden w-full flex-row justify-between text-xl font-extralight md:flex">
           <div className="flex gap-4">
             {routes.map((route, index) => (
-              <a
+              <Link
                 key={index}
-                href={route.link}
+                href={route.path}
                 className="flex items-center mb-1 text-lg font-semibold  text-white"
               >
                 {route.name}
-              </a>
+              </Link>
             ))}
 
           </div>
@@ -117,13 +128,13 @@ const NavBar = () => {
             <ul className="space-y-4">
               {routes.map((route, index) => (
                 <li key={index}>
-                  <a
-                    href={route.link}
+                  <Link
+                    href={route.path}
                     className="block py-2 px-3  border-b border-gray-100  md:hover:bg-transparent md:border-0 md:hover:text-blue-600 text-white hover:bg-gray-700 hover:text-blue-500"
-                    onClick={() => handleCloseMenu()}
+                    onClick={handleCloseMenu}
                   >
                     {route.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             
