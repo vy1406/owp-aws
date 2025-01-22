@@ -6,9 +6,10 @@ import ApplicationForm from './forms/application'
 import ResourceServiceForm from './pages/resources'
 import Signup from './pages/signUp'
 import { ROUTES } from './utils/constants';
+import ResourceList from './pages/resourceList';
+import { ToastContainer } from 'react-toastify';
 
 const Home = () => <h1>Home</h1>
-const Resource = () => <h1>Resource</h1>
 const Application = () => <h1>Application</h1>
 const About = () => <h1>About</h1>
 const Login = () => <h1>Login</h1>
@@ -26,7 +27,7 @@ function App() {
       <main className="pt-16 px-4 md:px-16">
         <Switch>
           <Route path={ROUTES.HOME} component={Home} />
-          <Route path={ROUTES.RESOURCES} component={Resource} />
+          <Route path={ROUTES.RESOURCES} component={ResourceList} />
           <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
           <Route path={ROUTES.APPLICATIONS} component={Application} />
           <Route path={ROUTES.NEW_APPLICATION} component={ApplicationForm} />
@@ -35,6 +36,7 @@ function App() {
           <Route path={ROUTES.SIGNUP} component={Signup} />
           <Route><NotFound /></Route>
         </Switch>
+        <ToastContainer aria-label={"Notification messages"} position='bottom-right' autoClose={2000} />
       </main>
       <Footer />
     </>

@@ -4,40 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
     "build": "cd ./next && npx next build",
     "export": "cd ./next && npx next build && move out ..",
     "upload": "aws s3 sync ./out s3://owp-aws-bucket",
-
     "app:deploy": "aws cloudformation deploy --template-file template.yml --stack-name OwpAppStack --capabilities CAPABILITY_NAMED_IAM",
     "delete": "aws cloudformation delete-stack --stack-name OwpAppStack",
     "events": "aws cloudformation describe-stack-events --stack-name OwpAppStack",
-    "stack" : "aws cloudformation describe-stacks --stack-name OwpAppStack",
+    "stack": "aws cloudformation describe-stacks --stack-name OwpAppStack",
     "validate": "aws cloudformation validate-template --template-body file://template.yml",
-
     "dynamo:deploy": "aws cloudformation deploy --template-file dynamo-auth.yml --stack-name DynamoAuthStack --capabilities CAPABILITY_NAMED_IAM",
     "deploy:full": "npm run build && npm run export && npm run upload && npm run deploy",
     "invalidate": "aws cloudfront create-invalidation --distribution-id YOUR_DISTRIBUTION_ID --paths \"/*\"",
-    
     "create:deployBucket": "aws s3 mb s3://owp-aws-deploy-bucket",
     "handlers:zip": "powershell Compress-Archive -Path ./handlers/test* -DestinationPath ./test.zip",
     "handlers:unzip": "powershell Expand-Archive -Path ./handlers.zip -DestinationPath ./handlers_unzipped -Force",
     "handlers:clear-zip": "powershell Remove-Item -Path ./handlers.zip -Force",
     "handlers:upload": "aws s3 cp handlers.zip s3://owp-aws-deploy-bucket",
     "handlers:updateSpecific": "aws lambda update-function-code --function-name TestFunction --s3-bucket owp-aws-deploy-bucket --s3-key test.zip && aws lambda update-function-configuration --function-name TestFunction",
-
     "authApi:deploy": "aws cloudformation deploy --template-file api-auth.yml --stack-name ApiAuthStack --capabilities CAPABILITY_NAMED_IAM",
     "authApi:outputs": "aws cloudformation describe-stacks --stack-name ApiAuthStack --query \"Stacks[0].Outputs\"",
     "applicationApi:deploy": "aws cloudformation deploy --template-file api-application.yml --stack-name ApiApplicationStack --capabilities CAPABILITY_NAMED_IAM",
     "applicationApi:outputs": "aws cloudformation describe-stacks --stack-name ApiApplicationStack --query \"Stacks[0].Outputs\"",
     "layer:output": "aws lambda list-layer-versions --layer-name AuthLayer",
-    
     "resourceApi:deploy": "aws cloudformation deploy --template-file api-resource.yml --stack-name ApiResourceStack --capabilities CAPABILITY_NAMED_IAM",
     "resourceApi:outputs": "aws cloudformation describe-stacks --stack-name ApiResourceStack --query \"Stacks[0].Outputs\""
-
-    
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-toastify": "^11.0.3"
+  }
 }

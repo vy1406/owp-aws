@@ -1,13 +1,10 @@
-Todo:
-
-1. add only unique user.
-2. multilanguage support
-3. constants
-4. separated app for login
-
-todo:
-
+AWS:
+- add only unique user.
+- separated app for login
 - make email with the whole template at step function
+
+REACT:
+- multilanguage support
 - generate cities using gpt ( make constant ) 
 - react toastify
 - find different text style.

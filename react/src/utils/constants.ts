@@ -39,7 +39,7 @@ export const LANG = {
         YOU_CAN_ONLY_ADD_UP_TO: "You can only add up to",
         YOU_CAN_ADD_UP_TO: "You can add up to",
         MORE_TAGS: "more tags",
-
+        ERROR_FETCHING: "Error fetching items...",
 
 
         TITLE_CANNOT_BE_EMPTY: "Title cannot be empty.",
