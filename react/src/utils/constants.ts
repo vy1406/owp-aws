@@ -1,3 +1,12 @@
+export const CONSTANTS = {
+    MAX_TAGS: 10
+}
+
+export const RESOURCE_MAP = {
+    SERVICE: "Service",
+    RESOURCE: "Resource",
+}
+
 export const LANG = {
     EN: {
         SUBMIT: "Submit",
@@ -35,12 +44,8 @@ export const LANG = {
         LINK_INVALID_FORMAT: "Please enter a valid URL.",
 
         TAGS_CANNOT_BE_EMPTY: "Tags cannot be empty.",
-        TAGS_MAX_COUNT: "You can only add up to 10 tags.",
+        TAGS_MAX_COUNT: `You can only add up to ${CONSTANTS.MAX_TAGS} tags.`,
     }
 };
 
 
-export const RESOURCE_MAP = {
-    SERVICE: "Service",
-    RESOURCE: "Resource",
-}
