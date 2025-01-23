@@ -9,7 +9,7 @@ const Toggle = ({ activeTab, onTabSwitch }: ToggleProps) => {
     const isResource = activeTab === RESOURCE_MAP.RESOURCE;
 
     return (
-        <div className="flex items-center justify-center w-full mb-6">
+        <div className="flex items-center justify-center w-full">
             <label className="flex items-center cursor-pointer">
                 <span className={`mr-3 text-lg font-medium ${isResource ? 'text-indigo-600' : 'text-gray-500'}`}>
                     {LANG.EN.RESOURCE}

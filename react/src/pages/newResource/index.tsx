@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import ResourceForm from "../forms/resource";
-import ServiceForm from "../forms/service";
-import Toggle from "../components/Toggle";
+import ResourceForm from "../../forms/resource";
+import ServiceForm from "../../forms/service";
+import Toggle from "../../components/Toggle";
+import HowTo from "../../components/HowTo";
+import { LANG } from "../../utils/constants";
+import HowToFillResource from "./HowToFillResource";
 
 const ResourceServiceForm = () => {
     const [activeTab, setActiveTab] = useState('Resource');
@@ -68,8 +71,12 @@ const ResourceServiceForm = () => {
 
     return (
         <div className="max-w-md mx-auto p-2">
-            <Toggle activeTab={activeTab} onTabSwitch={handleTabSwitch} />
-        
+            <div className="flex items-center justify-center w-full mb-6">
+                <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
+                <HowTo title={LANG.EN.HOW_RESOURCE_WORK}>
+                    <HowToFillResource />
+                </HowTo>
+            </div>
             <ResourceForm onSubmit={onSubmit} />
 
             <button onClick={handleOnGetResources}>

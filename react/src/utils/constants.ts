@@ -14,6 +14,7 @@ export const LANG = {
         DELETE: "Delete",
         EDIT: "Edit",
         EMAIL: "Email",
+        TITLE: "Title",
         SUBMITTER_EMAIL: "Submitter Email",
         ADD: "Add",
         APPLICATIONS: "Applications",
@@ -29,6 +30,8 @@ export const LANG = {
         SERVICES: "Services",
         OPEN_EXTERNAL: "Open External",
         USER: "User",
+        GOT_IT: "Got it",
+        HOW_RESOURCE_WORK: "How resource form works?",
         ABOUT: "About",
         VISIT_RESOURCE: "Visit Resource",
         USERS: "Users",
@@ -43,8 +46,18 @@ export const LANG = {
         YOU_CAN_ADD_UP_TO: "You can add up to",
         MORE_TAGS: "more tags",
         ERROR_FETCHING: "Error fetching items...",
-
-
+        TITLE_SEEN_FIRST: "This will be seen first, try to make it pinpoint direct and easy to understand.",
+        EMAIL_RESOURCE: "This is optional and will not be publicly visible! It is only used to notify you if your resource gets approved or not.",
+        LINK_RESOURCE_DESCRIPTION: "Provide a link to the resource, whether it's a Google Drive, Instagram post, official website, or anything that works best for you.",
+        DESCRIPTION_RESOURCE: "You can write here whatever you want about the resource.",
+        EXAMPLE_RESOURCE_DESCRIPTION: "For example:This is the official site where you can fill the official form for owp",
+        RESOURCE_WALKTHROUGH: [
+            "This form works in an ",
+            "approval step ",
+            "Your submitted resource will be ",
+            "reviewed within 24 hours ",
+            "to ensure integrity and safety before being published."
+        ],
         TITLE_CANNOT_BE_EMPTY: "Title cannot be empty.",
         TITLE_MIN_LENGTH: "Title must be at least 3 characters long.",
         TITLE_MAX_LENGTH: "Title cannot exceed 50 characters.",

@@ -3,11 +3,11 @@ import { Route, Switch } from 'wouter';
 import Footer from './components/Footer'
 import NavBar from './components/NavBar'
 import ApplicationForm from './forms/application'
-import ResourceServiceForm from './pages/resources'
 import Signup from './pages/signUp'
 import { ROUTES } from './utils/constants';
-import ResourceList from './pages/resourceList';
+import ResourceList from './pages/resourcesList';
 import { ToastContainer } from 'react-toastify';
+import ResourceServiceForm from './pages/newResource';
 
 const Home = () => <h1>Home</h1>
 const Applications = () => <h1>Applications</h1>

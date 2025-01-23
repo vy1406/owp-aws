@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getResources } from "../services/resource";
-import ResourceCard from "../components/ResourceCard";
-import { IResource } from "../utils/types";
-import SkeletonCard from "../components/SkeletonCard";
-import Toggle from "../components/Toggle";
+import { getResources } from "../../services/resource";
+import ResourceCard from "../../components/ResourceCard";
+import { IResource } from "../../utils/types";
+import SkeletonCard from "../../components/SkeletonCard";
+import Toggle from "../../components/Toggle";
 
 const ResourceList = () => {
     const [activeTab, setActiveTab] = useState('Resource');
@@ -25,7 +25,8 @@ const ResourceList = () => {
 
     return (
         <div className="container mx-auto p-2">
-            <Toggle activeTab={activeTab} onTabSwitch={(tab:string) => setActiveTab(tab)} />
+                <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
+
 
             {isLoading ? (
                 <ul className="list-disc list-inside">
