@@ -13,7 +13,7 @@ const ResourceCard = ({ resource }: ResourceCardProps) => {
 
     return (
         <CollapseContainer text={resource.title} key={resource.id}>
-            <div className="bg-gray-900 p-4 rounded-md shadow-md border border-gray-700 text-gray-200 flex flex-col gap-3">
+            <div className="p-1 text-gray-200 flex flex-col gap-3">
 
                 <p className="text-sm my-2">
                     {resource.description}
