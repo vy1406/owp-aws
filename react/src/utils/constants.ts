@@ -25,6 +25,7 @@ export const LANG = {
         RESET: "Reset",
         RESOURCE: "Resource",
         RESOURCES: "Resources",
+        FREE_TEXT: "Free Text",
         NEW_RESOURCE: "New Resource",
         NEW_APPLICATION: "New Application",
         SERVICE: "Service",

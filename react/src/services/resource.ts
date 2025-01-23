@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { API } from "./constants";
 import { LANG } from "../utils/constants";
+import { IResource } from "../utils/types";
 
 const STUB = {
     "resources": [
@@ -57,7 +58,13 @@ const STUB = {
         }
     ]
 }
-export const getResources = async () => {
+
+export type IResourceData = {
+    resources: IResource[];
+    services: IResource[];
+}
+
+export const getResources = async (): Promise<IResourceData> => {
     const url = `${API.RESOURCE}/retrieve`;
 
     return new Promise((resolve) => {

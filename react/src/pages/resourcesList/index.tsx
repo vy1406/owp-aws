@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { getResources } from "../../services/resource";
+import { getResources, IResourceData } from "../../services/resource";
 import ResourceCard from "../../components/ResourceCard";
 import { IResource } from "../../utils/types";
 import SkeletonCard from "../../components/SkeletonCard";
 import Toggle from "../../components/Toggle";
-import FilterSearch from "./FilterSearch";
+import FilterSearch, { IOnFilter } from "./FilterSearch";
 import { LANG, RESOURCE_MAP } from "../../utils/constants";
-
-const Separtor = () => <div className="border-b-2 border-gray-800 my-4"></div>;
+import Separtor from "../../components/Separator";
 
 const ResourceList = () => {
     const [activeTab, setActiveTab] = useState('Resource');
-    const [resources, setResources] = useState([]);
-    const [services, setServices] = useState([]);
+    const [apiResponse, setApiResponse] = useState<IResourceData>({ resources: [], services: [] });
+    const [resources, setResources] = useState<IResource[]>([]);
+    const [services, setServices] = useState<IResource[]>([]);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -20,6 +20,7 @@ const ResourceList = () => {
             setLoading(true);
             const data = await getResources();
             if (data) {
+                setApiResponse(data);
                 setResources(data.resources);
                 setServices(data.services);
             }
@@ -29,13 +30,33 @@ const ResourceList = () => {
         fetchResources();
     }, []);
 
-    const handleOnFilter = (search: string) => {
-        console.log('Filtering:', search);
+    const handleOnFilter = (filter: IOnFilter) => {
+        const { searchTerm, tags } = filter;
+        const tagList = tags.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag !== '');
+
+        const filterItems = (items: IResource[]): IResource[] => {
+            return items.filter((item: IResource) => {
+                const matchesSearchTerm =
+                    item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    item.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+                const itemTags = item.tags?.toLowerCase().split(',').map(tag => tag.trim());
+
+                const matchesTags = tagList.length === 0 || tagList.some(tag =>
+                    itemTags?.some(itemTag => itemTag.includes(tag))
+                );
+
+                return matchesSearchTerm && matchesTags;
+            });
+        };
+
+        setResources(filterItems(apiResponse.resources || []));
+        setServices(filterItems(apiResponse.services || []));
     }
-    
+
     return (
         <div className="container mx-auto p-2">
-            <FilterSearch onFilter={handleOnFilter}/>
+            <FilterSearch onFilter={handleOnFilter} />
             <Separtor />
             <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
             {isLoading ? (
@@ -69,7 +90,9 @@ const ServiceItems = ({ items }: ResourceItemsProps) => {
                     <ResourceCard resource={resource} key={resource.id} />
                 ))
             ) : (
-                <p className="text-red-500">{LANG.EN.NO_SERVICE_FOUND}</p>
+                <div className="text-lg font-medium text-gray-200  whitespace-nowrap text-ellipsis mt-4"                >
+                    {LANG.EN.NO_SERVICE_FOUND}
+                </div>
             )}
         </ul>
     )
@@ -83,7 +106,9 @@ const ResourceItems = ({ items }: ResourceItemsProps) => {
                     <ResourceCard resource={resource} key={resource.id} />
                 ))
             ) : (
-                <p className="text-red-500">{LANG.EN.NO_SERVICE_FOUND}</p>
+                <div className="text-lg font-medium text-gray-200  whitespace-nowrap text-ellipsis mt-4"                >
+                    {LANG.EN.NO_RESOURCE_FOUND}
+                </div>
             )}
         </ul>
     )

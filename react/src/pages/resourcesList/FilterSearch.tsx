@@ -1,15 +1,26 @@
 import { useState } from 'react';
 import CollapseContainer from '../../components/CollapseContainer';
 import { LANG } from '../../utils/constants';
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+
+export interface IOnFilter {
+    searchTerm: string;
+    tags: string;
+}
+
+interface IFilterSearchForm {
+    searchTerm: string;
+    tags: string;
+}
 
 type IFilterSearchProps = {
-    onFilter: (filter: { searchTerm: string; tags: string[] }) => void;
+    onFilter: (data: IOnFilter) => void;
 };
 
 const FilterSearch = ({ onFilter }: IFilterSearchProps) => {
-    const { register, handleSubmit, reset, watch, control, clearErrors } = useForm<any>();
-
+    const [isOpen, setIsOpen] = useState(false);
+    const { register, handleSubmit, reset, watch } = useForm<IFilterSearchForm>();
+    
     const tags = (watch('tags') || '').split(',').filter((tag) => tag.trim() !== '');
 
     const handleOnDeleteTag = (tag: string) => {
@@ -17,31 +28,32 @@ const FilterSearch = ({ onFilter }: IFilterSearchProps) => {
         reset({ tags: newTags.join(',') });
     };
 
-    const onSubmit = (data: any) => {
-        const { title, tags } = data;
-        onFilter({ searchTerm: title, tags: tags.split(',') });
+    const onSubmit = (data: IFilterSearchForm) => {
+        const { searchTerm, tags } = data;
+        onFilter({ searchTerm, tags });
     };
 
     const handleClear = () => {
         reset();
-        onFilter({ searchTerm: '', tags: [] });
+        onFilter({ searchTerm: '', tags: "" });
     }
+
     return (
-        <CollapseContainer text="Filter and Search">
+        <CollapseContainer text="Filter and Search" isOpen={isOpen} toggleIsOpen={(isOpen) => setIsOpen(isOpen)}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
                 <div className="relative z-0 w-full mt-2 group">
                     <input
                         type="text"
-                        id="title"
+                        id="searchTerm"
                         className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
                         placeholder=" "
-                        {...register('title')}
+                        {...register('searchTerm')}
                     />
                     <label
-                        htmlFor="title"
+                        htmlFor="searchTerm"
                         className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                     >
-                        {LANG.EN.RESOURCE}
+                        {LANG.EN.FREE_TEXT}
                     </label>
 
                 </div>
