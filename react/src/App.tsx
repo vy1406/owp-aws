@@ -24,7 +24,7 @@ function App() {
       <header className="sticky z-50 top-0">
         <NavBar />
       </header>
-      <main className="pt-16 px-4 md:px-16">
+      <main className="pt-2 px-4 md:px-16">
         <Switch>
           <Route path={ROUTES.HOME} component={Home} />
           <Route path={ROUTES.RESOURCES} component={ResourceList} />

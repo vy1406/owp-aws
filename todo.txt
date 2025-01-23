@@ -10,4 +10,7 @@ REACT:
 - find different text style.
 
 
+
 learn about react table. master it. from Codevolution ( same  channel as useForm)
+
+- continue rendering items in resource

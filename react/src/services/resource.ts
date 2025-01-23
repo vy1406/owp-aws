@@ -7,11 +7,41 @@ const STUB = {
         {
             "submitterEmail": "yvova88@yahoo.com",
             "status": "Approved",
-            "link": "my link lol",
-            "description": "my description",
+            "link": "www.google.com",
+            "description": "This is the official site where you can download and insert the form for you to submit, and again this is just a long text so it can be seen as breaking lines",
             "id": "1e488585-2077-4ebd-82d5-88b9c8049949",
+            "tags": "Official,WorkPermit,Site",
+            "title": "Permit official form",
+            "type": "Resource"
+        },
+        {
+            "submitterEmail": "yvova88@yahoo.com",
+            "status": "Approved",
+            "link": "www.google.com",
+            "description": "I'm teaching English in Calgary. I have an Instagram account where I post daily tips and tricks for learning English. Follow me for more information.",
+            "id": "1e488585-2077-4ebd-82d5-88b9c8049941",
+            "tags": "English,Teacher,Instagram,Calgary",
+            "title": "Jenny Orlov - English Teacher",
+            "type": "Resource"
+        },
+        {
+            "submitterEmail": "yvova88@yahoo.com",
+            "status": "Approved",
+            "link": "link2",
+            "description": "description2",
+            "id": "1e488585-2077-4ebd-82d5-88b9c8049942",
             "tags": "tag1,tag2",
-            "title": "from postman",
+            "title": "long title long title long title long title title long title title long title",
+            "type": "Resource"
+        },
+        {
+            "submitterEmail": "yvova88@yahoo.com",
+            "status": "Approved",
+            "link": "link3",
+            "description": "description3",
+            "id": "1e488585-2077-4ebd-82d5-88b9c8049943",
+            "tags": "tag1,tag2",
+            "title": "title3",
             "type": "Resource"
         }
     ],
