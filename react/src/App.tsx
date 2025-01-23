@@ -10,10 +10,11 @@ import ResourceList from './pages/resourceList';
 import { ToastContainer } from 'react-toastify';
 
 const Home = () => <h1>Home</h1>
-const Application = () => <h1>Application</h1>
+const Applications = () => <h1>Applications</h1>
 const About = () => <h1>About</h1>
 const Login = () => <h1>Login</h1>
 const NotFound = () => <h1>404 Not Found</h1>
+const Application = () => <h1>Application</h1>
 
 
 
@@ -29,7 +30,8 @@ function App() {
           <Route path={ROUTES.HOME} component={Home} />
           <Route path={ROUTES.RESOURCES} component={ResourceList} />
           <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
-          <Route path={ROUTES.APPLICATIONS} component={Application} />
+          <Route path={ROUTES.APPLICATIONS} component={Applications} />
+          <Route path={ROUTES.APPLICATION} component={Application} />
           <Route path={ROUTES.NEW_APPLICATION} component={ApplicationForm} />
           <Route path={ROUTES.ABOUT} component={About} />
           <Route path={ROUTES.LOGIN} component={Login} />

@@ -70,6 +70,7 @@ export const ROUTES = {
     HOME: '/',
     RESOURCES: '/resources',
     APPLICATIONS: '/applications',
+    APPLICATION: "/application/:id", 
     ABOUT: '/about',
     LOGIN: '/login',
     SIGNUP: '/signup',

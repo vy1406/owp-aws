@@ -8,7 +8,7 @@ REACT:
 - generate cities using gpt ( make constant ) 
 - react toastify
 - find different text style.
-
+- on clicking on tag, it will go to search to fetch
 
 
 learn about react table. master it. from Codevolution ( same  channel as useForm)
