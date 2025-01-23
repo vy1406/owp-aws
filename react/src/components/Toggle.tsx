@@ -1,6 +1,11 @@
 import { LANG, RESOURCE_MAP } from "../utils/constants";
 
-const Toggle = ({ activeTab, onTabSwitch }) => {
+type ToggleProps = {
+    activeTab: string
+    onTabSwitch: (tab: string) => void
+};
+
+const Toggle = ({ activeTab, onTabSwitch }: ToggleProps) => {
     const isResource = activeTab === RESOURCE_MAP.RESOURCE;
 
     return (
