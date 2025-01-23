@@ -1,7 +1,7 @@
 import { LANG } from "../../utils/constants";
 
 
-const HowToFillResource = () => {
+const HowToFillService = () => {
     return (
         <div className="space-y-6 text-gray-300">
             
@@ -40,4 +40,4 @@ const HowToFillResource = () => {
     );
 };
 
-export default HowToFillResource;
+export default HowToFillService;

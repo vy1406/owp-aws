@@ -4,15 +4,11 @@ import ResourceForm from "../../forms/resource";
 import ServiceForm from "../../forms/service";
 import Toggle from "../../components/Toggle";
 import HowTo from "../../components/HowTo";
-import { LANG } from "../../utils/constants";
+import { LANG, RESOURCE_MAP } from "../../utils/constants";
 import HowToFillResource from "./HowToFillResource";
 
 const ResourceServiceForm = () => {
-    const [activeTab, setActiveTab] = useState('Resource');
-
-    const handleTabSwitch = (tab) => {
-        setActiveTab(tab);
-    };
+    const [activeTab, setActiveTab] = useState(RESOURCE_MAP.RESOURCE);
 
     const handleOnGetResources = async () => {
         const url = "https://qn6tw91djc.execute-api.us-east-1.amazonaws.com/states/retrieve"
@@ -71,13 +67,15 @@ const ResourceServiceForm = () => {
 
     return (
         <div className="max-w-md mx-auto p-2">
+            
             <div className="flex items-center justify-center w-full mb-6">
                 <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
                 <HowTo title={LANG.EN.HOW_RESOURCE_WORK}>
                     <HowToFillResource />
                 </HowTo>
             </div>
-            <ResourceForm onSubmit={onSubmit} />
+            
+            <ResourceForm onSubmit={onSubmit} type={activeTab}/>
 
             <button onClick={handleOnGetResources}>
                 get resources

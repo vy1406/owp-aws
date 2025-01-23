@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
-import { CONSTANTS, LANG } from '../utils/constants';
+import { CONSTANTS, LANG, RESOURCE_MAP } from '../utils/constants';
 import { IResourceForm, ResourceRules } from './rules';
 
-const ResourceForm = ({ onSubmit }) => {
+type ResourceFormProps = {
+    onSubmit: (data: IResourceForm) => void;
+    type: string;
+};
+
+const ResourceForm = ({ onSubmit, type }: ResourceFormProps) => {
     const { register, handleSubmit, reset, watch, control, clearErrors } = useForm<IResourceForm>();
     const { isSubmitSuccessful, isSubmitting, errors } = useFormState({ control });
 
@@ -35,7 +40,7 @@ const ResourceForm = ({ onSubmit }) => {
                     htmlFor="title"
                     className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
-                    {LANG.EN.RESOURCE}
+                    {type === RESOURCE_MAP.RESOURCE ? LANG.EN.RESOURCE : LANG.EN.SERVICE}
                 </label>
                 <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
                     {errors.title?.message || '\u00A0'}
