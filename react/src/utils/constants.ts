@@ -24,6 +24,7 @@ export const LANG = {
         CLEAR: "Clear",
         TITLE: "Title",
         SUBMITTER_EMAIL: "Submitter Email",
+        HOW_IT_WORKS: "How it works ?",
         ADD: "Add",
         APPLICATIONS: "Applications",
         SAVE: "Save",
@@ -54,6 +55,7 @@ export const LANG = {
         USER: "User",
         USERNAME: "Username",
         PASSWORD: "Password",
+        RE_PASSWORD: "Re-enter Password",
         GOT_IT: "Got it",
         HOW_RESOURCE_WORK: "How resource form works?",
         ABOUT: "About",
@@ -62,7 +64,6 @@ export const LANG = {
         DESCRIPTION: "Description",
         TAGS: "Tags",
         STATUS: "Status",
-        SIGNUP: "Sign Up",
         GO_THERE: "Go there",
         LOGIN: "Login",
         SIGN_UP: "Sign Up",
@@ -93,6 +94,7 @@ export const LANG = {
         NO: "No",
         PASSWORD_REQUIRED: "Password is required",
         USERNAME_REQUIRED: "Username is required",
+        PASSWORDS_MUST_MATCH: "Passwords must match",
         USERNAME_MUST_BE_VALID: "Can only contain letters, numbers, and special characters.",
         TITLE_SEEN_FIRST: "This will be seen first, try to make it pinpoint direct and easy to understand.",
         EMAIL_RESOURCE: "This is optional and will not be publicly visible! It is only used to notify you if your resource / service gets approved or not.",
@@ -124,6 +126,8 @@ export const LANG = {
         EMAIL_INVALID: "Invalid email address.",
 
         EMAIL_NOTIFIED: "Email will be notified when the resource is approved / decline.",
+        HOW_TO_SIGN_UP_UNIQUE_USERNAME: "Make sure to sign up with a unique username. You username will be seen to others as part of submitted application form.",
+        HOW_TO_SIGN_UP_PASSWORD: "All password are stored in a secured way, NOT a single password stored as plain text. 'Forgot password' will be added lately.",
     }
 };
 

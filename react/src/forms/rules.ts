@@ -5,6 +5,12 @@ export type FormValidationRules<T extends FieldValues> = {
     [K in keyof T]?: RegisterOptions<T, any> | undefined;
 };
 
+export interface ISignUpForm {
+    username: string;
+    password: string;
+    confirmPassword: string;
+}
+
 export interface ILoginForm {
     username: string;
     password: string;
@@ -38,6 +44,28 @@ export const LoginRules: FormValidationRules<ILoginForm> = {
     },
     password: {
         required: LANG.EN.PASSWORD_REQUIRED,
+    },
+};
+
+export const SignUpRules: FormValidationRules<ISignUpForm> = {
+    username: {
+        required: LANG.EN.USERNAME_REQUIRED,
+        pattern: {
+            value: /^[A-Za-z0-9!@#$%^&*()_+=[\]{}|\\;:'",.<>?/`~-]*$/,  
+            message: LANG.EN.USERNAME_MUST_BE_VALID,
+        }
+    },
+    password: {
+        required: LANG.EN.PASSWORD_REQUIRED,
+    },
+    confirmPassword: {
+        required: LANG.EN.PASSWORD_REQUIRED,
+        validate: (value, formValues) => {
+            if (value !== formValues.password) {
+                return LANG.EN.PASSWORDS_MUST_MATCH;
+            }
+            return true;
+        }
     },
 };
 

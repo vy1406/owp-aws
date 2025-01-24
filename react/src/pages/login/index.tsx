@@ -1,4 +1,4 @@
-import LoginForm from "../../forms";
+import LoginForm from "../../forms/login";
 import { LANG, ROUTES } from "../../utils/constants";
 import { useLocation } from "wouter";
 

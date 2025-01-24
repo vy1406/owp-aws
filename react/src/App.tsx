@@ -1,7 +1,6 @@
 import './App.css'
 import { Route, Switch } from 'wouter';
 import NavBar from './components/NavBar'
-import Signup from './pages/signUp'
 import { ROUTES } from './utils/constants';
 import ResourceList from './pages/resourcesList';
 import { ToastContainer } from 'react-toastify';
@@ -11,6 +10,7 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 import Application from './pages/application';
 import NewApplication from './pages/newApplication';
 import Login from './pages/login';
+import SignUp from './pages/signup';
 
 const Home = () => <h1>Home</h1>
 const About = () => <h1>About</h1>
@@ -34,7 +34,7 @@ function App() {
           <Route path={ROUTES.NEW_APPLICATION} component={NewApplication} />
           <Route path={ROUTES.ABOUT} component={About} />
           <Route path={ROUTES.LOGIN} component={Login} />
-          <Route path={ROUTES.SIGNUP} component={Signup} />
+          <Route path={ROUTES.SIGNUP} component={SignUp} />
           <Route><NotFound /></Route>
         </Switch>
           <ScrollToTopButton />

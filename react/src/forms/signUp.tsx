@@ -1,21 +1,21 @@
 import { useEffect } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { LANG } from '../utils/constants';
-import { ILoginForm, LoginRules } from './rules';
+import { ISignUpForm, SignUpRules } from './rules';
 
 
-type ApplicationFormProps = {
-    onSubmit: (data: ILoginForm) => void;
-    onSignUp: () => void;
+type SignUpFormProps = {
+    onSubmit: (data: ISignUpForm) => void;
 };
 
-const DEFAULT_VALUS: ILoginForm = {
+const DEFAULT_VALUS: ISignUpForm = {
     username: '',
     password: '',
+    confirmPassword: '',
 }
 
-const LoginForm = ({ onSubmit, onSignUp }: ApplicationFormProps) => {
-    const { register, handleSubmit, reset, control, clearErrors } = useForm<ILoginForm>({
+const SignUpForm = ({ onSubmit }: SignUpFormProps) => {
+    const { register, handleSubmit, reset, control, clearErrors } = useForm<ISignUpForm>({
         defaultValues: DEFAULT_VALUS
     });
     
@@ -36,7 +36,7 @@ const LoginForm = ({ onSubmit, onSignUp }: ApplicationFormProps) => {
                     id="username"
                     className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
                     placeholder=" "
-                    {...register('username', LoginRules.username)}
+                    {...register('username', SignUpRules.username)}
                 />
                 <label
                     htmlFor="username"
@@ -54,7 +54,7 @@ const LoginForm = ({ onSubmit, onSignUp }: ApplicationFormProps) => {
                     id="password"
                     className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
                     placeholder=" "
-                    {...register('password', LoginRules.password)}
+                    {...register('password', SignUpRules.password)}
                 />
                 <label
                     htmlFor="password"
@@ -66,7 +66,24 @@ const LoginForm = ({ onSubmit, onSignUp }: ApplicationFormProps) => {
                     {errors.password?.message || '\u00A0'}
                 </span>
             </div>
-
+            <div className="relative z-0 w-full mb-5 group">
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
+                    placeholder=" "
+                    {...register('confirmPassword', SignUpRules.confirmPassword)}
+                />
+                <label
+                    htmlFor="confirmPassword"
+                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                    {LANG.EN.RE_PASSWORD}
+                </label>
+                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                    {errors.confirmPassword?.message || '\u00A0'}
+                </span>
+            </div>
 
             <button
                 type="submit"
@@ -77,18 +94,11 @@ const LoginForm = ({ onSubmit, onSignUp }: ApplicationFormProps) => {
                 {isSubmitting ? (
                     <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
-                    LANG.EN.LOGIN
+                    LANG.EN.SIGN_UP
                 )}
-            </button>
-            <button
-                type="button"
-                className="w-full flex justify-center items-center bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-500"
-                onClick={onSignUp}
-            >
-                {LANG.EN.SIGN_UP}
             </button>
         </form>
     );
 }
 
-export default LoginForm;
+export default SignUpForm;
