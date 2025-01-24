@@ -65,6 +65,7 @@ export const LANG = {
         SIGNUP: "Sign Up",
         GO_THERE: "Go there",
         LOGIN: "Login",
+        SIGN_UP: "Sign Up",
         SELECT_STATUS: "Select Status",
         STATUS_APPROVED: "Approved",
         STATUS_DECLINED: "Declined",

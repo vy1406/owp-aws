@@ -6,6 +6,7 @@ import { ILoginForm, LoginRules } from './rules';
 
 type ApplicationFormProps = {
     onSubmit: (data: ILoginForm) => void;
+    onSignUp: () => void;
 };
 
 const DEFAULT_VALUS: ILoginForm = {
@@ -13,7 +14,7 @@ const DEFAULT_VALUS: ILoginForm = {
     password: '',
 }
 
-const LoginForm = ({ onSubmit }: ApplicationFormProps) => {
+const LoginForm = ({ onSubmit, onSignUp }: ApplicationFormProps) => {
     const { register, handleSubmit, reset, control, clearErrors } = useForm<ILoginForm>({
         defaultValues: DEFAULT_VALUS
     });
@@ -78,6 +79,13 @@ const LoginForm = ({ onSubmit }: ApplicationFormProps) => {
                 ) : (
                     LANG.EN.LOGIN
                 )}
+            </button>
+            <button
+                type="button"
+                className="w-full flex justify-center items-center bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-500"
+                onClick={onSignUp}
+            >
+                {LANG.EN.SIGN_UP}
             </button>
         </form>
     );
