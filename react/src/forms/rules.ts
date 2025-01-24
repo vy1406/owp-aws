@@ -1,9 +1,10 @@
 import { FieldValues, RegisterOptions } from 'react-hook-form';
-import { CONSTANTS, LANG } from '../utils/constants';
+import { CONSTANTS, LANG, STATUS_MAP } from '../utils/constants';
 
 export type FormValidationRules<T extends FieldValues> = {
     [K in keyof T]?: RegisterOptions<T, any> | undefined;
 };
+
 
 export interface IResourceForm {
     title?: string;
@@ -12,6 +13,63 @@ export interface IResourceForm {
     tags?: string;
     submitterEmail?: string;
 }
+
+export interface IApplicationForm {
+    application_date?: string;
+    biometric_date: string | null;
+    decision_date: string | null;
+    additional_info: string;
+    is_self_submitted: boolean;
+    status: string;
+    submission_city: string | null;
+}
+
+export const ApplicationRules: FormValidationRules<IApplicationForm> = {
+    application_date: {
+        required: LANG.EN.APPLICATION_DATE_REQUIRED,
+    },
+    biometric_date: {
+        validate: (value, formValues) => {
+            if (!value || !formValues.application_date) {
+                return true;  
+            }
+            const applicationDate = new Date(formValues.application_date);
+            const biometricDate = new Date(value);
+
+            if (!(biometricDate > applicationDate)) {
+                return LANG.EN.BIOMETRIC_DATE_MUST_BE_LATER;
+            }
+
+            if (formValues?.decision_date) {
+                const decisionDate = new Date(formValues.decision_date);
+                if (biometricDate < decisionDate) {
+                    return LANG.EN.BIOMETRIC_DATE_CANNOT_BE_BEFORE_DECISION;
+                }
+            }
+
+            return true;
+        },
+    },
+    decision_date: {
+        validate: (value, formValues) => {
+            if (STATUS_MAP.PENDING === formValues?.status && value) {
+                return LANG.EN.DECISION_DATE_CANT_BE_WITH_STATUS_PENDING;
+            }
+            
+            if (formValues?.status && formValues.status !== STATUS_MAP.PENDING && !value) {
+                return LANG.EN.DECISION_DATE_REQUIRED;
+            }
+
+            if (value && formValues.application_date) {
+                const applicationDate = new Date(formValues.application_date);
+                const decisionDate = new Date(value);
+                return decisionDate.getTime() > applicationDate.getTime() || LANG.EN.DECISION_DATE_MUST_BE_LATER;
+            }
+            
+            return true; 
+        },
+    },
+};
 
 export const ResourceRules: FormValidationRules<IResourceForm> = {
     title: {

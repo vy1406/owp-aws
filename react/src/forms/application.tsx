@@ -1,294 +1,185 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { format } from 'date-fns';
-import { STATUS_MAP } from '../utils/constants';
+import { useEffect } from 'react';
+import { useForm, useFormState } from 'react-hook-form';
+import { IApplicationForm, ApplicationRules } from './rules';
+import { LANG, STATUS_MAP } from '../utils/constants';
 
-export default function ApplicationForm() {
-    const [isSelfSubmitted, setIsSelfSubmitted] = useState(true);
-    const {
-        register,
-        handleSubmit,
-        formState: { isSubmitting },
-    } = useForm();
 
-    const handleGetAll = async () => {
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            });
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
-            }
-            const result = await response.json();
-            console.log('Test endpoint result:', result);
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
+type ApplicationFormProps = {
+    onSubmit: (data: IApplicationForm) => void;
+};
+
+const DEFAULT_VALUS: IApplicationForm = {
+    application_date: '',
+    biometric_date: null,
+    decision_date: null,
+    additional_info: '',
+    is_self_submitted: false,
+    status: STATUS_MAP.PENDING, 
+    submission_city: '',
+}
+
+const ApplicationForm = ({ onSubmit }: ApplicationFormProps) => {
+    const { register, handleSubmit, reset, control, clearErrors } = useForm<IApplicationForm>({
+        defaultValues: DEFAULT_VALUS
+    });
+    
+    const { isSubmitSuccessful, isSubmitting, errors } = useFormState({ control });
+
+    useEffect(() => {
+        if (isSubmitSuccessful) {
+            clearErrors()
+            reset()
         }
-    }
+    }, [isSubmitSuccessful, reset]);
 
-    const addOneDummy = async () => {
-        const token = localStorage.getItem('token');
-
-        const generatedindex = Math.floor(Math.random() * 1000);
-        const tempData = {
-            additional_info: "generated index:" + generatedindex,
-            application_date: "2025-03-23",
-            biometric_date: "2025-03-24",
-            decision_date: "2025-03-25",
-            is_self_submitted: true,
-            status: "Declined",
-            submission_city: "Toronto"
-        }
-
-        try {
-            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify(tempData),
-            });
-            if (!response.ok) {
-                console.log(response);
-                throw new Error('Failed to submit form');
-            }
-            const result = await response.json();
-            console.log('Test endpoint result:', result);
-            alert('Application created successfully!');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    }
-
-    const onSubmit = async (data) => {
-        const formattedData = {
-            ...data,
-            application_date: format(new Date(data.application_date), 'yyyy-MM-dd'),
-            biometric_date: format(new Date(data.biometric_date), 'yyyy-MM-dd'),
-            decision_date: format(new Date(data.decision_date), 'yyyy-MM-dd'),
-        }
-        console.log(formattedData);
-
-        const token = localStorage.getItem('token');
-        const tempData = {
-            additional_info: "this is my additional info",
-            application_date: "2025-01-20",
-            biometric_date: "2025-01-21",
-            decision_date: "2025-01-22",
-            is_self_submitted: true,
-            status: "Pending",
-            submission_city: "Calgary"
-        }
-
-        try {
-            const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify(formattedData),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
-            }
-            alert('Application created successfully!');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    };
-
-    const getById = async () => {
-        const id = "5c5f9527-680c-4894-8cbc-fc3f22be0742"
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            });
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
-            }
-            const result = await response.json();
-            console.log('Test endpoint result:', result);
-            alert('Application created successfully!');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    }
-
-    const handleUpdate = async () => {
-        const id = "5c5f9527-680c-4894-8cbc-fc3f22be0742"
-        const generatedindex = Math.floor(Math.random() * 1000);
-        const token = localStorage.getItem('token');
-        const body = {
-            id,
-            submission_city: "New Toronto"
-        }
-
-        try {
-            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify(body),
-            });
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
-            }
-            const result = await response.json();
-            console.log('Test endpoint result:', result);
-            alert('Application updated successfully!');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    }
-
-    const handleDeleteById = async () => {
-        const id = "5c5f9527-680c-4894-8cbc-fc3f22be0742"
-        const token = localStorage.getItem('token');
-        try {
-            const response = await fetch(`https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                }
-            });
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
-            }
-            const result = await response.json();
-            console.log('Test endpoint result:', result);
-            alert('Application deleted successfully!');
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
-        }
-    }
     return (
-        <div className="max-w-md mx-auto p-4">
-            <h1 className="text-2xl font-bold text-center mb-6">Create an Application</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div>
-                    <label htmlFor="application_date" className="block text-sm font-medium text-gray-700">Application Date</label>
-                    <input
-                        id="application_date"
-                        type="date"
-                        {...register('application_date', { required: true })}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="biometric_date" className="block text-sm font-medium text-gray-700">Biometric Date</label>
-                    <input
-                        id="biometric_date"
-                        type="date"
-                        {...register('biometric_date')}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="decision_date" className="block text-sm font-medium text-gray-700">Decision Date</label>
-                    <input
-                        id="decision_date"
-                        type="date"
-                        {...register('decision_date')}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="submission_city" className="block text-sm font-medium text-gray-700">Submission City</label>
-                    <input
-                        id="submission_city"
-                        type="text"
-                        {...register('submission_city', { required: true })}
-                        placeholder="Enter submission city"
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="additional_info" className="block text-sm font-medium text-gray-700">Additional Info</label>
-                    <textarea
-                        id="additional_info"
-                        {...register('additional_info')}
-                        placeholder="Enter additional info"
-                        maxLength={254}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
-                    <select
-                        id="status"
-                        {...register('status')}
-                        defaultValue={STATUS_MAP.PENDING}
-                        className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        <option value={STATUS_MAP.PENDING}>{STATUS_MAP.PENDING}</option>
-                        <option value={STATUS_MAP.DECLINED}>{STATUS_MAP.DECLINED}</option>
-                        <option value={STATUS_MAP.APPROVED}>{STATUS_MAP.APPROVED}</option>
-                    </select>
-                </div>
-                <div>
-                    <label className="flex items-center text-sm">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="relative z-0 w-full mb-5 group">
+                <input
+                    type="date"
+                    id="application_date"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
+                    placeholder=" "
+                    {...register('application_date', ApplicationRules.application_date)}
+                />
+                <label
+                    htmlFor="application_date"
+                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                    {LANG.EN.APPLICATION_DATE}
+                </label>
+                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                    {errors.application_date?.message || '\u00A0'}
+                </span>
+            </div>
+            <div className="relative z-0 w-full mb-5 group">
+                <input
+                    type="date"
+                    id="biometric_date"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
+                    placeholder=" "
+                    {...register('biometric_date', ApplicationRules.biometric_date)}
+                />
+                <label
+                    htmlFor="biometric_date"
+                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                    {LANG.EN.BIOMETRIC_DATE}
+                </label>
+                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                    {errors.biometric_date?.message || '\u00A0'}
+                </span>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+                <input
+                    type="date"
+                    id="decision_date"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
+                    placeholder=" "
+                    {...register('decision_date', ApplicationRules.decision_date)}
+                />
+                <label
+                    htmlFor="decision_date"
+                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                    {LANG.EN.DECISION_DATE}
+                </label>
+                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                    {errors.decision_date?.message || '\u00A0'}
+                </span>
+            </div>
+
+            <div className="relative z-0 w-full mb-5 group">
+                <input
+                    type="text"
+                    id="title"
+                    className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
+                    placeholder=" "
+                    {...register('submission_city')}
+                />
+                <label
+                    htmlFor="title"
+                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                >
+                    {LANG.EN.SUBMISSION_CITY}
+                </label>
+            </div>
+
+            <div>
+                <label htmlFor="additional_info" className="block text-sm font-medium text-gray-400 mb-3">
+                    {LANG.EN.ADDITIONAL_INFO}
+                </label>
+                <textarea
+                    id="additional_info"
+                    rows={4}
+                    className="bg-gray-800 block p-2.5 w-full text-sm rounded-lg border border-gray-600 placeholder-gray-400 text-white focus:ring-blue-400 focus:border-blue-400 focus:outline-none"
+                    placeholder={LANG.EN.LEAVE_A_MESSAGE}
+                    {...register('additional_info')}
+                />
+            </div>
+
+            <div className="flex flex-col space-y-2">
+                <label className="block text-sm font-medium text-gray-400 mb-3">
+                    {LANG.EN.STATUS}
+                </label>
+                <div className="flex">
+                    <div className="flex items-center me-4">
                         <input
-                            type="checkbox"
-                            {...register('is_self_submitted')}
-                            checked={isSelfSubmitted}
-                            onChange={() => setIsSelfSubmitted(!isSelfSubmitted)}
-                            className="mr-2"
+                            id="pending"
+                            type="radio"
+                            value={STATUS_MAP.PENDING}
+                            {...register('status')}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0  dark:bg-gray-700 dark:border-gray-600"
                         />
-                        Self submitted (No counselor)
-                    </label>
+                        <label htmlFor="pending" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            {STATUS_MAP.PENDING}
+                        </label>
+                    </div>
+                    <div className="flex items-center me-4">
+                        <input
+                            id="approved"
+                            type="radio"
+                            value={STATUS_MAP.APPROVED}
+                            {...register('status')}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                        <label htmlFor="approved" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            {STATUS_MAP.APPROVED}
+                        </label>
+                    </div>
+                    <div className="flex items-center me-4">
+                        <input
+                            id="declined"
+                            type="radio"
+                            value={STATUS_MAP.DECLINED}
+                            {...register('status')}
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                        <label htmlFor="declined" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            {STATUS_MAP.DECLINED}
+                        </label>
+                    </div>
                 </div>
-                <div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 disabled:opacity-50"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Saving...' : 'Save'}
-                    </button>
-                </div>
-            </form>
-            <button onClick={handleGetAll}>
-                test get all
+                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                    {errors.status?.message || '\u00A0'}
+                </span>
+            </div>
+
+            <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full flex justify-center items-center bg-indigo-800 text-white py-2 px-4 rounded-md ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'
+                    }`}
+            >
+                {isSubmitting ? (
+                    <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                    LANG.EN.SUBMIT
+                )}
             </button>
-            <div>----</div>
-            <button onClick={addOneDummy}>
-                test add dummy
-            </button>
-            <div>----</div>
-            <button onClick={getById}>
-                test get by id
-            </button>
-            <div>----</div>
-            <button onClick={handleUpdate}>
-                update
-            </button>
-            <div>----</div>
-            <button onClick={handleDeleteById}>
-                delete by id
-            </button>
-        </div>
+        </form>
     );
 }
+
+export default ApplicationForm;

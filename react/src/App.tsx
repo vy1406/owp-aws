@@ -1,8 +1,6 @@
 import './App.css'
 import { Route, Switch } from 'wouter';
-import Footer from './components/Footer'
 import NavBar from './components/NavBar'
-import ApplicationForm from './forms/application'
 import Signup from './pages/signUp'
 import { ROUTES } from './utils/constants';
 import ResourceList from './pages/resourcesList';
@@ -10,12 +8,13 @@ import { ToastContainer } from 'react-toastify';
 import ResourceServiceForm from './pages/newResource';
 import Applications from './pages/applications';
 import ScrollToTopButton from './components/ScrollToTopButton';
+import Application from './pages/application';
+import NewApplication from './pages/newApplication';
 
 const Home = () => <h1>Home</h1>
 const About = () => <h1>About</h1>
 const Login = () => <h1>Login</h1>
 const NotFound = () => <h1>404 Not Found</h1>
-const Application = () => <h1>Application</h1>
 
 
 
@@ -33,7 +32,7 @@ function App() {
           <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
           <Route path={ROUTES.APPLICATIONS} component={Applications} />
           <Route path={ROUTES.APPLICATION} component={Application} />
-          <Route path={ROUTES.NEW_APPLICATION} component={ApplicationForm} />
+          <Route path={ROUTES.NEW_APPLICATION} component={NewApplication} />
           <Route path={ROUTES.ABOUT} component={About} />
           <Route path={ROUTES.LOGIN} component={Login} />
           <Route path={ROUTES.SIGNUP} component={Signup} />

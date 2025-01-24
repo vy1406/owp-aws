@@ -81,10 +81,17 @@ const ResourceForm = ({ onSubmit, type }: ResourceFormProps) => {
                     {LANG.EN.TAGS}
                 </label>
                 <p className={`mt-2 italic text-xs ${tags.length >= CONSTANTS.MAX_TAGS ? 'text-red-500' : 'text-gray-400'}`}>
-                    {tags.length >= CONSTANTS.MAX_TAGS
-                        ? `( ${LANG.EN.YOU_CAN_ONLY_ADD_UP_TO} ${CONSTANTS.MAX_TAGS} ${LANG.EN.TAGS} )`
-                        : `( ${LANG.EN.YOU_CAN_ADD_UP_TO} ${CONSTANTS.MAX_TAGS - tags.length} ${LANG.EN.MORE_TAGS} )`}
+                    {tags.length === 0
+                        ?
+                            (<>( {LANG.EN.SEPARATE_BY_COMMAS} )</>)
+                        :
+                            tags.length >= CONSTANTS.MAX_TAGS
+                                ? `( ${LANG.EN.YOU_CAN_ONLY_ADD_UP_TO} ${CONSTANTS.MAX_TAGS} ${LANG.EN.TAGS} )`
+                                : `( ${LANG.EN.YOU_CAN_ADD_UP_TO} ${CONSTANTS.MAX_TAGS - tags.length} ${LANG.EN.MORE_TAGS} )`
+                    }
+
                 </p>
+                
                 <div className="mt-2">
                     {tags.map((tag, index) => (
                         <span
@@ -97,7 +104,7 @@ const ResourceForm = ({ onSubmit, type }: ResourceFormProps) => {
                     ))}
                 </div>
             </div>
-        
+
 
             <div>
                 <label htmlFor="description" className="block text-sm font-medium text-gray-400 mb-3">

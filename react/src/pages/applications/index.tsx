@@ -49,14 +49,13 @@ const ResourceList = () => {
     return (
         <div className="container mx-auto p-2">
             <FilterSearch onFilter={handleOnFilter} />
-            <Statistics applications={filteredApplications}/>
+            <Statistics applications={filteredApplications} />
             <Separtor />
             {isLoading ? (
                 <ul className="list-disc list-inside">
-                    <Skeleton />
-                    <Skeleton />
-                    <Skeleton />
-                    <Skeleton />
+                    {[...Array(8)].map((_, index) => (
+                        <Skeleton key={index} />
+                    ))}
                 </ul>
             ) : (
                 <>
