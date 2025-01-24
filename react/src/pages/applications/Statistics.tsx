@@ -13,7 +13,6 @@ import { LANG, STATUS_MAP } from '../../utils/constants';
 import Separtor from './Separator';
 import GoThereLink from '../../components/GoThereLink';
 
-
 interface StatisticsProps {
     applications: IApplication[];
 }

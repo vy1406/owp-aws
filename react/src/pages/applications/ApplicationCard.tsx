@@ -22,9 +22,7 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
                     <div className="text-gray-200 w-2/5">{LANG.EN.DECISION_DATE}:</div>
                     <div className="text-gray-200 ">{formatDateToDDMMYYYY(application.decision_date)}</div>
                 </div>
-
                 <Separtor />
-
                 <div className="flex">
                     <div className="text-gray-200 w-2/5">{LANG.EN.SUBMISSION_CITY}:</div>
                     <div className="text-gray-200">{application.submission_city}</div>
@@ -33,14 +31,14 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
                     <div className="text-gray-200 w-2/5">{LANG.EN.SELF_SUBMISSION}:</div>
                     <div className="text-gray-200">{application.is_self_submitted ? LANG.EN.YES : LANG.EN.NO}</div>
                 </div>
-                <Separtor />
-                
+                <Separtor />             
                 {application.additional_info && <div className="flex flex-col gap-1">
                     <div className="text-gray-200">{LANG.EN.ADDITIONAL_INFO}:</div>
                     <div className="text-gray-200">{application.additional_info}</div>
                 </div>}
                 <Separtor />
                 <Counters application={application}/>
+                <div className="text-gray-200 italic text-right">({application.username})</div>
             </div>
         </CollapsableApplication>
     )
