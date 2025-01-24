@@ -33,23 +33,27 @@ export const ApplicationRules: FormValidationRules<IApplicationForm> = {
             if (!value || !formValues.application_date) {
                 return true;  
             }
+            
             const applicationDate = new Date(formValues.application_date);
             const biometricDate = new Date(value);
-
-            if (!(biometricDate > applicationDate)) {
+    
+            if (biometricDate.getTime() <= applicationDate.getTime()) {
                 return LANG.EN.BIOMETRIC_DATE_MUST_BE_LATER;
             }
-
+    
             if (formValues?.decision_date) {
                 const decisionDate = new Date(formValues.decision_date);
-                if (biometricDate < decisionDate) {
-                    return LANG.EN.BIOMETRIC_DATE_CANNOT_BE_BEFORE_DECISION;
+    
+                if (biometricDate.getTime() >= decisionDate.getTime()) {
+                    return LANG.EN.BIOMETRIC_DATE_MUST_BE_BEFORE_DECISION;
                 }
             }
-
+    
             return true;
         },
     },
+    
+    
     decision_date: {
         validate: (value, formValues) => {
             if (STATUS_MAP.PENDING === formValues?.status && value) {
@@ -59,16 +63,19 @@ export const ApplicationRules: FormValidationRules<IApplicationForm> = {
             if (formValues?.status && formValues.status !== STATUS_MAP.PENDING && !value) {
                 return LANG.EN.DECISION_DATE_REQUIRED;
             }
-
+    
             if (value && formValues.application_date) {
                 const applicationDate = new Date(formValues.application_date);
                 const decisionDate = new Date(value);
-                return decisionDate.getTime() > applicationDate.getTime() || LANG.EN.DECISION_DATE_MUST_BE_LATER;
+                if (decisionDate.getTime() <= applicationDate.getTime()) {
+                    return LANG.EN.DECISION_DATE_MUST_BE_LATER;
+                }
             }
-            
-            return true; 
+
+            return true;
         },
     },
+    
 };
 
 export const ResourceRules: FormValidationRules<IResourceForm> = {

@@ -43,6 +43,8 @@ export const LANG = {
         BIOMETRIC_DATE_MUST_BE_LATER: "Biometric date must be later than application date.",
         DECISION_DATE_MUST_BE_LATER: "Decision date must be later than application date.",
         BIOMETRIC_DATE_CANNOT_BE_BEFORE_DECISION: "Biometric date cannot be before decision date.",
+        DECISION_DATE_MUST_BE_AFTER_BIOMETRIC_DATE: "Decision date must be after biometric date.",
+        BIOMETRIC_DATE_MUST_BE_BEFORE_DECISION: "Biometric date must be before decision date.",
         SERVICES: "Services",
         OPEN_EXTERNAL: "Open External",
         NO_SERVICE_FOUND: "No service found.",
