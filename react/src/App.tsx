@@ -8,9 +8,9 @@ import { ROUTES } from './utils/constants';
 import ResourceList from './pages/resourcesList';
 import { ToastContainer } from 'react-toastify';
 import ResourceServiceForm from './pages/newResource';
+import Applications from './pages/applications';
 
 const Home = () => <h1>Home</h1>
-const Applications = () => <h1>Applications</h1>
 const About = () => <h1>About</h1>
 const Login = () => <h1>Login</h1>
 const NotFound = () => <h1>404 Not Found</h1>

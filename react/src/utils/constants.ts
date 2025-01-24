@@ -7,6 +7,13 @@ export const RESOURCE_MAP = {
     RESOURCE: "Resource",
 }
 
+
+export const STATUS_MAP = {
+    APPROVED: 'Approved',
+    PENDING: 'Pending',
+    DECLINED: 'Declined',
+}
+
 export const LANG = {
     EN: {
         SUBMIT: "Submit",
@@ -34,6 +41,7 @@ export const LANG = {
         OPEN_EXTERNAL: "Open External",
         NO_SERVICE_FOUND: "No service found.",
         NO_RESOURCE_FOUND: "No resource found.",
+        NO_APPLICATION_FOUND: "No application found.",
         USER: "User",
         GOT_IT: "Got it",
         HOW_RESOURCE_WORK: "How resource form works?",
@@ -52,7 +60,14 @@ export const LANG = {
         SEPARATE_BY_COMMAS: "Enter tags separated by commas",
         MORE_TAGS: "more tags",
         ERROR_FETCHING: "Error fetching items...",
-        
+        APPLICATION_DATE: "Application Date",
+        DECISION_DATE: "Decision Date",
+        BIOMETRIC_DATE: "Biometric Date",
+        SUBMISSION_CITY: "Submission City",
+        SELF_SUBMISSION: "Self Submission",
+        ADDITIONAL_INFO: "Additional Info",
+        YES: "Yes",
+        NO: "No",
 
         TITLE_SEEN_FIRST: "This will be seen first, try to make it pinpoint direct and easy to understand.",
         EMAIL_RESOURCE: "This is optional and will not be publicly visible! It is only used to notify you if your resource / service gets approved or not.",
