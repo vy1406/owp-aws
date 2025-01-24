@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import SkeletonCard from "../../components/SkeletonCard";
 import FilterSearch, { IOnFilter } from "./FilterSearch";
 import { LANG } from "../../utils/constants";
 import Separtor from "../../components/Separator";
 import { getApplications, IApplication } from "../../services/applications";
 import ApplicationCard from "./ApplicationCard";
+import Skeleton from "./Skeleton";
 
 const ResourceList = () => {
     const [apiApplications, setApiApplications] = useState<IApplication[]>([]);
@@ -27,13 +27,12 @@ const ResourceList = () => {
     }, []);
 
     const handleOnFilter = (filter: IOnFilter) => {
-        console.log('Filter:', filter);
 
         const filteredData = apiApplications.filter((application) => {
             const isDateFromValid = filter.dateFrom ? new Date(application.application_date) >= new Date(filter.dateFrom) : true;
             const isDateToValid = filter.dateTo ? new Date(application.application_date) <= new Date(filter.dateTo) : true;
             const isSubmissionCityValid = filter.submission_city
-                ? application.submission_city.toLowerCase().includes(filter.submission_city.toLowerCase())
+                ? application.submission_city?.toLowerCase().includes(filter.submission_city.toLowerCase())
                 : true;
             const isStatusValid = filter.status ? application.status.toLowerCase() === filter.status.toLowerCase() : true;
             const isAdditionalInfoValid = filter.additional_info
@@ -52,10 +51,10 @@ const ResourceList = () => {
             <Separtor />
             {isLoading ? (
                 <ul className="list-disc list-inside">
-                    <SkeletonCard />
-                    <SkeletonCard />
-                    <SkeletonCard />
-                    <SkeletonCard />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
                 </ul>
             ) : (
                 <>
