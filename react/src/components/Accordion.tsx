@@ -42,14 +42,14 @@ const CollapseContainer: React.FC<CollapsibleApplicationBoxProps> = ({ text, sub
     }, [isOpen]);
 
     return (
-        <div className="mt-4 overflow-hidden max-w-md p-1 border  rounded-lg shadow bg-gray-800 border-gray-700 w-full md:w-auto select-none random-card">
+        <div className="mt-4 overflow-hidden max-w-md p-2 border  rounded-lg shadow bg-gray-800 border-gray-700 w-full md:w-auto select-none random-card">
             <div
-                className="flex justify-between items-center p-2 cursor-pointer "
+                className="flex justify-between p-0 cursor-pointer "
                 onClick={handleToggle}
             >
                 <div className="overflow-hidden w-full">
                     <div
-                        className="text-lg font-medium text-gray-200 overflow-hidden whitespace-nowrap text-ellipsis pr-2"
+                        className={`text-lg pl-1 font-medium text-gray-200 ${!isOpen ? 'overflow-hidden whitespace-nowrap text-ellipsis pr-2' : 'pr-2'}`}
                     >
                         {text}
                     </div>

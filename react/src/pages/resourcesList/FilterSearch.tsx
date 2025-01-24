@@ -39,7 +39,7 @@ const FilterSearch = ({ onFilter }: IFilterSearchProps) => {
     }
 
     return (
-        <CollapseContainer text="Filter and Search" isOpen={isOpen} toggleIsOpen={(isOpen) => setIsOpen(isOpen)}>
+        <CollapseContainer text={LANG.EN.FILTER_AND_SEARCH} isOpen={isOpen} toggleIsOpen={(isOpen) => setIsOpen(isOpen)}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
                 <div className="relative z-0 w-full mt-2 group">
                     <input
