@@ -1,12 +1,11 @@
-import { format } from "date-fns";
 import ApplicationForm from "../../forms/application";
-import { LANG } from "../../utils/constants";
 import { IApplicationForm } from "../../forms/rules";
+import { LANG } from "../../utils/constants";
 
 const NewApplication = () => {
 
-    const handleOnSubmit = async (data: any) => {
-        return new Promise((resolve) => {
+    const handleOnSubmit = async (data: IApplicationForm) => {
+        return new Promise<void>((resolve) => {
             console.log('Submitting data:', data);
             setTimeout(() => {
                 console.log('Data submitted successfully');

@@ -1,5 +1,3 @@
-import { API } from "./constants";
-import { IResource } from "../utils/types";
 
 const STUB: IApplication[] = [
 
@@ -63,7 +61,7 @@ export type IApplication = {
 }
 
 export const getApplications = async (): Promise<IApplication[]> => {
-    const url = `${API.APPLICATION}/??`;
+    // const url = `${API.APPLICATION}/??`;
 
     return new Promise((resolve) => {
         setTimeout(() => {

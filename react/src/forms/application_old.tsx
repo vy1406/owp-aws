@@ -68,7 +68,7 @@ export default function ApplicationForm() {
         }
     }
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: any) => {
         const formattedData = {
             ...data,
             application_date: format(new Date(data.application_date), 'yyyy-MM-dd'),
@@ -78,15 +78,15 @@ export default function ApplicationForm() {
         console.log(formattedData);
 
         const token = localStorage.getItem('token');
-        const tempData = {
-            additional_info: "this is my additional info",
-            application_date: "2025-01-20",
-            biometric_date: "2025-01-21",
-            decision_date: "2025-01-22",
-            is_self_submitted: true,
-            status: "Pending",
-            submission_city: "Calgary"
-        }
+        // const tempData = {
+        //     additional_info: "this is my additional info",
+        //     application_date: "2025-01-20",
+        //     biometric_date: "2025-01-21",
+        //     decision_date: "2025-01-22",
+        //     is_self_submitted: true,
+        //     status: "Pending",
+        //     submission_city: "Calgary"
+        // }
 
         try {
             const response = await fetch('https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications/', {
@@ -132,7 +132,7 @@ export default function ApplicationForm() {
 
     const handleUpdate = async () => {
         const id = "5c5f9527-680c-4894-8cbc-fc3f22be0742"
-        const generatedindex = Math.floor(Math.random() * 1000);
+        // const generatedindex = Math.floor(Math.random() * 1000);
         const token = localStorage.getItem('token');
         const body = {
             id,

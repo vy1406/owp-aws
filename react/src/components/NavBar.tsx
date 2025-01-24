@@ -1,5 +1,5 @@
 
-import React, { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { LANG, ROUTES } from '../utils/constants';
 import useClickOutside from '../hooks/useClickOutside';

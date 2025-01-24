@@ -3,12 +3,13 @@ import HowTo from "../../components/HowTo";
 import SignUpForm from "../../forms/signUp";
 import { LANG, ROUTES } from "../../utils/constants";
 import HowToFillSignUp from "./HowToFillSignUp";
+import { ISignUpForm } from "../../forms/rules";
 
 const SignUp = () => {
     const [_, setLocation] = useLocation();
     
-    const handleOnSubmit = async (data: any) => {
-        return new Promise((resolve) => {
+    const handleOnSubmit = async (data: ISignUpForm) => {
+        return new Promise(() => {
             console.log('Submitting data:', data);
             setTimeout(() => {
                 console.log('Data submitted successfully');

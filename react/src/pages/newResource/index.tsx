@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import ResourceForm from "../../forms/resource";
-import ServiceForm from "../../forms/service";
+// import ServiceForm from "../../forms/service";
 import Toggle from "../../components/Toggle";
 import HowTo from "../../components/HowTo";
 import { LANG, RESOURCE_MAP } from "../../utils/constants";
 import HowToFillResource from "./HowToFillResource";
+import { IResourceForm } from "../../forms/rules";
 
 const ResourceServiceForm = () => {
     const [activeTab, setActiveTab] = useState(RESOURCE_MAP.RESOURCE);
@@ -28,9 +29,9 @@ const ResourceServiceForm = () => {
         }
     }
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: IResourceForm) => {
 
-        return new Promise((resolve) => {
+        return new Promise<void>((resolve) => {
             console.log('Submitting data:', data);
             setTimeout(() => {
                 console.log('Data submitted successfully');

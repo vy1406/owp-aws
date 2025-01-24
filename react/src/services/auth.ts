@@ -17,7 +17,8 @@ export type ILoginResponse = {
 }
 export const apiLogin = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
     const url = `${API.AUTH}/login`;
-
+    console.log('username:', username);
+    console.log('password:', password);
     try {
         const response = await fetch(url, {
             method: 'POST',
