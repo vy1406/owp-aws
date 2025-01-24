@@ -9,7 +9,7 @@ import ApplicationCard from "./ApplicationCard";
 const ResourceList = () => {
     const [apiApplications, setApiApplications] = useState<IApplication[]>([]);
     const [filteredApplications, setFilteredApplications] = useState<IApplication[]>([]);
-    
+
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -20,7 +20,6 @@ const ResourceList = () => {
                 setApiApplications(data);
                 setFilteredApplications(data)
             }
-            console.log('Data:', data);
             setLoading(false);
         };
 
@@ -29,6 +28,22 @@ const ResourceList = () => {
 
     const handleOnFilter = (filter: IOnFilter) => {
         console.log('Filter:', filter);
+
+        const filteredData = apiApplications.filter((application) => {
+            const isDateFromValid = filter.dateFrom ? new Date(application.application_date) >= new Date(filter.dateFrom) : true;
+            const isDateToValid = filter.dateTo ? new Date(application.application_date) <= new Date(filter.dateTo) : true;
+            const isSubmissionCityValid = filter.submission_city
+                ? application.submission_city.toLowerCase().includes(filter.submission_city.toLowerCase())
+                : true;
+            const isStatusValid = filter.status ? application.status.toLowerCase() === filter.status.toLowerCase() : true;
+            const isAdditionalInfoValid = filter.additional_info
+                ? application.additional_info.toLowerCase().includes(filter.additional_info.toLowerCase())
+                : true;
+
+            return isDateFromValid && isDateToValid && isSubmissionCityValid && isStatusValid && isAdditionalInfoValid;
+        });
+
+        setFilteredApplications(filteredData);
     }
 
     return (
