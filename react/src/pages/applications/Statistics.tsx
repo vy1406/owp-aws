@@ -29,7 +29,7 @@ const Statistics: React.FC<StatisticsProps> = ({ applications }) => {
 
     return (
         <CollapseContainer text={LANG.EN.STATISTICS} isOpen={isOpen} toggleIsOpen={(isOpen) => setIsOpen(isOpen)}>
-            <div className="bg-gray-800 text-white p-4 rounded-lg space-y-4">
+            <div className="bg-gray-800 text-white p-2 rounded-lg space-y-4">
                 {fastestApplication &&
                        <div className="flex justify-between">
                         <div className="text-gray-200 w-2/5">Fastest Approved:</div>

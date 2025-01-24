@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CollapseContainer from '../../components/CollapseContainer';
 import { LANG, STATUS_MAP } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
+import Separtor from './Separator';
 
 export interface IOnFilter {
     dateFrom: string;
@@ -44,7 +45,7 @@ const FilterSearch = ({ onFilter }: IFilterSearchProps) => {
 
     return (
         <CollapseContainer text={LANG.EN.FILTER_AND_SEARCH} isOpen={isOpen} toggleIsOpen={(isOpen) => setIsOpen(isOpen)}>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 flex flex-col mt-3">
                 <div className="relative z-0 w-full mt-2 group">
                     <input
                         type="date"
