@@ -61,10 +61,7 @@ const ResourceList = () => {
             <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
             {isLoading ? (
                 <ul className="list-disc list-inside">
-                    <SkeletonCard />
-                    <SkeletonCard />
-                    <SkeletonCard />
-                    <SkeletonCard />
+                    {[...Array(8)].map((_, index) => (<SkeletonCard key={index} />))}
                 </ul>
             ) : (
                 <>

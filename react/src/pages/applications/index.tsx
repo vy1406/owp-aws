@@ -53,9 +53,7 @@ const ResourceList = () => {
             <Separtor />
             {isLoading ? (
                 <ul className="list-disc list-inside">
-                    {[...Array(8)].map((_, index) => (
-                        <Skeleton key={index} />
-                    ))}
+                    {[...Array(8)].map((_, index) => (<Skeleton key={index} />))}
                 </ul>
             ) : (
                 <>
