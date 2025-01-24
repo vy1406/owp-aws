@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import CollapseContainer from '../../components/CollapseContainer';
-import { LANG, STATUS_MAP } from '../../utils/constants';
+import { LANG } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
-import Separtor from './Separator';
 
 export interface IOnFilter {
     dateFrom: string;

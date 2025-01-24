@@ -1,5 +1,5 @@
 
-export const formatDateToDDMMYYYY = (dateString: string) => {
+export const formatDateToDDMMYYYY = (dateString: string | null) => {
     if ( dateString === "" || dateString === null || dateString === undefined) return "----"; 
 
     const [year, month, day] = dateString.split('-');

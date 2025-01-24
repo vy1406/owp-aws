@@ -1,4 +1,5 @@
 import { IApplication } from "../../services/applications";
+import { STATUS_MAP } from "../../utils/constants";
 
 const getDaysDifference = (start: string, end: string): number => {
     const startDate = new Date(start);
@@ -17,7 +18,7 @@ export const findFastestApplication = (applications: IApplication[]): { app: IAp
     let minDays = Infinity;
 
     for (const app of applications) {
-        if (app.status === 'Approved' && app.decision_date) {
+        if (app.status === STATUS_MAP.APPROVED && app.decision_date) {
             const days = getDaysDifference(app.application_date, app.decision_date);
             if (days < minDays) {
                 minDays = days;
@@ -35,7 +36,7 @@ export const findLongestApplication = (applications: IApplication[]): { app: IAp
     let maxDays = -Infinity;
 
     for (const app of applications) {
-        if (app.status === 'Approved' && app.decision_date) {
+        if (app.status === STATUS_MAP.APPROVED && app.decision_date) {
             const days = getDaysDifference(app.application_date, app.decision_date);
             if (days > maxDays) {
                 maxDays = days;
@@ -54,7 +55,7 @@ export const findLongestPendingApplication = (applications: IApplication[]): { a
     const today = new Date().toISOString().split('T')[0];
 
     for (const app of applications) {
-        if (app.status === 'Pending') {
+        if (app.status === STATUS_MAP.PENDING) {
             const days = getDaysDifference(app.application_date, today);
             if (days > maxDays) {
                 maxDays = days;
@@ -79,7 +80,7 @@ export const calculateAverageDays = (applications: IApplication[], status: strin
 };
 
 export const calculateAveragePendingDays = (applications: IApplication[]): { averageDays: number; total: number } => {
-    const filteredApps = applications.filter((app) => app.status === 'Pending');
+    const filteredApps = applications.filter((app) => app.status === STATUS_MAP.PENDING);
     const today = new Date().toISOString().split('T')[0];
 
     const totalDays = filteredApps.reduce((total, app) => {
