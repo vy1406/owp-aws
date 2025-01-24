@@ -1,8 +1,6 @@
 import { format } from "date-fns";
-import HowTo from "../../components/HowTo";
 import ApplicationForm from "../../forms/application";
 import { LANG } from "../../utils/constants";
-import HowToFillApplication from "./HowToFillApplication";
 import { IApplicationForm } from "../../forms/rules";
 
 const NewApplication = () => {
@@ -56,12 +54,9 @@ const NewApplication = () => {
     return (
         <div className="mt-4">
             <div className="flex items-center justify-center w-full mb-6 gap-6">
-                <h1 className="text-2xl font-bold text-center">Create an Application</h1>
-                <HowTo title={LANG.EN.HOW_RESOURCE_WORK}>
-                    <HowToFillApplication />
-                </HowTo>
+                <h1 className="text-2xl font-bold text-center">{LANG.EN.CREATE_APPLICATION}</h1>
             </div>
-            <ApplicationForm onSubmit={handleOnSubmit}/>
+            <ApplicationForm onSubmit={handleOnSubmit} />
         </div>
     );
 }

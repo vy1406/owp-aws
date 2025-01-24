@@ -10,12 +10,11 @@ import Applications from './pages/applications';
 import ScrollToTopButton from './components/ScrollToTopButton';
 import Application from './pages/application';
 import NewApplication from './pages/newApplication';
+import Login from './pages/login';
 
 const Home = () => <h1>Home</h1>
 const About = () => <h1>About</h1>
-const Login = () => <h1>Login</h1>
 const NotFound = () => <h1>404 Not Found</h1>
-
 
 
 function App() {

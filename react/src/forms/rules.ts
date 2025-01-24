@@ -5,6 +5,10 @@ export type FormValidationRules<T extends FieldValues> = {
     [K in keyof T]?: RegisterOptions<T, any> | undefined;
 };
 
+export interface ILoginForm {
+    username: string;
+    password: string;
+}
 
 export interface IResourceForm {
     title?: string;
@@ -23,6 +27,19 @@ export interface IApplicationForm {
     status: string;
     submission_city: string | null;
 }
+
+export const LoginRules: FormValidationRules<ILoginForm> = {
+    username: {
+        required: LANG.EN.USERNAME_REQUIRED,
+        pattern: {
+            value: /^[A-Za-z0-9!@#$%^&*()_+=[\]{}|\\;:'",.<>?/`~-]*$/,  
+            message: LANG.EN.USERNAME_MUST_BE_VALID,
+        }
+    },
+    password: {
+        required: LANG.EN.PASSWORD_REQUIRED,
+    },
+};
 
 export const ApplicationRules: FormValidationRules<IApplicationForm> = {
     application_date: {
