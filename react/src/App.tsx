@@ -9,6 +9,7 @@ import ResourceList from './pages/resourcesList';
 import { ToastContainer } from 'react-toastify';
 import ResourceServiceForm from './pages/newResource';
 import Applications from './pages/applications';
+import ScrollToTopButton from './components/ScrollToTopButton';
 
 const Home = () => <h1>Home</h1>
 const About = () => <h1>About</h1>
@@ -38,6 +39,7 @@ function App() {
           <Route path={ROUTES.SIGNUP} component={Signup} />
           <Route><NotFound /></Route>
         </Switch>
+          <ScrollToTopButton />
         <ToastContainer aria-label={"Notification messages"} position='bottom-right' autoClose={2000} />
       </main>
       {/* <Footer /> */}

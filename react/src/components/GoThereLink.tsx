@@ -1,7 +1,7 @@
 
 type LinkProps = {
     link: string
-    linkText: string
+    linkText?: string
 };
 
 const GoThereLink = ({ link, linkText }: LinkProps) => {

@@ -33,6 +33,7 @@ export const LANG = {
         RESOURCE: "Resource",
         RESOURCES: "Resources",
         FILTER_AND_SEARCH: "Filter & Search",
+        STATISTICS: "Statistics",
         DATE_FROM: "Date From",
         DATE_TO: "Date To",
         FREE_TEXT: "Free Text",

@@ -5,6 +5,7 @@ import Separtor from "../../components/Separator";
 import { getApplications, IApplication } from "../../services/applications";
 import ApplicationCard from "./ApplicationCard";
 import Skeleton from "./Skeleton";
+import Statistics from "./Statistics";
 
 const ResourceList = () => {
     const [apiApplications, setApiApplications] = useState<IApplication[]>([]);
@@ -48,6 +49,7 @@ const ResourceList = () => {
     return (
         <div className="container mx-auto p-2">
             <FilterSearch onFilter={handleOnFilter} />
+            <Statistics applications={filteredApplications}/>
             <Separtor />
             {isLoading ? (
                 <ul className="list-disc list-inside">

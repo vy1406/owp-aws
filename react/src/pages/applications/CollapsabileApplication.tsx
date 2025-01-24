@@ -13,10 +13,17 @@ interface CollapsibleApplicationBoxProps {
 const CollapsableApplication: React.FC<CollapsibleApplicationBoxProps> = ({ date, status, children }) => {
     const [isOpen, setIsOpen] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const [height, setHeight] = useState('0px');
 
     const handleToggle = () => {
         setIsOpen(!isOpen);
+
+        if (!isOpen && containerRef.current) {
+            setTimeout(() => {
+                containerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100); 
+        }
     };
 
     useEffect(() => {
@@ -24,7 +31,7 @@ const CollapsableApplication: React.FC<CollapsibleApplicationBoxProps> = ({ date
     }, [isOpen]);
 
     return (
-        <div className="mt-4 overflow-hidden max-w-md p-2 border  rounded-lg shadow bg-gray-800 border-gray-700 w-full md:w-auto select-none random-card">
+        <div ref={containerRef} className="mt-4 overflow-hidden max-w-md p-2 border  rounded-lg shadow bg-gray-800 border-gray-700 w-full md:w-auto select-none random-card">
             <div
                 className="flex justify-between p-0 cursor-pointer "
                 onClick={handleToggle}
