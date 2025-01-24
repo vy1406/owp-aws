@@ -28,7 +28,7 @@ const ResourceList = () => {
     }, []);
 
     const handleOnFilter = (filter: IOnFilter) => {
-     
+        console.log('Filter:', filter);
     }
 
     return (

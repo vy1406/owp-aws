@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { format } from 'date-fns';
-
-export const STATUS_MAP = {
-    Pending: 'Pending',
-    Rejected: 'Rejected',
-    Approved: 'Approved',
-};
+import { STATUS_MAP } from '../utils/constants';
 
 export default function ApplicationForm() {
     const [isSelfSubmitted, setIsSelfSubmitted] = useState(true);
@@ -244,13 +239,13 @@ export default function ApplicationForm() {
                     <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
                     <select
                         id="status"
-                        {...register('status', { required: true })}
-                        defaultValue={STATUS_MAP.Pending}
+                        {...register('status')}
+                        defaultValue={STATUS_MAP.PENDING}
                         className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                        <option value={STATUS_MAP.Pending}>{STATUS_MAP.Pending}</option>
-                        <option value={STATUS_MAP.Rejected}>{STATUS_MAP.Rejected}</option>
-                        <option value={STATUS_MAP.Approved}>{STATUS_MAP.Approved}</option>
+                        <option value={STATUS_MAP.PENDING}>{STATUS_MAP.PENDING}</option>
+                        <option value={STATUS_MAP.DECLINED}>{STATUS_MAP.DECLINED}</option>
+                        <option value={STATUS_MAP.APPROVED}>{STATUS_MAP.APPROVED}</option>
                     </select>
                 </div>
                 <div>
