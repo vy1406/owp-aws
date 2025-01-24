@@ -1,19 +1,12 @@
 
-import React, { useRef, useState } from 'react';
-import { Link } from 'wouter';
+import React, { useContext, useRef, useState } from 'react';
+import { Link, useLocation } from 'wouter';
 import { LANG, ROUTES } from '../utils/constants';
 import useClickOutside from '../hooks/useClickOutside';
+import LoginContext from '../services/context';
 
 
 const routes = [
-  {
-    name: LANG.EN.RESOURCES,
-    path: ROUTES.RESOURCES,
-  },
-  {
-    name: LANG.EN.NEW_RESOURCE,
-    path: ROUTES.NEW_RESOURCE,
-  },
   {
     name: LANG.EN.APPLICATIONS,
     path: ROUTES.APPLICATIONS,
@@ -23,8 +16,12 @@ const routes = [
     path: ROUTES.NEW_APPLICATION,
   },
   {
-    name: LANG.EN.ABOUT,
-    path: ROUTES.ABOUT,
+    name: LANG.EN.RESOURCES,
+    path: ROUTES.RESOURCES,
+  },
+  {
+    name: LANG.EN.NEW_RESOURCE,
+    path: ROUTES.NEW_RESOURCE,
   },
   {
     name: LANG.EN.LOGIN,
@@ -34,9 +31,15 @@ const routes = [
     name: LANG.EN.SIGN_UP,
     path: ROUTES.SIGNUP,
   },
+  {
+    name: LANG.EN.ABOUT,
+    path: ROUTES.ABOUT,
+  },
 ];
 
 const NavBar = () => {
+  const { isAuthenticated, logout } = useContext(LoginContext)
+  const [_, setLocation] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
 
@@ -50,15 +53,9 @@ const NavBar = () => {
 
   useClickOutside(mobileMenuRef, handleCloseMenu);
 
-  const onDownloadCv = () => {
-    // gtag('event', 'click', {
-    //   event_category: 'engagement',
-    //   event_label: 'download_cv',
-    // });
-
-    // window.open(DATA.links.cv, '_blank');
-  }
-
+  const onLogin = () => setLocation(ROUTES.LOGIN);
+  const onLogout = () => logout();
+  
   return (
     <div className="sticky top-0 z-50 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200" >
       <div className="flex w-full items-center px-4 py-2">
@@ -76,15 +73,25 @@ const NavBar = () => {
 
           </div>
           <div>
-            <button
-              className="py-2 px-2 text-sm font-medium text-center text-white rounded-lg bg-indigo-800 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300"
-              onClick={() => onDownloadCv()}
-            >
-              CV
-            </button>
+            {!isAuthenticated ?
+              <button
+                onClick={onLogin}
+                className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
+              >
+                {LANG.EN.LOGIN}
+              </button>
+              :
+              <button
+                onClick={onLogout}
+                className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
+              >
+                {LANG.EN.LOGOUT}
+              </button>
+            }
 
           </div>
         </div>
+
         <div className="md:hidden flex w-full items-center justify-between">
           <div
             className="cursor-pointer"
@@ -106,12 +113,23 @@ const NavBar = () => {
               />
             </svg>
           </div>
-          <button
-            className="py-2 px-2 text-sm font-medium text-center text-white rounded-lg bg-indigo-800 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-300"
-            onClick={() => onDownloadCv()}
-          >
-            CV
-          </button>
+          {!isAuthenticated ?
+            <button
+              onClick={onLogin}
+              className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
+            >
+              {LANG.EN.LOGIN}
+            </button>
+
+
+            :
+            <button
+              onClick={onLogout}
+              className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
+            >
+              {LANG.EN.LOGOUT}
+            </button>
+          }
 
         </div>
 
@@ -137,7 +155,7 @@ const NavBar = () => {
                   </Link>
                 </li>
               ))}
-            
+
             </ul>
           </div>
         </div>

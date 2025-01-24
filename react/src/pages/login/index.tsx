@@ -1,18 +1,24 @@
+import { toast } from "react-toastify";
 import LoginForm from "../../forms/login";
+import { ILoginForm } from "../../forms/rules";
+import { apiLogin } from "../../services/auth";
 import { LANG, ROUTES } from "../../utils/constants";
 import { useLocation } from "wouter";
+import { useContext } from "react";
+import LoginContext from "../../services/context";
 
 const Login = () => {
     const [_, setLocation] = useLocation();
+    const { login: ctxLogin } = useContext(LoginContext)
+    const handleOnSubmit = async (data: ILoginForm) => {
+        try { 
+            const res = await apiLogin(data);
+            ctxLogin(res?.token || '');
+            setLocation(ROUTES.APPLICATIONS);
+        } catch {
+            toast.error(LANG.EN.LOGIN_ERROR);
+        }
 
-    const handleOnSubmit = async (data: any) => {
-        return new Promise((resolve) => {
-            console.log('Submitting data:', data);
-            setTimeout(() => {
-                console.log('Data submitted successfully');
-                resolve();
-            }, 3000);
-        });
     }
 
     return (

@@ -19,11 +19,11 @@ const SignUp = () => {
 
     return (
         <div className="mt-4">
-            <div className="flex items-center justify-center w-full mb-6 gap-6">
-                <h1 className="text-2xl font-bold text-center">{LANG.EN.SIGN_UP}</h1>
-                <HowTo title={LANG.EN.HOW_IT_WORKS}>
-                    <HowToFillSignUp />
-                </HowTo>
+            <div className="flex items-center justify-center w-full mb-6">
+                <h1 className="text-2xl font-bold ml-4 text-center w-full">{LANG.EN.SIGN_UP}</h1>
+                    <HowTo title={LANG.EN.HOW_IT_WORKS_TITLE}>
+                        <HowToFillSignUp />
+                    </HowTo>
             </div>
             <SignUpForm onSubmit={handleOnSubmit} />
         </div>
