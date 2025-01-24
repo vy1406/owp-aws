@@ -20,6 +20,7 @@ const HowTo = ({ children, title }: HelpIconProps) => {
 
     return (
         <div>
+
             <div
                 className="w-8 h-8 flex items-center justify-center rounded-full cursor-pointer text-gray-600 hover:text-gray-800 hover:border-gray-600 transition-all"
                 onClick={() => setIsOpen(!isOpen)}
@@ -38,6 +39,7 @@ const HowTo = ({ children, title }: HelpIconProps) => {
                 >
                     <div
                         ref={howToRef}
+                        onClick={(e) => e.stopPropagation()}
                         className="rounded-lg shadow-lg p-4 w-[90%] max-w-screen-md bg-gray-800 max-h-[90vh] overflow-y-auto"
                     >
                         <h2 className="text-lg font-semibold mb-3">{title}</h2>

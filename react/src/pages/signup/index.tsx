@@ -6,12 +6,13 @@ import HowToFillSignUp from "./HowToFillSignUp";
 
 const SignUp = () => {
     const [_, setLocation] = useLocation();
+    
     const handleOnSubmit = async (data: any) => {
         return new Promise((resolve) => {
             console.log('Submitting data:', data);
             setTimeout(() => {
                 console.log('Data submitted successfully');
-                setLocation(ROUTES.APPLICATIONS)
+                setLocation(ROUTES.LOGIN)
             }, 3000);
         });
     }

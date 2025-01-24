@@ -47,7 +47,7 @@ const CollapseContainer: React.FC<CollapsibleApplicationBoxProps> = ({ text, sub
                 className="flex justify-between p-0 cursor-pointer "
                 onClick={handleToggle}
             >
-                <div className="overflow-hidden w-full">
+                <div className="overflow-hidden w-full flex items-center">
                     <div
                         className={`text-lg pl-1 font-medium text-gray-200 ${!isOpen ? 'overflow-hidden whitespace-nowrap text-ellipsis pr-2' : 'pr-2'}`}
                     >
@@ -55,9 +55,9 @@ const CollapseContainer: React.FC<CollapsibleApplicationBoxProps> = ({ text, sub
                     </div>
                     {subText && (
                         <span
-                            className="text-sm text-gray-200 overflow-hidden whitespace-nowrap text-ellipsis block"
+                            className="text-sm italic text-gray-200 overflow-hidden whitespace-nowrap text-ellipsis block"
                         >
-                            {subText}
+                            ( {subText} )
                         </span>
                     )}
                 </div>

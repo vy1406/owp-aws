@@ -31,7 +31,7 @@ const routes = [
     path: ROUTES.LOGIN,
   },
   {
-    name: LANG.EN.SIGNUP,
+    name: LANG.EN.SIGN_UP,
     path: ROUTES.SIGNUP,
   },
 ];
@@ -130,7 +130,7 @@ const NavBar = () => {
                 <li key={index}>
                   <Link
                     href={route.path}
-                    className="block py-2 px-3  border-b border-gray-100  md:hover:bg-transparent md:border-0 md:hover:text-blue-600 text-white hover:bg-gray-700 hover:text-blue-500"
+                    className="block py-2 px-3  border-b border-gray-600  md:hover:bg-transparent md:border-0 md:hover:text-blue-600 text-white hover:bg-gray-700 hover:text-blue-500"
                     onClick={handleCloseMenu}
                   >
                     {route.name}

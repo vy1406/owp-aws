@@ -24,7 +24,8 @@ export const LANG = {
         CLEAR: "Clear",
         TITLE: "Title",
         SUBMITTER_EMAIL: "Submitter Email",
-        HOW_IT_WORKS: "How it works ?",
+        HOW_IT_WORKS_TITLE: "How it works ?",
+        WHAT_IS_IT: "What is it about?",
         ADD: "Add",
         APPLICATIONS: "Applications",
         SAVE: "Save",
@@ -128,6 +129,33 @@ export const LANG = {
         EMAIL_NOTIFIED: "Email will be notified when the resource is approved / decline.",
         HOW_TO_SIGN_UP_UNIQUE_USERNAME: "Make sure to sign up with a unique username. You username will be seen to others as part of submitted application form.",
         HOW_TO_SIGN_UP_PASSWORD: "All password are stored in a secured way, NOT a single password stored as plain text. 'Forgot password' will be added lately.",
+        FEATURES_TITLE: "Features",
+
+        INTRO: "I created this application out of boredom while waiting for my decision. I got tired of asking people where they stand so I can compare myself to them, so I've created somethign more or less automatic",
+        HOW_IT_WORKS: [
+            "You can log in with a made-up username and a simple password. Just make sure to remember these credentials, as you will need them to update your applications and their statuses. We do not store any personal information, so your privacy is guaranteed.",
+            "To get started, simply sign up with a username and password. Once logged in, you can start adding your applications and tracking their statuses.",
+        ],
+        FEATURES: [
+            "Add as many applications as you want.",
+            "Edit & delete your applications at any time.",
+            "Filter and sort",
+            "Share links to your applications",
+            "You can add resources, any valuable resource is welcome. For example, links to useful sites like comparing the cost of living.",
+            "You can also add services, for example, if you are an English teacher or a real estate agent, you can share a link to your page with an explanation.",
+        ],
+        PURPOSE_TITLE: "Purpose",
+        DISCLAIMERS: "disclaimers",
+        PURPOSE: [
+            "This site is not for commercial use. It is designed purely for monitoring and statistical purposes. By using this site, you can gain insights into the application process and better manage your expectations.",
+            "This application is provided 'as is' without any representations or warranties, express or implied. The creator of this application will not be held liable for any damages arising from the use of this application. Users are responsible for the accuracy of the data they input and for complying with any relevant legal requirements. This site is intended for personal use only, and any misuse of the site or its data is strictly prohibited."
+        ],
+        FUNNY_NOTE: "Like anyone cares lol",
+        ABOUT_ME_TITLE: "About me",
+        ABOUT_ME: {
+            NAME: "Made by Vladimir Elisavetsky",
+            EMAIL: "vladimir.elisavetsky@gmail.com"
+        }
     }
 };
 

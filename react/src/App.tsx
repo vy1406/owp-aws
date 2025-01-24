@@ -11,9 +11,9 @@ import Application from './pages/application';
 import NewApplication from './pages/newApplication';
 import Login from './pages/login';
 import SignUp from './pages/signup';
+import About from './pages/about';
 
 const Home = () => <h1>Home</h1>
-const About = () => <h1>About</h1>
 const NotFound = () => <h1>404 Not Found</h1>
 
 
