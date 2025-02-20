@@ -38,7 +38,7 @@ const routes = [
 ];
 
 const NavBar = () => {
-  const { isAuthenticated, logout } = useContext(LoginContext)
+  const { isAuthenticated, username, logout } = useContext(LoginContext)
   const [_, setLocation] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuRef = useRef(null);
@@ -55,7 +55,7 @@ const NavBar = () => {
 
   const onLogin = () => setLocation(ROUTES.LOGIN);
   const onLogout = () => logout();
-  
+  console.log("lol ", username)
   return (
     <div className="sticky top-0 z-50 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200" >
       <div className="flex w-full items-center px-4 py-2">
@@ -81,12 +81,17 @@ const NavBar = () => {
                 {LANG.EN.LOGIN}
               </button>
               :
-              <button
-                onClick={onLogout}
-                className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
-              >
-                {LANG.EN.LOGOUT}
-              </button>
+              <div className='flex gap-4 items-center'>
+                <span className='bg-gray-500 text-white text-sm font-medium px-3 py-1 rounded-full'>
+                  {username}
+                </span>
+                <button
+                  onClick={onLogout}
+                  className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
+                >
+                  {LANG.EN.LOGOUT}
+                </button>
+              </div>
             }
 
           </div>
@@ -123,12 +128,17 @@ const NavBar = () => {
 
 
             :
-            <button
-              onClick={onLogout}
-              className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
-            >
-              {LANG.EN.LOGOUT}
-            </button>
+            <div className='flex gap-4 items-center'>
+              <span className='bg-gray-500 text-white text-sm font-medium px-3 py-1 rounded-full'>
+                {username}
+              </span>
+              <button
+                onClick={onLogout}
+                className={` bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-700`}
+              >
+                {LANG.EN.LOGOUT}
+              </button>
+            </div>
           }
 
         </div>

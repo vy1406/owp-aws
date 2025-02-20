@@ -68,7 +68,7 @@ exports.handler = async (event) => {
                 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             },
-            body: JSON.stringify({ message: 'Login successful', token }),
+            body: JSON.stringify({ message: 'Login successful', token, username: user.username }),
         };
     } catch (error) {
         console.error('Error in login handler:', error);

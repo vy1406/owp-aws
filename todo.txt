@@ -9,7 +9,8 @@ REACT:
 - react toastify
 - find different text style.
 - on clicking on tag, it will go to search to fetch
-
+- only english
+- 
 - how it works ( resource )
 - use proxy from vite
 

@@ -13,7 +13,10 @@ const Login = () => {
     const handleOnSubmit = async (data: ILoginForm) => {
         try { 
             const res = await apiLogin(data);
-            ctxLogin(res?.token || '');
+            ctxLogin({
+                token: res?.token || '',
+                username: res?.username || 'N/A'
+            });
             setLocation(ROUTES.APPLICATIONS);
         } catch {
             toast.error(LANG.EN.LOGIN_ERROR);

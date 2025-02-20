@@ -14,6 +14,7 @@ const DUMMY_LOGIN = {
 export type ILoginResponse = {
     message: string;
     token: string;
+    username: string;
 }
 export const apiLogin = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
     const url = `${API.AUTH}/login`;
