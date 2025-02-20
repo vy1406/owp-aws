@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "wouter";
 import { getApplication, IApplication } from "../../services/applications";
 import ApplicationForm from "../../forms/application";
+import { LANG } from "../../utils/constants";
 
 const Application = () => {
     const [application, setApplication] = useState<IApplication | null>(null);
@@ -27,8 +28,7 @@ const Application = () => {
     }
 
     return (
-        <div className="max-w-2xl mx-auto mt-10">
-            <h1 className="text-white text-2xl font-semibold mb-4">Edit Application</h1>
+        <div className="max-w-2xl mx-auto mt-5">
             {application ? (
                 <ApplicationForm onSubmit={(data) => console.log("Submitted data:", data)} application={application} />
             ) : (

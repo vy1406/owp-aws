@@ -51,10 +51,7 @@ const NewApplication = () => {
     };
 
     return (
-        <div className="mt-4">
-            <div className="flex items-center justify-center w-full mb-6 gap-6">
-                <h1 className="text-2xl font-bold text-center">{LANG.EN.CREATE_APPLICATION}</h1>
-            </div>
+        <div className="max-w-2xl mx-auto mt-5">
             <ApplicationForm onSubmit={handleOnSubmit} />
         </div>
     );
