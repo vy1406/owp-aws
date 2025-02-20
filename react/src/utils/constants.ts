@@ -95,6 +95,7 @@ export const LANG = {
         APPLICATION_DATE_REQUIRED: "Application date is required",
         YES: "Yes",
         NO: "No",
+        GO_TO_APPLICATION: "Go to application",
         PASSWORD_REQUIRED: "Password is required",
         USERNAME_REQUIRED: "Username is required",
         PASSWORDS_MUST_MATCH: "Passwords must match",

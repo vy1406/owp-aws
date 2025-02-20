@@ -1,15 +1,41 @@
+import { useEffect, useState } from "react";
 import { useParams } from "wouter";
+import { getApplication, IApplication } from "../../services/applications";
+import ApplicationForm from "../../forms/application";
 
 const Application = () => {
+    const [application, setApplication] = useState<IApplication | null>(null);
+    const [isLoading, setLoading] = useState(true);
+    const location = useParams();
 
-    const location = useParams()
+    useEffect(() => {
+        const fetchApplication = async () => {
+            setLoading(true);
+            if (location.id) {
+                const fetchedApplication = await getApplication(location.id);
+                if (fetchedApplication) {
+                    setApplication(fetchedApplication);
+                }
+            }
+            setLoading(false);
+        };
+        fetchApplication();
+    }, [location]);
 
-    console.log(location)
+    if (isLoading) {
+        return <p className="text-gray-300">Loading...</p>;
+    }
+
     return (
-        <div>
-        <h1>Application</h1>
+        <div className="max-w-2xl mx-auto mt-10">
+            <h1 className="text-white text-2xl font-semibold mb-4">Edit Application</h1>
+            {application ? (
+                <ApplicationForm onSubmit={(data) => console.log("Submitted data:", data)} application={application} />
+            ) : (
+                <p className="text-red-400">Application not found</p>
+            )}
         </div>
     );
-}
+};
 
 export default Application;

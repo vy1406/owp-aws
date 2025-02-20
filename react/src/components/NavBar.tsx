@@ -55,7 +55,7 @@ const NavBar = () => {
 
   const onLogin = () => setLocation(ROUTES.LOGIN);
   const onLogout = () => logout();
-  console.log("lol ", username)
+  
   return (
     <div className="sticky top-0 z-50 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200" >
       <div className="flex w-full items-center px-4 py-2">

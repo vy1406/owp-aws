@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { IApplicationForm, ApplicationRules } from './rules';
 import { LANG, STATUS_MAP } from '../utils/constants';
+import { IApplication } from '../services/applications';
+import LoginContext from '../services/context';
+import Status from '../pages/applications/Status';
 
 
 type ApplicationFormProps = {
     onSubmit: (data: IApplicationForm) => void;
+    application?: IApplication | null;
 };
 
 const DEFAULT_VALUS: IApplicationForm = {
@@ -14,26 +18,45 @@ const DEFAULT_VALUS: IApplicationForm = {
     decision_date: null,
     additional_info: '',
     is_self_submitted: false,
-    status: STATUS_MAP.PENDING, 
+    status: STATUS_MAP.PENDING,
     submission_city: '',
 }
 
-const ApplicationForm = ({ onSubmit }: ApplicationFormProps) => {
-    const { register, handleSubmit, reset, control, clearErrors } = useForm<IApplicationForm>({
-        defaultValues: DEFAULT_VALUS
+const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps) => {
+    const { username, isAuthenticated } = useContext(LoginContext)
+    const isFormDisabled = !isAuthenticated || (application && application.username !== username);
+
+    const { register, handleSubmit, reset, control, clearErrors, watch } = useForm<IApplicationForm>({
+        defaultValues: DEFAULT_VALUS, disabled: !!isFormDisabled
     });
     
     const { isSubmitSuccessful, isSubmitting, errors } = useFormState({ control });
+
+    const selectedStatus = watch('status', STATUS_MAP.PENDING);
 
     useEffect(() => {
         if (isSubmitSuccessful) {
             clearErrors()
             reset()
         }
-    }, [isSubmitSuccessful, reset]);
+    }, [isSubmitSuccessful, reset, clearErrors]);
+
+    useEffect(() => {
+        if (application) {
+            reset({
+                application_date: application.application_date,
+                biometric_date: application.biometric_date || null,
+                decision_date: application.decision_date || null,
+                additional_info: application.additional_info || '',
+                is_self_submitted: application.is_self_submitted || false,
+                status: application.status || STATUS_MAP.PENDING,
+                submission_city: application.submission_city || '',
+            });
+        }
+    }, [application, reset]);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" >
             <div className="relative z-0 w-full mb-5 group">
                 <input
                     type="date"
@@ -118,66 +141,76 @@ const ApplicationForm = ({ onSubmit }: ApplicationFormProps) => {
                     {...register('additional_info')}
                 />
             </div>
+            {isFormDisabled ? <div className='flex justify-center'>
+                <Status status={selectedStatus} />
+            </div> :
+                (
 
-            <div className="flex flex-col space-y-2">
-                <label className="block text-sm font-medium text-gray-400 mb-3">
-                    {LANG.EN.STATUS}
-                </label>
-                <div className="flex">
-                    <div className="flex items-center me-4">
-                        <input
-                            id="pending"
-                            type="radio"
-                            value={STATUS_MAP.PENDING}
-                            {...register('status')}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0  dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label htmlFor="pending" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            {STATUS_MAP.PENDING}
+                    <div className="flex flex-col space-y-2">
+                        <label className="block text-sm font-medium text-gray-400 mb-3">
+                            {LANG.EN.STATUS}
                         </label>
+                        <div className="flex">
+                            <div className="flex items-center me-4">
+                                <input
+                                    id="pending"
+                                    type="radio"
+                                    value={STATUS_MAP.PENDING}
+                                    {...register('status')}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0  dark:bg-gray-700 dark:border-gray-600"
+                                />
+                                <label htmlFor="pending" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    {STATUS_MAP.PENDING}
+                                </label>
+                            </div>
+                            <div className="flex items-center me-4">
+                                <input
+                                    id="approved"
+                                    type="radio"
+                                    value={STATUS_MAP.APPROVED}
+                                    {...register('status')}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
+                                />
+                                <label htmlFor="approved" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    {STATUS_MAP.APPROVED}
+                                </label>
+                            </div>
+                            <div className="flex items-center me-4">
+                                <input
+                                    id="declined"
+                                    type="radio"
+                                    value={STATUS_MAP.DECLINED}
+                                    {...register('status')}
+                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
+                                />
+                                <label htmlFor="declined" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    {STATUS_MAP.DECLINED}
+                                </label>
+                            </div>
+                        </div>
+                        <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                            {errors.status?.message || '\u00A0'}
+                        </span>
                     </div>
-                    <div className="flex items-center me-4">
-                        <input
-                            id="approved"
-                            type="radio"
-                            value={STATUS_MAP.APPROVED}
-                            {...register('status')}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label htmlFor="approved" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            {STATUS_MAP.APPROVED}
-                        </label>
-                    </div>
-                    <div className="flex items-center me-4">
-                        <input
-                            id="declined"
-                            type="radio"
-                            value={STATUS_MAP.DECLINED}
-                            {...register('status')}
-                            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
-                        />
-                        <label htmlFor="declined" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                            {STATUS_MAP.DECLINED}
-                        </label>
-                    </div>
-                </div>
-                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
-                    {errors.status?.message || '\u00A0'}
-                </span>
-            </div>
-
-            <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full flex justify-center items-center bg-indigo-800 text-white py-2 px-4 rounded-md ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'
-                    }`}
-            >
-                {isSubmitting ? (
-                    <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                ) : (
-                    LANG.EN.SUBMIT
                 )}
-            </button>
+            {
+                isFormDisabled ? null :
+                    (
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className={`w-full flex justify-center items-center bg-indigo-800 text-white py-2 px-4 rounded-md ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'
+                                }`}
+                        >
+                            {isSubmitting ? (
+                                <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                            ) : (
+                                LANG.EN.SUBMIT
+                            )}
+                        </button>
+                    )
+            }
+
         </form>
     );
 }

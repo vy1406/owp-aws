@@ -1,19 +1,25 @@
 
 type LinkProps = {
-    link: string
+    link?: string
+    onClick?:       () => void
     linkText?: string
 };
 
-const GoThereLink = ({ link, linkText }: LinkProps) => {
+const GoThereLink = ({ link, linkText, onClick }: LinkProps) => {
 
     const handleOnLink = () => {
-        const formattedLink = link.startsWith('http://') || link.startsWith('https://')
+        if (onClick) {
+            onClick();
+            return;
+        }
+
+        const formattedLink = link?.startsWith('http://') || link?.startsWith('https://')
             ? link
             : `https://${link}`;
 
         window.open(formattedLink, '_blank', 'noopener,noreferrer');
     }
-
+ 
     return (
         <span
             onClick={handleOnLink}

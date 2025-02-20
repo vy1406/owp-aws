@@ -28,7 +28,7 @@ const LoginContext = createContext<LoginContextType>({
 
 export function LoginProvider({ children }: LoginProviderProps) {
   const [token, setToken] = useState(localStorage.getItem(TOKEN_KEY) || null);
-  const [username, setUsername] = useState(N_A);
+  const [username, setUsername] = useState(localStorage.getItem(USER_KEY) || null);
 
   const login = (props: LoginParams) => {
     setToken(props.token);

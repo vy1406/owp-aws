@@ -10,9 +10,10 @@ REACT:
 - find different text style.
 - on clicking on tag, it will go to search to fetch
 - only english
-- 
+- showing username ( done )
 - how it works ( resource )
 - use proxy from vite
+- remove from STUB
 
 learn about react table. master it. from Codevolution ( same  channel as useForm)
 

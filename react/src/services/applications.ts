@@ -70,3 +70,13 @@ export const getApplications = async (): Promise<IApplication[]> => {
     });
 
 };
+
+export const getApplication = async (id: string): Promise<IApplication | null> => {
+    // const url = `${API.APPLICATION}/${id}`;
+
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(STUB.find(app => app.id === id) || null);
+        }, 1500);
+    });
+}
