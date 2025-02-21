@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "wouter";
 import { getApplication, IApplication } from "../../services/applications";
 import ApplicationForm from "../../forms/application";
+import ApplicationFormSkeleton from "../../components/ApplicationSkeleton";
 
 const Application = () => {
     const [application, setApplication] = useState<IApplication | null>(null);
@@ -23,7 +24,7 @@ const Application = () => {
     }, [location]);
 
     if (isLoading) {
-        return <p className="text-gray-300">Loading...</p>;
+        return <ApplicationFormSkeleton />;
     }
 
     return (

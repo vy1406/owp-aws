@@ -2,7 +2,7 @@ AWS:
 - add only unique user. ( 1, 1h )
 - separated app for login ( 4, 2h )
 - make email with the whole template at step function ( 2, 2h )
-- Route 53 to S3.
+- Route 53 to S3 domain
 
 Eisenhower matrix:
 urgent | important
@@ -12,12 +12,13 @@ REACT:
 - generate cities using gpt ( make constant ) (1 1h)
 - react toastify (2, 20min)
 - find different text style. (3, 30min)
-- on clicking on tag, it will go to search to fetch (2, 10 min)
+- on clicking on tag, it will go to search to fetch. resource and applications.  (2, 10 min)
 - only english (1, 10 min)
 - how it works ( resource ) (2, 1h)
 - use proxy from vite (2, 1h)
 - remove from STUB (3, 1h)
 - edit application:id (1, 10m )
+- create a loading skeleton for application (1, 10min)
 - router rewrite (1, 1h )
 - cleaning (4, 2h )
 - statistics -> go to that application. (1, 10min)
