@@ -18,7 +18,7 @@ REACT:
 - use proxy from vite (2, 1h)
 - remove from STUB (3, 1h)
 - edit application:id (1, 10m )
-- create a loading skeleton for application (1, 10min)
+- create a loading skeleton for application (1, 10min) ( done ) 
 - router rewrite (1, 1h )
 - cleaning (4, 2h )
 - statistics -> go to that application. (1, 10min)
