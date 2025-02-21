@@ -14,6 +14,12 @@ export const STATUS_MAP = {
     DECLINED: 'Declined',
 }
 
+export const REGEX = {
+    ONLY_ENGLISH: /^[A-Za-z\s]+$/,
+    EMAIL: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+    LETTER_NUMBERS_SPECIAL_CHARS: /^[A-Za-z0-9!@#$%^&*()_+=[\]{}|\\;:'",.<>?/`~-]*$/
+}
+
 export const LANG = {
     EN: {
         SUBMIT: "Submit",
@@ -93,6 +99,8 @@ export const LANG = {
         SELF_SUBMISSION: "Self Submission",
         ADDITIONAL_INFO: "Additional Info",
         APPLICATION_DATE_REQUIRED: "Application date is required",
+        SUBMISSION_CITY_REQUIRED: "Submission city is required",
+        SUBMISSION_CITY_MUST_BE_ENGLISH: "Submission city must be in English",
         YES: "Yes",
         NO: "No",
         GO_TO_APPLICATION: "Go to application",

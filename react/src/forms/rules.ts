@@ -1,5 +1,5 @@
 import { FieldValues, RegisterOptions } from 'react-hook-form';
-import { CONSTANTS, LANG, STATUS_MAP } from '../utils/constants';
+import { CONSTANTS, LANG, REGEX, STATUS_MAP } from '../utils/constants';
 
 export type FormValidationRules<T extends FieldValues> = {
     [K in keyof T]?: RegisterOptions<T, any> | undefined;
@@ -38,7 +38,7 @@ export const LoginRules: FormValidationRules<ILoginForm> = {
     username: {
         required: LANG.EN.USERNAME_REQUIRED,
         pattern: {
-            value: /^[A-Za-z0-9!@#$%^&*()_+=[\]{}|\\;:'",.<>?/`~-]*$/,  
+            value: REGEX.LETTER_NUMBERS_SPECIAL_CHARS, 
             message: LANG.EN.USERNAME_MUST_BE_VALID,
         }
     },
@@ -51,7 +51,7 @@ export const SignUpRules: FormValidationRules<ISignUpForm> = {
     username: {
         required: LANG.EN.USERNAME_REQUIRED,
         pattern: {
-            value: /^[A-Za-z0-9!@#$%^&*()_+=[\]{}|\\;:'",.<>?/`~-]*$/,  
+            value: REGEX.LETTER_NUMBERS_SPECIAL_CHARS,  
             message: LANG.EN.USERNAME_MUST_BE_VALID,
         }
     },
@@ -97,7 +97,14 @@ export const ApplicationRules: FormValidationRules<IApplicationForm> = {
             return true;
         },
     },
-    
+
+    submission_city: {
+        required: LANG.EN.SUBMISSION_CITY_REQUIRED,
+        pattern: {
+            value: REGEX.ONLY_ENGLISH,
+            message: LANG.EN.SUBMISSION_CITY_MUST_BE_ENGLISH,
+        },
+    },
     
     decision_date: {
         validate: (value, formValues) => {
@@ -160,7 +167,7 @@ export const ResourceRules: FormValidationRules<IResourceForm> = {
     },
     submitterEmail: {
         pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+            value: REGEX.EMAIL, 
             message: LANG.EN.EMAIL_INVALID,
         }
     }
