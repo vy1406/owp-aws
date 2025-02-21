@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "wouter";
 import { getApplication, IApplication } from "../../services/applications";
 import ApplicationForm from "../../forms/application";
-import { LANG } from "../../utils/constants";
 
 const Application = () => {
     const [application, setApplication] = useState<IApplication | null>(null);

@@ -1,6 +1,5 @@
 import ApplicationForm from "../../forms/application";
 import { IApplicationForm } from "../../forms/rules";
-import { LANG } from "../../utils/constants";
 
 const NewApplication = () => {
 
