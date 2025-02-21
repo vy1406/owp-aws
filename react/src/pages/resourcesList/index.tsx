@@ -14,6 +14,14 @@ const ResourceList = () => {
     const [resources, setResources] = useState<IResource[]>([]);
     const [services, setServices] = useState<IResource[]>([]);
     const [isLoading, setLoading] = useState(true);
+    const [filters, setFilters] = useState<IOnFilter>({ searchTerm: '', tags: '' });    
+
+    const handleOnTag = (tag: string) => {
+        const filter = { searchTerm: '', tags: tag };
+        setFilters(filter);
+        handleOnFilter(filter);
+    }
+
 
     useEffect(() => {
         const fetchResources = async () => {
@@ -32,6 +40,7 @@ const ResourceList = () => {
 
     const handleOnFilter = (filter: IOnFilter) => {
         const { searchTerm, tags } = filter;
+        setFilters(filter);
         const tagList = tags.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag !== '');
 
         const filterItems = (items: IResource[]): IResource[] => {
@@ -56,7 +65,7 @@ const ResourceList = () => {
 
     return (
         <div className="container mx-auto p-2">
-            <FilterSearch onFilter={handleOnFilter} />
+            <FilterSearch onFilter={handleOnFilter} filters={filters}/>
             <Separtor />
             <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
             {isLoading ? (
@@ -65,8 +74,8 @@ const ResourceList = () => {
                 </ul>
             ) : (
                 <>
-                    {activeTab === RESOURCE_MAP.RESOURCE && <ResourceItems items={resources} />}
-                    {activeTab === RESOURCE_MAP.SERVICE && <ServiceItems items={services} />}
+                    {activeTab === RESOURCE_MAP.RESOURCE && <ResourceItems items={resources} onTag={handleOnTag}/>}
+                    {activeTab === RESOURCE_MAP.SERVICE && <ServiceItems items={services} onTag={handleOnTag}/>}
                 </>
             )}
         </div>
@@ -77,14 +86,15 @@ export default ResourceList;
 
 type ResourceItemsProps = {
     items: IResource[]
+    onTag: (tag: string) => void
 }
 
-const ServiceItems = ({ items }: ResourceItemsProps) => {
+const ServiceItems = ({ items, onTag }: ResourceItemsProps) => {
     return (
         <ul className="list-disc list-inside">
             {items.length > 0 ? (
                 items.map((resource: IResource) => (
-                    <ResourceCard resource={resource} key={resource.id} />
+                    <ResourceCard resource={resource} key={resource.id} onTag={onTag}/>
                 ))
             ) : (
                 <div className="text-lg font-medium text-gray-200  whitespace-nowrap text-ellipsis mt-4"                >
@@ -95,12 +105,12 @@ const ServiceItems = ({ items }: ResourceItemsProps) => {
     )
 }
 
-const ResourceItems = ({ items }: ResourceItemsProps) => {
+const ResourceItems = ({ items, onTag }: ResourceItemsProps) => {
     return (
         <ul className="list-disc list-inside">
             {items.length > 0 ? (
                 items.map((resource: IResource) => (
-                    <ResourceCard resource={resource} key={resource.id} />
+                    <ResourceCard resource={resource} key={resource.id} onTag={onTag}/>
                 ))
             ) : (
                 <div className="text-lg font-medium text-gray-200  whitespace-nowrap text-ellipsis mt-4"                >

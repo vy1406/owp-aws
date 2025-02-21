@@ -9,7 +9,6 @@ urgent | important
 
 REACT:
 - multilanguage support (3, 1h)
-- generate cities using gpt ( make constant ) (1 1h)
 - react toastify (2, 20min)
 - find different text style. (3, 30min)
 - on clicking on tag, it will go to search to fetch. resource and applications.  (2, 10 min)
@@ -21,4 +20,4 @@ REACT:
 - create a loading skeleton for application (1, 10min) ( done ) 
 - router rewrite (1, 1h )
 - cleaning (4, 2h )
-- statistics -> go to that application. (1, 10min)
+- statistics -> go to that application. (1, 10min) ( done )

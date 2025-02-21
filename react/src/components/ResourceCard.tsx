@@ -5,9 +5,10 @@ import GoThereLink from "./GoThereLink";
 
 type ResourceCardProps = {
     resource: IResource
+    onTag: (tag: string) => void
 };
 
-const ResourceCard = ({ resource }: ResourceCardProps) => {
+const ResourceCard = ({ resource, onTag }: ResourceCardProps) => {
 
     const tagsArray = resource.tags?.split(',') || [];
 
@@ -23,6 +24,7 @@ const ResourceCard = ({ resource }: ResourceCardProps) => {
                     {tagsArray?.map((tag, index) => (
                         <span
                             key={index}
+                            onClick={() => onTag(tag)}
                             className="bg-gray-700 px-3 py-1 text-xs font-semibold rounded-full text-gray-300"
                         >
                             #{tag.trim()}

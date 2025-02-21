@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CollapseContainer from '../../components/CollapseContainer';
 import { LANG } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
@@ -15,17 +15,24 @@ interface IFilterSearchForm {
 
 type IFilterSearchProps = {
     onFilter: (data: IOnFilter) => void;
+    filters: IOnFilter;
 };
 
-const FilterSearch = ({ onFilter }: IFilterSearchProps) => {
+const FilterSearch = ({ onFilter, filters }: IFilterSearchProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const { register, handleSubmit, reset, watch } = useForm<IFilterSearchForm>();
     
+    useEffect(() => {
+        reset(filters);
+    }, [filters, reset]);
+
     const tags = (watch('tags') || '').split(',').filter((tag) => tag.trim() !== '');
 
     const handleOnDeleteTag = (tag: string) => {
         const newTags = tags.filter((t) => t !== tag);
-        reset({ tags: newTags.join(',') });
+        const tagsInput = newTags.join(',');
+        reset({ tags: tagsInput });
+        onFilter({ searchTerm: '', tags: tagsInput });
     };
 
     const onSubmit = (data: IFilterSearchForm) => {
