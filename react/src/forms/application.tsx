@@ -61,7 +61,7 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                 <input
                     type="date"
                     id="application_date"
-                    
+
                     className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
                     placeholder=" "
                     {...register('application_date', ApplicationRules.application_date)}
@@ -120,7 +120,7 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                     id="title"
                     className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
                     placeholder=" "
-                    {...register('submission_city')}
+                    {...register('submission_city', ApplicationRules.submission_city)}
                 />
                 <label
                     htmlFor="title"
@@ -128,6 +128,9 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                 >
                     {LANG.EN.SUBMISSION_CITY}
                 </label>
+                <span className="text-sm text-red-400 mt-1 block min-h-[1.25rem]">
+                    {errors.submission_city?.message || '\u00A0'}
+                </span>
             </div>
 
             <div>

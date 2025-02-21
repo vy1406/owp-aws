@@ -7,7 +7,7 @@ export type ILoginData = {
 }
 
 const DUMMY_LOGIN = {
-    "username": "admin",
+    "username": "admin1",
     "password": "Aa1234567!"
 }
 
@@ -16,6 +16,7 @@ export type ILoginResponse = {
     token: string;
     username: string;
 }
+
 export const apiLogin = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
     const url = `${API.AUTH}/login`;
     console.log('username:', username);
@@ -40,6 +41,6 @@ export const apiLogin = async ({ username, password }: ILoginData): Promise<ILog
         return result;
     } catch (error) {
         console.error('Error:', error);
-        return null; 
+        throw new Error(`${error}`)
     }
 };

@@ -1,23 +1,27 @@
 AWS:
 - add only unique user. ( 1, 1h )
 - separated app for login ( 4, 2h )
+- router rewrite (1, 1h )
 - make email with the whole template at step function ( 2, 2h )
-- Route 53 to S3 domain
+- Route 53 to S3 domain ( 1, 1h ) 
 
 Eisenhower matrix:
 urgent | important
 
 REACT:
-- multilanguage support (3, 1h)
-- react toastify (2, 20min)
-- find different text style. (3, 30min)
-- only english (1, 10 min)
-- how it works ( resource ) (2, 1h)
+- multilanguage support (4, 1h)
+- find different text style. (4, 30min)
+
 - use proxy from vite (2, 1h)
 - remove from STUB (3, 1h)
 - edit application:id (1, 10m )
-- router rewrite (1, 1h )
 - cleaning (4, 2h )
+
+
+DONE: 
+- how it works ( resource ) (2, 1h) ( done ) 
+- react toastify (2, 20min) ( done ) 
+- only english (1, 10 min) ( done ) 
 - create a loading skeleton for application (1, 10min) ( done ) 
 - statistics -> go to that application. (1, 10min) ( done )
 - on clicking on tag, it will go to search to fetch. resource and applications.  (2, 10 min) ( dopne ) 

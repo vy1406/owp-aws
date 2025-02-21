@@ -39,6 +39,7 @@ function App() {
         </Switch>
           <ScrollToTopButton />
         <ToastContainer aria-label={"Notification messages"} position='bottom-right' autoClose={2000} />
+        
       </main>
       {/* <Footer /> */}
     </>
