@@ -17,7 +17,7 @@ REACT:
 - edit application:id (1, 10m )
 - cleaning (4, 2h )
 - make "rest" in client services.
-
+- delete application
 DONE: 
 - how it works ( resource ) (2, 1h) ( done ) 
 - react toastify (2, 20min) ( done ) 

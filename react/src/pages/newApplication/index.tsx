@@ -20,7 +20,6 @@ const NewApplication = () => {
         } else { 
             toast.error(res.message);
         }
-        
     };
 
     return (

@@ -94,6 +94,7 @@ export const LANG = {
         APPLICATION_DATE: "Application Date",
         APPLICATION_CREATED_SUCCESS: "Application created successfully",
         CREATE_APPLICATION_ERROR: "Error creating application",
+        GET_APPLICATION_ERROR: "Error getting application",
         WAITING_SINCE_APPLICATION: "Waiting since application",
         WAITING_SINCE_BIOMETRIC: "Waiting since biometric",
         DECISION_DATE: "Decision Date",

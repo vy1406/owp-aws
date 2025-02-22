@@ -23,6 +23,6 @@ exports.handler = async (event) => {
         await dynamoDB.delete(params).promise();
         return { statusCode: 200, body: JSON.stringify({ message: 'Deleted successfully' }) };
     } catch (error) {
-        return { statusCode: 500, body: JSON.stringify({ message: error.message }) };
+        return { statusCode: 500, body: JSON.stringify({ message: 'Error deleting application' }) };
     }
 };

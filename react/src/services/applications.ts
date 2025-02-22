@@ -68,6 +68,10 @@ export interface ICreateResponse {
     message: string;
 }
 
+export interface IApplicationResponse {
+    application: IApplication | null;
+    message?: string;
+}
 
 export const getApplications = async (): Promise<IApplication[] | null> => {
     const url = `${API.APPLICATION}`;
@@ -86,22 +90,37 @@ export const getApplications = async (): Promise<IApplication[] | null> => {
     }
 };
 
-export const getApplication = async (id: string): Promise<IApplication | null> => {
-    // const url = `${API.APPLICATION}/${id}`;
-
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(STUB.find(app => app.id === id) || null);
-        }, 1500);
-    });
-}
-
-export const createApplication = async (data: IApplication): Promise<ICreateResponse> => {
-    const url = `${API.APPLICATION}`;
+export const getApplication = async (id: string): Promise<IApplicationResponse> => {
     const token = localStorage.getItem(TOKEN_KEY);
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`${API.APPLICATION}/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+
+        const result: IApplicationResponse = await response.json();
+        return {
+            application: result.application || null,
+            message: result.message
+        };
+
+    } catch {
+        return {
+            application: null,
+            message: LANG.EN.GET_APPLICATION_ERROR
+        }
+    }
+}
+
+export const createApplication = async (data: IApplication): Promise<ICreateResponse> => {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    try {
+        const response = await fetch(API.APPLICATION, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

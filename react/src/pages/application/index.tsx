@@ -3,25 +3,29 @@ import { useParams } from "wouter";
 import { getApplication, IApplication } from "../../services/applications";
 import ApplicationForm from "../../forms/application";
 import ApplicationFormSkeleton from "../../components/ApplicationSkeleton";
+import { toast } from "react-toastify";
 
 const Application = () => {
     const [application, setApplication] = useState<IApplication | null>(null);
     const [isLoading, setLoading] = useState(true);
-    const location = useParams();
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchApplication = async () => {
+            if (!id) return;
             setLoading(true);
-            if (location.id) {
-                const fetchedApplication = await getApplication(location.id);
-                if (fetchedApplication) {
-                    setApplication(fetchedApplication);
+            if (id) {
+                const fetchedApplication = await getApplication(id);
+                if (fetchedApplication.application) {
+                    setApplication(fetchedApplication.application);
+                } else {
+                    toast.error(fetchedApplication.message);
                 }
             }
             setLoading(false);
         };
         fetchApplication();
-    }, [location]);
+    }, [id]);
 
     if (isLoading) {
         return <ApplicationFormSkeleton />;
