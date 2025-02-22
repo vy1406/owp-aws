@@ -52,12 +52,12 @@ const STUB: IApplication[] = [
 ]
 
 export interface IApplication {
+    id?: string;
     additional_info: string;
     application_date: string;
     is_self_submitted: boolean;
     biometric_date: string | null;
     status: string;
-    id: string;
     decision_date: string | null;
     submission_city: string | null;
     username?: string | null;
@@ -69,15 +69,21 @@ export interface ICreateResponse {
 }
 
 
-export const getApplications = async (): Promise<IApplication[]> => {
-    // const url = `${API.APPLICATION}/??`;
+export const getApplications = async (): Promise<IApplication[] | null> => {
+    const url = `${API.APPLICATION}`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
 
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(STUB);
-        }, 1500);
-    });
-
+        const result: IApplication[] = await response.json();
+        return result;
+    } catch {
+        return null
+    }
 };
 
 export const getApplication = async (id: string): Promise<IApplication | null> => {

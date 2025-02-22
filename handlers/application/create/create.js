@@ -18,7 +18,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 401,
             headers,
-            body: JSON.stringify({ message: 'Unauthorized' })
+            body: JSON.stringify({ message: 'Must be logged in.' })
         };
     }
 
@@ -44,7 +44,7 @@ exports.handler = async (event) => {
         return {
             statusCode: 500,
             headers,
-            body: JSON.stringify({ message: error.message })
+            body: JSON.stringify({ message: 'Error creating application' })
         };
     }
 };
