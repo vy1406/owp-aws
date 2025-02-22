@@ -17,7 +17,7 @@ const Login = () => {
                 token: res?.token || '',
                 username: res?.username || 'N/A'
             });
-            setLocation(ROUTES.APPLICATIONS);
+            setLocation(ROUTES.HOME);
         } catch {
             toast.error(LANG.EN.LOGIN_ERROR);
         }

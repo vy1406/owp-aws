@@ -5,11 +5,10 @@ import { LANG, ROUTES } from '../utils/constants';
 import useClickOutside from '../hooks/useClickOutside';
 import LoginContext from '../services/context';
 
-
 const routes = [
   {
     name: LANG.EN.APPLICATIONS,
-    path: ROUTES.APPLICATIONS,
+    path: ROUTES.HOME,
   },
   {
     name: LANG.EN.NEW_APPLICATION,

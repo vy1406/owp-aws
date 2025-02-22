@@ -175,7 +175,7 @@ export const ROUTES = {
     HOME: '/',
     RESOURCES: '/resources',
     APPLICATIONS: '/applications',
-    APPLICATION: "/applications/:id", 
+    APPLICATION: "/application/:id", 
     ABOUT: '/about',
     LOGIN: '/login',
     SIGNUP: '/signup',

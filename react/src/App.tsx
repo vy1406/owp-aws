@@ -26,10 +26,9 @@ function App() {
       </header>
       <main className="pt-2 px-4 md:px-16" id="main-content">
         <Switch>
-          <Route path={ROUTES.HOME} component={Home} />
+          <Route path={ROUTES.HOME} component={Applications} />
           <Route path={ROUTES.RESOURCES} component={ResourceList} />
           <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
-          <Route path={ROUTES.APPLICATIONS} component={Applications} />
           <Route path={ROUTES.APPLICATION} component={Application} />
           <Route path={ROUTES.NEW_APPLICATION} component={NewApplication} />
           <Route path={ROUTES.ABOUT} component={About} />

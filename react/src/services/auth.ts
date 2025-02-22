@@ -17,6 +17,12 @@ export type ILoginResponse = {
     username: string;
 }
 
+export type ISignUpResponse = {
+    message: string;
+    token: string;
+    username: string;
+}
+
 export const apiLogin = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
     const url = `${API.AUTH}/login`;
     console.log('username:', username);
@@ -28,7 +34,7 @@ export const apiLogin = async ({ username, password }: ILoginData): Promise<ILog
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                username: DUMMY_LOGIN.username,  
+                username: DUMMY_LOGIN.username,
                 password: DUMMY_LOGIN.password,
             }),
         });
@@ -44,3 +50,30 @@ export const apiLogin = async ({ username, password }: ILoginData): Promise<ILog
         throw new Error(`${error}`)
     }
 };
+
+export const apiSignUp = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
+    const url = `${API.AUTH}/signup`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result: ILoginResponse = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error(`${error}`)
+    }
+}

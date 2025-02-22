@@ -90,6 +90,7 @@ Resources:
       PackageType: Zip
       Environment:
         Variables:
+          JWT_SECRET: "mysecretkey3"
           USERS_TABLE: "UsersTable"
 
   TestFunction:

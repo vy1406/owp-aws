@@ -1,6 +1,10 @@
 const AWS = require('aws-sdk');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
+
+const SECRET = process.env.JWT_SECRET || "mysecretkey3";
+
 
 exports.handler = async (event) => {
     try {
@@ -15,11 +19,10 @@ exports.handler = async (event) => {
                     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
                     'Access-Control-Allow-Headers': 'Content-Type,Authorization',
                 },
-                body: JSON.stringify({ message: 'Missing username or password' }),
+                body: JSON.stringify({ message: 'Wrong username or password' }),
             };
         }
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const params = {
@@ -29,6 +32,8 @@ exports.handler = async (event) => {
 
         await dynamoDB.put(params).promise();
 
+        const token = jwt.sign({ username }, SECRET, { expiresIn: '1h' });
+
         return {
             statusCode: 200,
             headers: {
@@ -37,7 +42,7 @@ exports.handler = async (event) => {
                 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             },
-            body: JSON.stringify({ message: 'User created successfully' }),
+            body: JSON.stringify({ message: 'User created successfully', token, username }),
         };
     } catch (error) {
         console.error('Error in signup handler:', error);
@@ -49,7 +54,7 @@ exports.handler = async (event) => {
                 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
                 'Access-Control-Allow-Headers': 'Content-Type,Authorization',
             },
-            body: JSON.stringify({ message: 'Internal server error', error }),
+            body: JSON.stringify({ message: 'Wrong username or password', error }),
         };
     }
 };
