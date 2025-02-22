@@ -25,7 +25,7 @@ export interface IResourceForm {
 }
 
 export interface IApplicationForm {
-    application_date?: string;
+    application_date: string;
     biometric_date: string | null;
     decision_date: string | null;
     additional_info: string;

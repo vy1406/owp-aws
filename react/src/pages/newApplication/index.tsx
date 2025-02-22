@@ -1,16 +1,24 @@
 import ApplicationForm from "../../forms/application";
 import { IApplicationForm } from "../../forms/rules";
+import { formatDateToDDMMYYYY } from "../../utils/dateUtils";
 
 const NewApplication = () => {
-
     const handleOnSubmit = async (data: IApplicationForm) => {
-        return new Promise<void>((resolve) => {
-            console.log('Submitting data:', data);
-            setTimeout(() => {
-                console.log('Data submitted successfully');
-                resolve();
-            }, 3000);
-        });
+
+        const formattedData = {
+            ...data,
+            application_date: formatDateToDDMMYYYY(data.application_date),
+            biometric_date: formatDateToDDMMYYYY(data.biometric_date),
+            decision_date: formatDateToDDMMYYYY(data.decision_date),
+        }
+        console.log(formattedData);
+        // return new Promise<void>((resolve) => {
+        //     console.log('Submitting data:', data);
+        //     setTimeout(() => {
+        //         console.log('Data submitted successfully');
+        //         resolve();
+        //     }, 3000);
+        // });
         // const formattedData = {
         //     ...data,
         //     application_date: format(new Date(data.application_date), 'yyyy-MM-dd'),

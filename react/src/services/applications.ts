@@ -1,3 +1,6 @@
+import { LANG } from "../utils/constants";
+import { API } from "./constants";
+import { TOKEN_KEY, USER_KEY } from "./context";
 
 const STUB: IApplication[] = [
 
@@ -48,7 +51,7 @@ const STUB: IApplication[] = [
 
 ]
 
-export type IApplication = {
+export interface IApplication {
     additional_info: string;
     application_date: string;
     is_self_submitted: boolean;
@@ -59,6 +62,12 @@ export type IApplication = {
     submission_city: string | null;
     username?: string | null;
 }
+
+export interface ICreateResponse {
+    id: string | null;
+    message: string;
+}
+
 
 export const getApplications = async (): Promise<IApplication[]> => {
     // const url = `${API.APPLICATION}/??`;
@@ -79,4 +88,36 @@ export const getApplication = async (id: string): Promise<IApplication | null> =
             resolve(STUB.find(app => app.id === id) || null);
         }, 1500);
     });
+}
+
+export const createApplication = async (data: IApplication): Promise<ICreateResponse> => {
+    const url = `${API.APPLICATION}`;
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                additional_info: data.additional_info,
+                application_date: data.application_date,
+                is_self_submitted: data.is_self_submitted,
+                biometric_date: data.biometric_date,
+                status: data.status,
+                submission_city: data.submission_city,
+                username: data.username
+            }),
+        });
+
+        const result: ICreateResponse = await response.json();
+        return result;
+    } catch {
+        return {
+            message: LANG.EN.CREATE_APPLICATION_ERROR,
+            id: null
+        }
+    }
 }

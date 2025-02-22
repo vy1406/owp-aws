@@ -117,14 +117,14 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
             <div className="relative z-0 w-full mb-5 group">
                 <input
                     type="text"
-                    id="title"
+                    id="submission_city"
                     className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 appearance-none text-white border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-0  peer"
                     placeholder=" "
                     {...register('submission_city', ApplicationRules.submission_city)}
                 />
                 <label
-                    htmlFor="title"
-                    className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                    htmlFor="submission_city"
+                     className="peer-focus:font-medium absolute text-sm text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 peer-focus:start-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
                 >
                     {LANG.EN.SUBMISSION_CITY}
                 </label>
@@ -163,7 +163,7 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                                     {...register('status')}
                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0  dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <label htmlFor="pending" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                <label htmlFor="pending" className="ms-2 text-sm font-medium text-white">
                                     {STATUS_MAP.PENDING}
                                 </label>
                             </div>
@@ -175,7 +175,7 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                                     {...register('status')}
                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <label htmlFor="approved" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                <label htmlFor="approved" className="ms-2 text-sm font-medium text-white">
                                     {STATUS_MAP.APPROVED}
                                 </label>
                             </div>
@@ -187,7 +187,7 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                                     {...register('status')}
                                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-0 dark:bg-gray-700 dark:border-gray-600"
                                 />
-                                <label htmlFor="declined" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                <label htmlFor="declined" className="ms-2 text-sm font-medium text-white">
                                     {STATUS_MAP.DECLINED}
                                 </label>
                             </div>

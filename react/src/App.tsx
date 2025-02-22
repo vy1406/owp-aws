@@ -13,9 +13,7 @@ import Login from './pages/login';
 import SignUp from './pages/signup';
 import About from './pages/about';
 
-const Home = () => <h1>Home</h1>
 const NotFound = () => <h1>404 Not Found</h1>
-
 
 function App() {
 
@@ -29,8 +27,8 @@ function App() {
           <Route path={ROUTES.HOME} component={Applications} />
           <Route path={ROUTES.RESOURCES} component={ResourceList} />
           <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
-          <Route path={ROUTES.APPLICATION} component={Application} />
           <Route path={ROUTES.NEW_APPLICATION} component={NewApplication} />
+          <Route path={ROUTES.APPLICATION} component={Application} />
           <Route path={ROUTES.ABOUT} component={About} />
           <Route path={ROUTES.LOGIN} component={Login} />
           <Route path={ROUTES.SIGNUP} component={SignUp} />

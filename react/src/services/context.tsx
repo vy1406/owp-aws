@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-const TOKEN_KEY = 'auth_token';
-const USER_KEY = 'auth_user';
+export const TOKEN_KEY = 'auth_token';
+export const USER_KEY = 'auth_user';
 const N_A = 'N/A';
 interface LoginProviderProps {
   children: React.ReactNode;

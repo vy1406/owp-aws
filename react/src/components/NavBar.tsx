@@ -23,14 +23,6 @@ const routes = [
     path: ROUTES.NEW_RESOURCE,
   },
   {
-    name: LANG.EN.LOGIN,
-    path: ROUTES.LOGIN,
-  },
-  {
-    name: LANG.EN.SIGN_UP,
-    path: ROUTES.SIGNUP,
-  },
-  {
     name: LANG.EN.ABOUT,
     path: ROUTES.ABOUT,
   },

@@ -11,7 +11,7 @@ const ApplicationCard = ({ application }: { application: IApplication }) => {
     const [_, setLocation] = useLocation();
 
     const handleOnClick = () => {
-        setLocation(`${ROUTES.APPLICATIONS}/${application.id}`);
+        setLocation(ROUTES.APPLICATION.replace(":id", application.id));
     }
 
     return (
