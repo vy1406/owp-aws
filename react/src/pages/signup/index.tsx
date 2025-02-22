@@ -12,17 +12,17 @@ import { apiSignUp } from "../../services/auth";
 const SignUp = () => {
     const [_, setLocation] = useLocation();
     const { login: ctxLogin } = useContext(LoginContext)
-
+    
     const handleOnSubmit = async (data: ISignUpForm) => {
-        try {
-            const res = await apiSignUp(data);
+        const res = await apiSignUp(data);
+        if ( res?.username ) {
             ctxLogin({
                 token: res?.token || '',
                 username: res?.username || 'N/A'
             });
             setLocation(ROUTES.HOME);
-        } catch {
-            toast.error(LANG.EN.LOGIN_ERROR);
+        } else {
+            toast.error(res?.message);
         }
     }
 

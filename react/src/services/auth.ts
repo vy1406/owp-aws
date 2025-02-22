@@ -1,3 +1,4 @@
+import { LANG } from "../utils/constants";
 import { API } from "./constants";
 
 
@@ -19,8 +20,8 @@ export type ILoginResponse = {
 
 export type ISignUpResponse = {
     message: string;
-    token: string;
-    username: string;
+    token: string | null;
+    username: string | null;
 }
 
 export const apiLogin = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
@@ -51,7 +52,7 @@ export const apiLogin = async ({ username, password }: ILoginData): Promise<ILog
     }
 };
 
-export const apiSignUp = async ({ username, password }: ILoginData): Promise<ILoginResponse | null> => {
+export const apiSignUp = async ({ username, password }: ILoginData): Promise<ISignUpResponse | null> => {
     const url = `${API.AUTH}/signup`;
 
     try {
@@ -66,14 +67,13 @@ export const apiSignUp = async ({ username, password }: ILoginData): Promise<ILo
             }),
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const result: ILoginResponse = await response.json();
+        const result: ISignUpResponse = await response.json();
         return result;
-    } catch (error) {
-        console.error('Error:', error);
-        throw new Error(`${error}`)
+    } catch  {
+        return {
+            message: LANG.EN.SIGNUP_ERROR,
+            token: null,
+            username: null
+        }
     }
 }

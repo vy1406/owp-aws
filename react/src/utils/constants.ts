@@ -41,6 +41,7 @@ export const LANG = {
         RESOURCE: "Resource",
         RESOURCES: "Resources",
         LOGIN_ERROR: "Failed to log in",
+        SIGNUP_ERROR: "Failed to sign up",
         FILTER_AND_SEARCH: "Filter & Search",
         STATISTICS: "Statistics",
         DATE_FROM: "Date From",
