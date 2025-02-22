@@ -4,6 +4,7 @@ AWS:
 - router rewrite (1, 1h )
 - make email with the whole template at step function ( 2, 2h )
 - Route 53 to S3 domain ( 1, 1h ) 
+- Redirect to expire
 
 Eisenhower matrix:
 urgent | important
@@ -25,3 +26,6 @@ DONE:
 - create a loading skeleton for application (1, 10min) ( done ) 
 - statistics -> go to that application. (1, 10min) ( done )
 - on clicking on tag, it will go to search to fetch. resource and applications.  (2, 10 min) ( dopne ) 
+
+
+continue from get application / edit / delete

@@ -83,6 +83,7 @@ export const getApplications = async (): Promise<IApplication[] | null> => {
             },
         });
 
+
         const result: IApplication[] = await response.json();
         return result;
     } catch {
@@ -91,14 +92,12 @@ export const getApplications = async (): Promise<IApplication[] | null> => {
 };
 
 export const getApplication = async (id: string): Promise<IApplicationResponse> => {
-    const token = localStorage.getItem(TOKEN_KEY);
 
     try {
         const response = await fetch(`${API.APPLICATION}/${id}`, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
         });
 

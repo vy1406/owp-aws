@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk');
-const jwt = require('jsonwebtoken');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 const headers = {
@@ -9,23 +8,10 @@ const headers = {
     'Access-Control-Allow-Headers': 'Content-Type,Authorization'
 }
 
-const SECRET = process.env.JWT_SECRET || "mysecretkey3";
 
 exports.handler = async (event) => {
-    const authHeader = event.headers?.Authorization;
-
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return {
-            statusCode: 401,
-            headers,
-            body: JSON.stringify({ message: 'Unauthorized' })
-        };
-    }
-
-    const token = authHeader.split(" ")[1];
 
     try {
-        jwt.verify(token, SECRET);
         const { id } = event.pathParameters;
 
         if (!id) {
@@ -43,8 +29,8 @@ exports.handler = async (event) => {
             return { statusCode: 404, headers, body: JSON.stringify({ message: 'Item not found' }) };
         }
 
-        return { statusCode: 200, headers, body: JSON.stringify(result.Item) };
+        return { statusCode: 200, headers, body: JSON.stringify({ application: result.Item }) };
     } catch (error) {
-        return { statusCode: 500, headers, body: JSON.stringify({ error: error.message }) };
+        return { statusCode: 500, headers, body: JSON.stringify({ message: 'Failed fetching application' }) };
     }
 };
