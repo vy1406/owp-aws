@@ -10,26 +10,28 @@ import LoginContext from "../../services/context";
 const Login = () => {
     const [_, setLocation] = useLocation();
     const { login: ctxLogin } = useContext(LoginContext)
+
     const handleOnSubmit = async (data: ILoginForm) => {
-        try { 
+        const res = await apiLogin(data);
+        if (res?.username) {
             const res = await apiLogin(data);
             ctxLogin({
                 token: res?.token || '',
                 username: res?.username || 'N/A'
             });
             setLocation(ROUTES.HOME);
-        } catch {
+        } else {
             toast.error(LANG.EN.LOGIN_ERROR);
         }
-
     }
+
 
     return (
         <div className="mt-4">
             <div className="flex items-center justify-center w-full mb-6 gap-6">
                 <h1 className="text-2xl font-bold text-center">{LANG.EN.LOGIN}</h1>
             </div>
-            <LoginForm onSubmit={handleOnSubmit} onSignUp={() => setLocation(ROUTES.SIGNUP)}/>
+            <LoginForm onSubmit={handleOnSubmit} onSignUp={() => setLocation(ROUTES.SIGNUP)} />
         </div>
     );
 }

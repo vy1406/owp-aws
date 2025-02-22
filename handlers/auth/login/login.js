@@ -32,7 +32,7 @@ exports.handler = async (event) => {
 
         if (!user) {
             return {
-                statusCode: 401,
+                statusCode: 400,
                 headers: {
                     'Content-Type': 'application/json',
                     'Access-Control-Allow-Origin': '*',
