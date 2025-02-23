@@ -20,3 +20,8 @@ REACT:
 DONE: 
 - my applicatons
 
+AWS snippets:
+
+after deploying to s3.
+do this:
+1. npm run app:deploy

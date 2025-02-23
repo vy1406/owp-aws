@@ -39,21 +39,21 @@ const Statistics: React.FC<StatisticsProps> = ({ applications }) => {
                        <div className="flex justify-between">
                         <div className="text-gray-200 w-2/5">Fastest Approved:</div>
                         <div className="text-gray-200 ">{fastestApplication.days} days</div>
-                        <GoThereLink onClick={() => handleOnClick(fastestApplication.app.id)}/>
+                        <GoThereLink onClick={() => handleOnClick(fastestApplication.app.id!)}/>
                     </div>
                 }
                 {longestApplication &&
                     <div className="flex justify-between">
                         <div className="text-gray-200 w-2/5">Longest Approved:</div>
                         <div className="text-gray-200 ">{longestApplication.days} days</div>
-                        <GoThereLink onClick={() => handleOnClick(longestApplication.app.id)}/>
+                        <GoThereLink onClick={() => handleOnClick(longestApplication.app.id!)}/>
                     </div>
                 }
                 {longestPendingApplication &&
                     <div className="flex justify-between">
                         <div className="text-gray-200 w-2/5">Longest Pending:</div>
                         <div className="text-gray-200 ">{longestPendingApplication.days} days</div>
-                        <GoThereLink onClick={() => handleOnClick(longestPendingApplication.app.id)}/>
+                        <GoThereLink onClick={() => handleOnClick(longestPendingApplication.app.id!)}/>
                     </div>
                 }
                 <Separtor />

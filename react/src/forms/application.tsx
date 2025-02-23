@@ -157,9 +157,12 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
                     {...register('additional_info')}
                 />
             </div>
-            {isFormDisabled ? <div className='flex justify-center'>
-                <Status status={selectedStatus} />
-            </div> :
+            {isFormDisabled ?
+                    
+                <div className='flex justify-center'>
+                    <Status status={selectedStatus} />
+                </div>
+                :
                 (
 
                     <div className="flex flex-col space-y-2">
@@ -210,6 +213,7 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
                     </div>
                 )}
             {
+                
                 isFormDisabled ? null :
                     (
                         <button
