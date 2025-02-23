@@ -80,6 +80,11 @@ export interface IUpdateResponse {
     status?: number
 }
 
+export interface IDeleteResponse {
+    message: string;
+    status?: number
+}
+
 export const getApplications = async (): Promise<IApplication[] | null> => {
     const url = `${API.APPLICATION}`;
     try {
@@ -153,6 +158,41 @@ export const createApplication = async (data: IApplication): Promise<ICreateResp
         }
     }
 }
+
+export const deleteApplication = async (id: string): Promise<IDeleteResponse> => {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    try {
+        const response = await fetch(`${API.APPLICATION}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                id
+            }),
+        });
+
+        if ( response.status === 401 ) {
+            return {
+                message: LANG.EN.NEED_TO_BE_LOGGED_IN,
+                status: 401
+            }
+        }
+
+        const result: IDeleteResponse = await response.json();
+        return {
+            status: 200,
+            message: result.message
+        };
+    } catch {
+        return {
+            message: LANG.EN.DELETE_APPLICATION_ERROR
+        }
+    }
+}
+
 export const updateApplication = async (data: IApplication): Promise<IUpdateResponse> => {
     const token = localStorage.getItem(TOKEN_KEY);
 

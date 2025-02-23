@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "wouter";
-import { getApplication, IApplication, updateApplication } from "../../services/applications";
+import { deleteApplication, getApplication, IApplication, updateApplication } from "../../services/applications";
 import ApplicationForm from "../../forms/application";
 import ApplicationFormSkeleton from "../../components/ApplicationSkeleton";
 import { toast } from "react-toastify";
@@ -30,15 +30,29 @@ const Application = () => {
         fetchApplication();
     }, [id]);
 
-    const handleOnDelete = () => {
-        // Implement delete functionality here
+    const handleOnDelete = async () => {
+        if ( !id ) return;
+
+        const response = await deleteApplication(id);
+
+        if (response.status === 401) {
+            toast.error(LANG.EN.UNAUTHORIZED);
+            setTimeout(() => setLocation(ROUTES.LOGIN), 2000);
+            return;
+        }
+        if (response.status === 200) {
+            toast.success(response.message);
+            setTimeout(() => setLocation(ROUTES.HOME), 2000);
+        } else {
+            toast.error(response.message);
+        }
     }
 
     const handleOnUpdate = async (data: IApplicationForm) => {
         const response = await updateApplication({ ...data, id, });
 
         if (response.status === 401) {
-            toast.error("Unauthorized");
+            toast.error(LANG.EN.UNAUTHORIZED);
             setTimeout(() => setLocation(ROUTES.LOGIN), 2000);
             return;
         }

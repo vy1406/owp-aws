@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm, useFormState } from 'react-hook-form';
 import { IApplicationForm, ApplicationRules } from './rules';
 import { LANG, STATUS_MAP } from '../utils/constants';
@@ -24,14 +24,14 @@ const DEFAULT_VALUS: IApplicationForm = {
 }
 
 const ApplicationForm = ({ onSubmit, onDelete, application  = null}: ApplicationFormProps) => {
+    const [isDeleting, setIsDeleting] = useState(false);
     const { username, isAuthenticated } = useContext(LoginContext)
     const isFormDisabled = !isAuthenticated || (application && application.username !== username);
-    const isEditable = !isFormDisabled && !!application?.id;
 
     const { register, handleSubmit, reset, control, clearErrors, watch } = useForm<IApplicationForm>({
         defaultValues: DEFAULT_VALUS, disabled: !!isFormDisabled
     });
-    
+    const hasApplicationId = !!application?.id;
     const { isSubmitSuccessful, isSubmitting, errors } = useFormState({ control });
 
     const selectedStatus = watch('status', STATUS_MAP.PENDING);
@@ -42,6 +42,16 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
             reset()
         }
     }, [isSubmitSuccessful, reset, clearErrors]);
+
+    const handleDelete = async () => {
+        if (!onDelete || !hasApplicationId) return;
+        try {
+            setIsDeleting(true);
+            await onDelete(); 
+        } finally {
+            setIsDeleting(false);
+        }
+    };
 
     useEffect(() => {
         if (application) {
@@ -211,7 +221,7 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
                             {isSubmitting ? (
                                 <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                             ) : (
-                                application?.id ? LANG.EN.UPDATE : LANG.EN.SUBMIT
+                                hasApplicationId ? LANG.EN.UPDATE : LANG.EN.SUBMIT
                             )}
                         </button>
                     )
@@ -222,10 +232,11 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
                  (
                      <button
                          type="button"
-                         disabled={isSubmitting}
-                         onClick={onDelete}
-                         className={`w-full flex justify-center items-center bg-red-800 text-white py-2 px-4 rounded-md ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'
-                             }`}
+                         disabled={isSubmitting || isDeleting}
+                         onClick={handleDelete}
+                         className={`w-full flex justify-center items-center bg-red-800 text-white py-2 px-4 rounded-md ${
+                            isDeleting || isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-red-700"
+                        }`}
                      >
                          {isSubmitting ? (
                              <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>

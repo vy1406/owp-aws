@@ -4,15 +4,35 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
 const SECRET = process.env.JWT_SECRET || "mysecretkey3";
 
-exports.handler = async (event) => {
-    const token = event.headers?.Authorization;
+const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type,Authorization',
+};
 
-    if (!token) {
-        return { statusCode: 401, body: JSON.stringify({ message: 'Unauthorized' }) };
+exports.handler = async (event) => {
+    const authHeader = event.headers?.Authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return {
+            statusCode: 401,
+            headers,
+            body: JSON.stringify({ message: 'Unauthorized' })
+        };
+    }
+    const token = authHeader.split(" ")[1];
+    try {
+        jwt.verify(token, SECRET);
+    } catch {
+        return {
+            statusCode: 401,
+            headers,
+            body: JSON.stringify({ message: 'Unauthorized' })
+        };
     }
 
     try {
-        jwt.verify(token, SECRET);
         const { id } = JSON.parse(event.body);
 
         const params = {
@@ -21,8 +41,8 @@ exports.handler = async (event) => {
         };
 
         await dynamoDB.delete(params).promise();
-        return { statusCode: 200, body: JSON.stringify({ message: 'Deleted successfully' }) };
+        return { statusCode: 200, headers, body: JSON.stringify({ message: 'Deleted successfully' }) };
     } catch (error) {
-        return { statusCode: 500, body: JSON.stringify({ message: 'Error deleting application' }) };
+        return { statusCode: 500, headers, body: JSON.stringify({ message: 'Error deleting application' }) };
     }
 };
