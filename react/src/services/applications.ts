@@ -66,11 +66,18 @@ export interface IApplication {
 export interface ICreateResponse {
     id: string | null;
     message: string;
+    status?: number
 }
 
 export interface IApplicationResponse {
     application: IApplication | null;
     message?: string;
+}
+
+export interface IUpdateResponse {
+    application: IApplication | null;
+    message?: string;
+    status?: number
 }
 
 export const getApplications = async (): Promise<IApplication[] | null> => {
@@ -128,6 +135,7 @@ export const createApplication = async (data: IApplication): Promise<ICreateResp
             body: JSON.stringify({
                 additional_info: data.additional_info,
                 application_date: data.application_date,
+                decision_date: data.decision_date,
                 is_self_submitted: data.is_self_submitted,
                 biometric_date: data.biometric_date,
                 status: data.status,
@@ -142,6 +150,44 @@ export const createApplication = async (data: IApplication): Promise<ICreateResp
         return {
             message: LANG.EN.CREATE_APPLICATION_ERROR,
             id: null
+        }
+    }
+}
+export const updateApplication = async (data: IApplication): Promise<IUpdateResponse> => {
+    const token = localStorage.getItem(TOKEN_KEY);
+
+    try {
+        const response = await fetch(API.APPLICATION, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                id: data.id,
+                additional_info: data.additional_info,
+                decision_date: data.decision_date,
+                application_date: data.application_date,
+                is_self_submitted: data.is_self_submitted,
+                biometric_date: data.biometric_date,
+                status: data.status,
+                submission_city: data.submission_city,
+                username: data.username
+            }),
+        });
+        if ( response.status === 401 ) {
+            return {
+                message: LANG.EN.NEED_TO_BE_LOGGED_IN,
+                application: null,
+                status: 401
+            }
+        }
+        const result: IUpdateResponse = await response.json();
+        return result;
+    } catch {
+        return {
+            message: LANG.EN.CREATE_APPLICATION_ERROR,
+            application: null
         }
     }
 }

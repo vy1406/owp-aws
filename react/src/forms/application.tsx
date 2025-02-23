@@ -10,6 +10,7 @@ import Status from '../pages/applications/Status';
 type ApplicationFormProps = {
     onSubmit: (data: IApplicationForm) => void;
     application?: IApplication | null;
+    onDelete?: () => void;
 };
 
 const DEFAULT_VALUS: IApplicationForm = {
@@ -22,9 +23,10 @@ const DEFAULT_VALUS: IApplicationForm = {
     submission_city: '',
 }
 
-const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps) => {
+const ApplicationForm = ({ onSubmit, onDelete, application  = null}: ApplicationFormProps) => {
     const { username, isAuthenticated } = useContext(LoginContext)
     const isFormDisabled = !isAuthenticated || (application && application.username !== username);
+    const isEditable = !isFormDisabled && !!application?.id;
 
     const { register, handleSubmit, reset, control, clearErrors, watch } = useForm<IApplicationForm>({
         defaultValues: DEFAULT_VALUS, disabled: !!isFormDisabled
@@ -209,12 +211,30 @@ const ApplicationForm = ({ onSubmit, application  = null}: ApplicationFormProps)
                             {isSubmitting ? (
                                 <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                             ) : (
-                                LANG.EN.SUBMIT
+                                application?.id ? LANG.EN.UPDATE : LANG.EN.SUBMIT
                             )}
                         </button>
                     )
             }
 
+            {
+                 isFormDisabled ? null :
+                 (
+                     <button
+                         type="button"
+                         disabled={isSubmitting}
+                         onClick={onDelete}
+                         className={`w-full flex justify-center items-center bg-red-800 text-white py-2 px-4 rounded-md ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-indigo-700'
+                             }`}
+                     >
+                         {isSubmitting ? (
+                             <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                         ) : (
+                             LANG.EN.DELETE
+                         )}
+                     </button>
+                 )
+            }
         </form>
     );
 }

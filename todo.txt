@@ -26,6 +26,6 @@ DONE:
 - create a loading skeleton for application (1, 10min) ( done ) 
 - statistics -> go to that application. (1, 10min) ( done )
 - on clicking on tag, it will go to search to fetch. resource and applications.  (2, 10 min) ( dopne ) 
-
+- my applicatons
 
 continue from get application / edit / delete

@@ -7,7 +7,7 @@ const SECRET = process.env.JWT_SECRET || "mysecretkey3";
 const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+    'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type,Authorization',
 };
 
@@ -21,8 +21,18 @@ exports.handler = async (event) => {
             body: JSON.stringify({ message: 'Unauthorized' })
         };
     }
-
     const token = authHeader.split(" ")[1];
+    try {
+        jwt.verify(token, SECRET);
+    } catch {
+        return {
+            statusCode: 401,
+            headers,
+            body: JSON.stringify({ message: 'Unauthorized' })
+        };
+    }
+
+
     const data = JSON.parse(event.body)
     if (data.id === undefined) {
         return {
@@ -33,7 +43,7 @@ exports.handler = async (event) => {
     }
 
     try {
-        jwt.verify(token, SECRET);
+
 
         let updateExpression = 'SET';
         const expressionAttributeNames = {};
@@ -83,7 +93,7 @@ exports.handler = async (event) => {
             UpdateExpression: updateExpression,
             ExpressionAttributeNames: expressionAttributeNames,
             ExpressionAttributeValues: expressionAttributeValues,
-            ReturnValues: 'UPDATED_NEW',
+            ReturnValues: 'ALL_NEW',
         };
 
         const result = await dynamoDB.update(params).promise();
@@ -91,9 +101,9 @@ exports.handler = async (event) => {
         return {
             statusCode: 200,
             headers,
-            body: JSON.stringify(result.Attributes)
+            body: JSON.stringify({ application: result.Attributes })
         };
     } catch (error) {
-        return { statusCode: 500, body: JSON.stringify({ message: error.message }) };
+        return { statusCode: 500, body: JSON.stringify({ message: 'Failed to update' }) };
     }
 };

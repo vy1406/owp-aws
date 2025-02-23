@@ -4,12 +4,16 @@ import { ILoginForm } from "../../forms/rules";
 import { apiLogin } from "../../services/auth";
 import { LANG, ROUTES } from "../../utils/constants";
 import { useLocation } from "wouter";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import LoginContext from "../../services/context";
 
 const Login = () => {
     const [_, setLocation] = useLocation();
-    const { login: ctxLogin } = useContext(LoginContext)
+    const { login: ctxLogin, logout } = useContext(LoginContext)
+
+    useEffect(() => {
+        logout();
+    }, [logout]);
 
     const handleOnSubmit = async (data: ILoginForm) => {
         const res = await apiLogin(data);

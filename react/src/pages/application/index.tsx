@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "wouter";
-import { getApplication, IApplication } from "../../services/applications";
+import { useLocation, useParams } from "wouter";
+import { getApplication, IApplication, updateApplication } from "../../services/applications";
 import ApplicationForm from "../../forms/application";
 import ApplicationFormSkeleton from "../../components/ApplicationSkeleton";
 import { toast } from "react-toastify";
+import { IApplicationForm } from "../../forms/rules";
+import { LANG, ROUTES } from "../../utils/constants";
 
 const Application = () => {
+    const [_, setLocation] = useLocation();
     const [application, setApplication] = useState<IApplication | null>(null);
     const [isLoading, setLoading] = useState(true);
     const { id } = useParams();
@@ -27,6 +30,26 @@ const Application = () => {
         fetchApplication();
     }, [id]);
 
+    const handleOnDelete = () => {
+        // Implement delete functionality here
+    }
+
+    const handleOnUpdate = async (data: IApplicationForm) => {
+        const response = await updateApplication({ ...data, id, });
+
+        if (response.status === 401) {
+            toast.error("Unauthorized");
+            setTimeout(() => setLocation(ROUTES.LOGIN), 2000);
+            return;
+        }
+        if (response.application) {
+            toast.success(LANG.EN.APPLICATION_UPDATE_SUCCESS);
+            setApplication(response.application);
+        } else {
+            toast.error(LANG.EN.ERROR_UPDATE_APPLICATION);
+        }
+    }
+
     if (isLoading) {
         return <ApplicationFormSkeleton />;
     }
@@ -34,7 +57,11 @@ const Application = () => {
     return (
         <div className="max-w-2xl mx-auto mt-5">
             {application ? (
-                <ApplicationForm onSubmit={(data) => console.log("Submitted data:", data)} application={application} />
+                <ApplicationForm
+                    onSubmit={handleOnUpdate}
+                    application={application}
+                    onDelete={handleOnDelete}
+                />
             ) : (
                 <p className="text-red-400">Application not found</p>
             )}
