@@ -35,6 +35,7 @@ export const LANG = {
         WHAT_IS_IT: "What is it about?",
         ADD: "Add",
         APPLICATIONS: "Applications",
+        ATTENTION: "Attention",
         SAVE: "Save",
         CLOSE: "Close",
         SEARCH: "Search",
@@ -52,6 +53,8 @@ export const LANG = {
         NEW_APPLICATION: "New Application",
         SERVICE: "Service",
         CREATE_APPLICATION: "Create Application",
+        SURE_TO_DELETE: "Are you sure you want to delete this application?",
+
         BIOMETRIC_DATE_MUST_BE_LATER: "Biometric date must be later than application date.",
         DECISION_DATE_MUST_BE_LATER: "Decision date must be later than application date.",
         BIOMETRIC_DATE_CANNOT_BE_BEFORE_DECISION: "Biometric date cannot be before decision date.",

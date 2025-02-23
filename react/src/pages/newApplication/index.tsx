@@ -16,7 +16,7 @@ const NewApplication = () => {
 
         if ( res.id) {
             toast.success(LANG.EN.APPLICATION_CREATED_SUCCESS);
-            setLocation(ROUTES.APPLICATIONS);
+            setLocation(ROUTES.HOME);
         } else { 
             toast.error(res.message);
         }

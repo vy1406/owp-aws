@@ -6,8 +6,10 @@ import ApplicationFormSkeleton from "../../components/ApplicationSkeleton";
 import { toast } from "react-toastify";
 import { IApplicationForm } from "../../forms/rules";
 import { LANG, ROUTES } from "../../utils/constants";
+import { useModal } from "../../services/modalContext";
 
 const Application = () => {
+    const { showModal, closeModal } = useModal();
     const [_, setLocation] = useLocation();
     const [application, setApplication] = useState<IApplication | null>(null);
     const [isLoading, setLoading] = useState(true);
@@ -30,11 +32,18 @@ const Application = () => {
         fetchApplication();
     }, [id]);
 
+
+    const showModalOnDelete = () => {
+        
+        showModal(LANG.EN.ATTENTION, LANG.EN.SURE_TO_DELETE, () => {
+            handleOnDelete();
+            closeModal();
+        });
+    }
+
     const handleOnDelete = async () => {
         if ( !id ) return;
-
         const response = await deleteApplication(id);
-
         if (response.status === 401) {
             toast.error(LANG.EN.UNAUTHORIZED);
             setTimeout(() => setLocation(ROUTES.LOGIN), 2000);
@@ -74,7 +83,7 @@ const Application = () => {
                 <ApplicationForm
                     onSubmit={handleOnUpdate}
                     application={application}
-                    onDelete={handleOnDelete}
+                    onDelete={showModalOnDelete}
                 />
             ) : (
                 <p className="text-red-400">Application not found</p>

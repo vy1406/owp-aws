@@ -12,6 +12,7 @@ import NewApplication from './pages/newApplication';
 import Login from './pages/login';
 import SignUp from './pages/signup';
 import About from './pages/about';
+import { ModalProvider } from './services/modalContext';
 
 const NotFound = () => <h1>404 Not Found</h1>
 
@@ -19,26 +20,28 @@ function App() {
 
   return (
     <>
-      <header className="sticky z-50 top-0">
-        <NavBar />
-      </header>
-      <main className="pt-2 px-4 md:px-16" id="main-content">
-        <Switch>
-          <Route path={ROUTES.HOME} component={Applications} />
-          <Route path={ROUTES.RESOURCES} component={ResourceList} />
-          <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
-          <Route path={ROUTES.NEW_APPLICATION} component={NewApplication} />
-          <Route path={ROUTES.APPLICATION} component={Application} />
-          <Route path={ROUTES.ABOUT} component={About} />
-          <Route path={ROUTES.LOGIN} component={Login} />
-          <Route path={ROUTES.SIGNUP} component={SignUp} />
-          <Route><NotFound /></Route>
-        </Switch>
+      <ModalProvider>
+        <header className="sticky z-50 top-0">
+          <NavBar />
+        </header>
+        <main className="pt-2 px-4 md:px-16" id="main-content">
+          <Switch>
+            <Route path={ROUTES.HOME} component={Applications} />
+            <Route path={ROUTES.RESOURCES} component={ResourceList} />
+            <Route path={ROUTES.NEW_RESOURCE} component={ResourceServiceForm} />
+            <Route path={ROUTES.NEW_APPLICATION} component={NewApplication} />
+            <Route path={ROUTES.APPLICATION} component={Application} />
+            <Route path={ROUTES.ABOUT} component={About} />
+            <Route path={ROUTES.LOGIN} component={Login} />
+            <Route path={ROUTES.SIGNUP} component={SignUp} />
+            <Route><NotFound /></Route>
+          </Switch>
           <ScrollToTopButton />
-        <ToastContainer aria-label={"Notification messages"} position='bottom-right' autoClose={2000} />
-        
-      </main>
-      {/* <Footer /> */}
+          <ToastContainer aria-label={"Notification messages"} position='bottom-right' autoClose={2000} />
+
+        </main>
+        {/* <Footer /> */}
+      </ModalProvider>
     </>
   )
 }
