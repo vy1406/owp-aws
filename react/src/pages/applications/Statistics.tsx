@@ -23,7 +23,7 @@ const Statistics: React.FC<StatisticsProps> = ({ applications }) => {
    const [_, setLocation] = useLocation();
 
     const handleOnClick = (applicationId: string) => {
-        setLocation(`${ROUTES.APPLICATIONS}/${applicationId}`);
+        setLocation(ROUTES.APPLICATION.replace(":id", applicationId));
     }
     const fastestApplication = findFastestApplication(applications);
     const longestApplication = findLongestApplication(applications);
