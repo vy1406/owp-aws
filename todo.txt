@@ -12,7 +12,6 @@ REACT:
 - use proxy from vite (2, 1h)
 - remove from STUB (3, 1h)
 - cleaning (4, 2h )
-- make "rest" in client services.
 - close specific routes.
 
 DONE: 
@@ -25,4 +24,3 @@ do this:
 
 
 1. npm run app:deploy
-2. 

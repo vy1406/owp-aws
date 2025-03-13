@@ -7,6 +7,7 @@ import HowTo from "../../components/HowTo";
 import { LANG, RESOURCE_MAP } from "../../utils/constants";
 import HowToFillResource from "./HowToFillResource";
 import { IResourceForm } from "../../forms/rules";
+import WithAuth from "../../components/WithAuth";
 
 const ResourceServiceForm = () => {
     const [activeTab, setActiveTab] = useState(RESOURCE_MAP.RESOURCE);
@@ -67,21 +68,23 @@ const ResourceServiceForm = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto p-2">
-            
-            <div className="flex items-center justify-center w-full mb-6">
-                <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
-                <HowTo title={LANG.EN.HOW_RESOURCE_WORK}>
-                    <HowToFillResource />
-                </HowTo>
-            </div>
-            
-            <ResourceForm onSubmit={onSubmit} type={activeTab}/>
+        <WithAuth>      
+            <div className="max-w-md mx-auto p-2">
+                
+                <div className="flex items-center justify-center w-full mb-6">
+                    <Toggle activeTab={activeTab} onTabSwitch={(tab: string) => setActiveTab(tab)} />
+                    <HowTo title={LANG.EN.HOW_RESOURCE_WORK}>
+                        <HowToFillResource />
+                    </HowTo>
+                </div>
+                
+                <ResourceForm onSubmit={onSubmit} type={activeTab}/>
 
-            <button onClick={handleOnGetResources}>
-                get resources
-            </button>
-        </div>
+                <button onClick={handleOnGetResources}>
+                    get resources
+                </button>
+            </div>
+        </WithAuth>
     );
 };
 

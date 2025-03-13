@@ -5,12 +5,11 @@ import { createApplication, IApplication } from "../../services/applications";
 import { USER_KEY } from "../../services/context";
 import { LANG, ROUTES } from "../../utils/constants";
 import { useLocation } from "wouter";
+import WithAuth from "../../components/WithAuth";
 
 const NewApplication = () => {
     const [_, setLocation] = useLocation();
     
-    
-
     const handleOnSubmit = async (data: IApplicationForm) => {
         const username = localStorage.getItem(USER_KEY);
         const formattedData: IApplication = { ...data, username, }
@@ -25,9 +24,11 @@ const NewApplication = () => {
     };
 
     return (
-        <div className="max-w-2xl mx-auto mt-5">
-            <ApplicationForm onSubmit={handleOnSubmit} />
-        </div>
+        <WithAuth>
+            <div className="max-w-2xl mx-auto mt-5">
+                <ApplicationForm onSubmit={handleOnSubmit} />
+            </div>
+        </WithAuth>
     );
 }
 
