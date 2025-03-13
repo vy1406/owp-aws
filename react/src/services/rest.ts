@@ -1,9 +1,18 @@
-interface IBody {
+import { TOKEN_KEY } from "./context";
+
+export interface IBody {
     [key: string]: unknown;
 }
 
-interface IHeaders {
+export interface IHeaders {
     [key: string]: string;
+}
+
+export const getAuthHeaders = (): IHeaders => {
+    const token = localStorage.getItem(TOKEN_KEY);
+    return {
+        Authorization: `Bearer ${token}`,
+    };
 }
 
 export const rest = {
@@ -24,7 +33,6 @@ export const rest = {
                 headers: defaultHeaders,
                 body: body ? JSON.stringify(body) : undefined,
             });
-
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }

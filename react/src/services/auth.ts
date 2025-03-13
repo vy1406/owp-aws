@@ -1,5 +1,6 @@
 import { LANG } from "../utils/constants";
 import { API } from "./constants";
+import { rest } from "./rest";
 
 export type ILoginData = {
     username: string;
@@ -13,52 +14,17 @@ export type IAuthResponse = {
 }
 
 export const apiLogin = async ({ username, password }: ILoginData): Promise<IAuthResponse | null> => {
-    const url = `${API.AUTH}/login`;
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username,
-                password,
-            }),
-        });
-
-        const result: IAuthResponse = await response.json();
-        return result;
-    } catch  {
-        return {
-            message: LANG.EN.LOGIN_ERROR,
-            token: null,
-            username: null
-        }
-    }
+    return (await rest.post<IAuthResponse>(`${API.AUTH}/login`, { username, password })) ?? {
+        message: LANG.EN.LOGIN_ERROR,
+        token: null,
+        username: null
+    };
 };
 
 export const apiSignUp = async ({ username, password }: ILoginData): Promise<IAuthResponse | null> => {
-    const url = `${API.AUTH}/signup`;
-
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username,
-                password,
-            }),
-        });
-
-        const result: IAuthResponse = await response.json();
-        return result;
-    } catch  {
-        return {
-            message: LANG.EN.SIGNUP_ERROR,
-            token: null,
-            username: null
-        }
-    }
+    return (await rest.post<IAuthResponse>(`${API.AUTH}/signup`, { username, password })) ?? {
+        message: LANG.EN.SIGNUP_ERROR,
+        token: null,
+        username: null
+    };
 }
