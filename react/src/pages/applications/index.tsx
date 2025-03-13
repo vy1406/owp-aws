@@ -47,29 +47,31 @@ const ResourceList = () => {
     }
 
     return (
-        <div className="container mx-auto p-2">
-            <FilterSearch onFilter={handleOnFilter} />
-            <Statistics applications={filteredApplications} />
-            <Separtor />
-            {isLoading ? (
-                <ul className="list-disc list-inside">
-                    {[...Array(8)].map((_, index) => (<Skeleton key={index} />))}
-                </ul>
-            ) : (
-                <>
+        <div className="flex justify-center w-full">
+            <div className="w-full max-w-[500px] mx-auto p-4">
+                <FilterSearch onFilter={handleOnFilter} />
+                <Statistics applications={filteredApplications} />
+                <Separtor />
+                {isLoading ? (
                     <ul className="list-disc list-inside">
-                        {filteredApplications.length > 0 ? (
-                            filteredApplications.map((application: IApplication) => (
-                                <ApplicationCard application={application} key={application.id} />
-                            ))
-                        ) : (
-                            <div className="text-lg font-medium text-gray-200  whitespace-nowrap text-ellipsis mt-4"                >
-                                {LANG.EN.NO_APPLICATION_FOUND}
-                            </div>
-                        )}
+                        {[...Array(8)].map((_, index) => (<Skeleton key={index} />))}
                     </ul>
-                </>
-            )}
+                ) : (
+                    <>
+                        <ul className="list-disc list-inside">
+                            {filteredApplications.length > 0 ? (
+                                filteredApplications.map((application: IApplication) => (
+                                    <ApplicationCard application={application} key={application.id} />
+                                ))
+                            ) : (
+                                <div className="text-lg font-medium text-gray-200  whitespace-nowrap text-ellipsis mt-4"                >
+                                    {LANG.EN.NO_APPLICATION_FOUND}
+                                </div>
+                            )}
+                        </ul>
+                    </>
+                )}
+            </div>
         </div>
     );
 };

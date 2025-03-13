@@ -42,7 +42,7 @@ const CollapseContainer: React.FC<CollapsibleApplicationBoxProps> = ({ text, sub
     }, [isOpen]);
 
     return (
-        <div className="mt-4 overflow-hidden max-w-md p-2 border  rounded-lg shadow bg-gray-800 border-gray-700 w-full md:w-auto select-none random-card">
+        <div className="mt-4 overflow-hidden max-w-[500px] p-2 border rounded-lg shadow bg-gray-800 border-gray-700 select-none random-card">
             <div
                 className="flex justify-between p-0 cursor-pointer "
                 onClick={handleToggle}

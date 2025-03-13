@@ -1,16 +1,14 @@
 AWS:
-- add only unique user. ( 1, 1h )
-- separated app for login ( 4, 2h )
-- router rewrite (1, 1h )
 - make email with the whole template at step function ( 2, 2h )
 - Route 53 to S3 domain ( 1, 1h ) 
-- Redirect to expire
+- populate
+
 
 REACT:
 - multilanguage support (4, 1h)
-- find different text style. (4, 30min)
 - remove from STUB (3, 1h)
 - cleaning (4, 2h )
+- implement recaptcha
 
 
 AWS snippets:

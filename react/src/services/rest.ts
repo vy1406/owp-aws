@@ -33,9 +33,6 @@ export const rest = {
                 headers: defaultHeaders,
                 body: body ? JSON.stringify(body) : undefined,
             });
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
-            }
 
             return await response.json();
         } catch {

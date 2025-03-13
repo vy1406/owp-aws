@@ -23,7 +23,7 @@ const GoThereLink = ({ link, linkText, onClick }: LinkProps) => {
     return (
         <span
             onClick={handleOnLink}
-            className="inline-flex font-medium items-center text-blue-600 underline"
+            className="inline-flex font-medium items-center text-blue-600 underline cursor-pointer"
         >
             {linkText}
             <svg

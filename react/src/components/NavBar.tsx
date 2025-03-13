@@ -7,8 +7,8 @@ import LoginContext from '../services/context';
 
 const routes = [
   { name: LANG.EN.APPLICATIONS, path: ROUTES.HOME, isProtected: false },
-  { name: LANG.EN.NEW_APPLICATION, path: ROUTES.NEW_APPLICATION, isProtected: true },
   { name: LANG.EN.RESOURCES, path: ROUTES.RESOURCES, isProtected: false },
+  { name: LANG.EN.NEW_APPLICATION, path: ROUTES.NEW_APPLICATION, isProtected: true },
   { name: LANG.EN.NEW_RESOURCE, path: ROUTES.NEW_RESOURCE, isProtected: true },
   { name: LANG.EN.ABOUT, path: ROUTES.ABOUT, isProtected: false },
 ];
