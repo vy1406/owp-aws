@@ -51,6 +51,7 @@ export const LANG = {
         FREE_TEXT: "Free Text",
         NEW_RESOURCE: "New Resource",
         NEW_APPLICATION: "New Application",
+        MUST_BE_LOGGED_IN: "( must be logged in )",
         SERVICE: "Service",
         CREATE_APPLICATION: "Create Application",
         SURE_TO_DELETE: "Are you sure you want to delete this application?",
@@ -78,6 +79,7 @@ export const LANG = {
         TAGS: "Tags",
         STATUS: "Status",
         GO_THERE: "Go there",
+        GO_HOME: "Go Home",
         LOGIN: "Login",
         LOGOUT: "Logout",
         SIGN_UP: "Sign Up",
@@ -135,15 +137,15 @@ export const LANG = {
             "reviewed within 24 hours ",
             "to ensure integrity and safety before being published."
         ],
-        
+
         TITLE_CANNOT_BE_EMPTY: "Title cannot be empty.",
         TITLE_MIN_LENGTH: "Title must be at least 3 characters long.",
         TITLE_MAX_LENGTH: "Title cannot exceed 50 characters.",
-        
+
         DESCRIPTION_CANNOT_BE_EMPTY: "Description cannot be empty.",
         DESCRIPTION_MIN_LENGTH: "Description must be at least 10 characters long.",
         DESCRIPTION_MAX_LENGTH: "Description cannot exceed 300 characters.",
-        
+
         LINK_CANNOT_BE_EMPTY: "Link cannot be empty.",
         LINK_TOO_SHORT: "Link is too short",
 
@@ -151,7 +153,8 @@ export const LANG = {
         TAGS_MAX_COUNT: `You can only add up to ${CONSTANTS.MAX_TAGS} tags.`,
 
         EMAIL_INVALID: "Invalid email address.",
-
+        SUBMIT_RESOURCE: "...2 ...3 ...Re-lease",
+        SUBMIT_APPLICATION: "...2 ...3 ...Re-lease",
         EMAIL_NOTIFIED: "Email will be notified when the resource is approved / decline.",
         HOW_TO_SIGN_UP_UNIQUE_USERNAME: "Make sure to sign up with a unique username. You username will be seen to others as part of submitted application form.",
         HOW_TO_SIGN_UP_PASSWORD: "All password are stored in a secured way, NOT a single password stored as plain text. 'Forgot password' will be added lately.",
@@ -190,7 +193,7 @@ export const ROUTES = {
     HOME: '/',
     RESOURCES: '/resources',
     APPLICATIONS: '/applications',
-    APPLICATION: "/application/:id", 
+    APPLICATION: "/application/:id",
     ABOUT: '/about',
     LOGIN: '/login',
     SIGNUP: '/signup',

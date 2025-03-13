@@ -148,7 +148,7 @@ const ResourceForm = ({ onSubmit, type }: ResourceFormProps) => {
                 {isSubmitting ? (
                     <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                 ) : (
-                    LANG.EN.SUBMIT
+                    LANG.EN.SUBMIT_RESOURCE
                 )}
             </button>
         </form>

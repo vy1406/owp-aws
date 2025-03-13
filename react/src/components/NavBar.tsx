@@ -1,31 +1,16 @@
 
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef, useState, useMemo } from 'react';
 import { Link, useLocation } from 'wouter';
 import { LANG, ROUTES } from '../utils/constants';
 import useClickOutside from '../hooks/useClickOutside';
 import LoginContext from '../services/context';
 
 const routes = [
-  {
-    name: LANG.EN.APPLICATIONS,
-    path: ROUTES.HOME,
-  },
-  {
-    name: LANG.EN.NEW_APPLICATION,
-    path: ROUTES.NEW_APPLICATION,
-  },
-  {
-    name: LANG.EN.RESOURCES,
-    path: ROUTES.RESOURCES,
-  },
-  {
-    name: LANG.EN.NEW_RESOURCE,
-    path: ROUTES.NEW_RESOURCE,
-  },
-  {
-    name: LANG.EN.ABOUT,
-    path: ROUTES.ABOUT,
-  },
+  { name: LANG.EN.APPLICATIONS, path: ROUTES.HOME, isProtected: false },
+  { name: LANG.EN.NEW_APPLICATION, path: ROUTES.NEW_APPLICATION, isProtected: true },
+  { name: LANG.EN.RESOURCES, path: ROUTES.RESOURCES, isProtected: false },
+  { name: LANG.EN.NEW_RESOURCE, path: ROUTES.NEW_RESOURCE, isProtected: true },
+  { name: LANG.EN.ABOUT, path: ROUTES.ABOUT, isProtected: false },
 ];
 
 const NavBar = () => {
@@ -42,21 +27,33 @@ const NavBar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const computedRoutes = useMemo(() => {
+    return routes.map(route => ({
+      ...route,
+      name: route.isProtected && !isAuthenticated
+        ? `${route.name} ${LANG.EN.MUST_BE_LOGGED_IN}`
+        : route.name,
+      disabled: route.isProtected && !isAuthenticated
+    }));
+  }, [isAuthenticated]);
+
   useClickOutside(mobileMenuRef, handleCloseMenu);
+
 
   const onLogin = () => setLocation(ROUTES.LOGIN);
   const onLogout = () => logout();
-  
+
   return (
     <div className="sticky top-0 z-50 bg-white backdrop-filter backdrop-blur-lg bg-opacity-30 border-b border-gray-200" >
       <div className="flex w-full items-center px-4 py-2">
         <div className="hidden w-full flex-row justify-between text-xl font-extralight md:flex">
           <div className="flex gap-4">
-            {routes.map((route, index) => (
+            {computedRoutes.map((route, index) => (
               <Link
                 key={index}
-                href={route.path}
-                className="flex items-center mb-1 text-lg font-semibold  text-white"
+                href={route.disabled ? "" : route.path}
+                className={`flex items-center mb-1 text-lg font-semibold text-white ${route.disabled ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
               >
                 {route.name}
               </Link>
@@ -145,12 +142,13 @@ const NavBar = () => {
         >
           <div className="flex flex-col gap-4">
             <ul className="space-y-4">
-              {routes.map((route, index) => (
+              {computedRoutes.map((route, index) => (
                 <li key={index}>
                   <Link
-                    href={route.path}
-                    className="block py-2 px-3  border-b border-gray-600  md:hover:bg-transparent md:border-0 md:hover:text-blue-600 text-white hover:bg-gray-700 hover:text-blue-500"
-                    onClick={handleCloseMenu}
+                    href={route.disabled ? "" : route.path}
+                    className={`block py-2 px-3 border-b border-gray-600 text-white ${route.disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-700 hover:text-blue-500"
+                      }`}
+                    onClick={route.disabled ? undefined : () => setIsMobileMenuOpen(false)}
                   >
                     {route.name}
                   </Link>

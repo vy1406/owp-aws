@@ -1,7 +1,5 @@
 import { useState } from "react";
-// import { v4 as uuidv4 } from 'uuid';
 import ResourceForm from "../../forms/resource";
-// import ServiceForm from "../../forms/service";
 import Toggle from "../../components/Toggle";
 import HowTo from "../../components/HowTo";
 import { LANG, RESOURCE_MAP } from "../../utils/constants";
@@ -12,23 +10,6 @@ import WithAuth from "../../components/WithAuth";
 const ResourceServiceForm = () => {
     const [activeTab, setActiveTab] = useState(RESOURCE_MAP.RESOURCE);
 
-    const handleOnGetResources = async () => {
-        const url = "https://qn6tw91djc.execute-api.us-east-1.amazonaws.com/states/retrieve"
-        try {
-            const response = await fetch(url, {
-                method: 'GET'
-            });
-            if (response.ok) {
-                console.log('fecthed successfully', response);
-                const result = await response.json();
-                console.log('Test endpoint result:', result);
-            } else {
-                console.error('Failed to fetch data', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
 
     const onSubmit = async (data: IResourceForm) => {
 
@@ -79,10 +60,6 @@ const ResourceServiceForm = () => {
                 </div>
                 
                 <ResourceForm onSubmit={onSubmit} type={activeTab}/>
-
-                <button onClick={handleOnGetResources}>
-                    get resources
-                </button>
             </div>
         </WithAuth>
     );

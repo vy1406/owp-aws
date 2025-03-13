@@ -227,7 +227,7 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
                             {isSubmitting ? (
                                 <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
                             ) : (
-                                hasApplicationId ? LANG.EN.UPDATE : LANG.EN.SUBMIT
+                                hasApplicationId ? LANG.EN.UPDATE : LANG.EN.SUBMIT_APPLICATION
                             )}
                         </button>
                     )
