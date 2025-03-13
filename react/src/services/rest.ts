@@ -1,12 +1,20 @@
+interface IBody {
+    [key: string]: unknown;
+}
+
+interface IHeaders {
+    [key: string]: string;
+}
+
 export const rest = {
     async request<T>(
         url: string,
         method: string,
-        body?: Record<string, unknown>,
-        headers?: Record<string, string>): Promise<T | null> {
+        body?: IBody,
+        headers?: IHeaders): Promise<T | null> {
         try {
 
-            const defaultHeaders: Record<string, string> = {
+            const defaultHeaders: IHeaders = {
                 'Content-Type': 'application/json',
                 ...headers
             };
@@ -27,19 +35,19 @@ export const rest = {
         }
     },
 
-    get<T>(url: string, headers?: Record<string, string>): Promise<T | null> {
+    get<T>(url: string, headers?: IHeaders): Promise<T | null> {
         return this.request<T>(url, 'GET', undefined, headers);
     },
 
-    post<T>(url: string, body: Record<string, unknown>, headers?: Record<string, string>): Promise<T | null> {
+    post<T>(url: string, body: IBody, headers?: IHeaders): Promise<T | null> {
         return this.request<T>(url, 'POST', body, headers);
     },
 
-    put<T>(url: string, body: Record<string, unknown>, headers?: Record<string, string>): Promise<T | null> {
+    put<T>(url: string, body: IBody, headers?: IHeaders): Promise<T | null> {
         return this.request<T>(url, 'PUT', body, headers);
     },
 
-    delete<T>(url: string, body?: Record<string, unknown>, headers?: Record<string, string>): Promise<T | null> {
+    delete<T>(url: string, body?: IBody, headers?: IHeaders): Promise<T | null> {
         return this.request<T>(url, 'DELETE', body, headers);
     }
 };
