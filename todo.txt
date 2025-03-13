@@ -9,13 +9,9 @@ AWS:
 REACT:
 - multilanguage support (4, 1h)
 - find different text style. (4, 30min)
-- use proxy from vite (2, 1h)
 - remove from STUB (3, 1h)
 - cleaning (4, 2h )
-- close specific routes, in navbar add MUST_BE_LOGGED_IN with useMemo.
 
-DONE: 
-- my applicatons
 
 AWS snippets:
 

@@ -31,7 +31,7 @@ const NavBar = () => {
     return routes.map(route => ({
       ...route,
       name: route.isProtected && !isAuthenticated
-        ? `${route.name} ${LANG.EN.MUST_BE_LOGGED_IN}`
+        ? `${route.name} ${LANG.EN.MUST_BE_LOGGED_IN}` 
         : route.name,
       disabled: route.isProtected && !isAuthenticated
     }));

@@ -3,3 +3,4 @@ export const API = {
     APPLICATION: "https://hglaoj2hgj.execute-api.us-east-1.amazonaws.com/prod/applications",
     AUTH: "https://v86g98hnxc.execute-api.us-east-1.amazonaws.com/prod/"
 }
+
