@@ -6,9 +6,6 @@ AWS:
 - Route 53 to S3 domain ( 1, 1h ) 
 - Redirect to expire
 
-Eisenhower matrix:
-urgent | important
-
 REACT:
 - multilanguage support (4, 1h)
 - find different text style. (4, 30min)
@@ -16,6 +13,7 @@ REACT:
 - remove from STUB (3, 1h)
 - cleaning (4, 2h )
 - make "rest" in client services.
+- close specific routes.
 
 DONE: 
 - my applicatons
@@ -24,4 +22,7 @@ AWS snippets:
 
 after deploying to s3.
 do this:
+
+
 1. npm run app:deploy
+2. 

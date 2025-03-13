@@ -157,7 +157,9 @@ const ApplicationForm = ({ onSubmit, onDelete, application  = null}: Application
                     {...register('additional_info')}
                 />
             </div>
+
             {isFormDisabled ?
+                    
                     
                 <div className='flex justify-center'>
                     <Status status={selectedStatus} />

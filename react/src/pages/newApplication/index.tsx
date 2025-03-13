@@ -8,6 +8,8 @@ import { useLocation } from "wouter";
 
 const NewApplication = () => {
     const [_, setLocation] = useLocation();
+    
+    
 
     const handleOnSubmit = async (data: IApplicationForm) => {
         const username = localStorage.getItem(USER_KEY);
