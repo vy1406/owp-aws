@@ -1,8 +1,7 @@
 AWS:
 - make email with the whole template at step function ( 2, 2h )
 - Route 53 to S3 domain ( 1, 1h ) 
-- populate
-
+- make sure you remove old applications
 
 REACT:
 - multilanguage support (4, 1h)

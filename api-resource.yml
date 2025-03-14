@@ -7,7 +7,7 @@ Parameters:
     AllowedPattern: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
     ConstraintDescription: Must be a valid email address.
 Resources:
-  # Begin API Gateway Resources
+
   ExecutionApi:
     Type: "AWS::ApiGateway::RestApi"
     Properties:
@@ -151,10 +151,7 @@ Resources:
     Properties:
       RestApiId: !Ref ExecutionApi
       StageName: DummyStage
-  # End API Gateway Resources
 
-  # Begin
-  # Lambda that will be invoked by API Gateway
   InvokeStateMachineFunction:
     Type: "AWS::Lambda::Function"
     Properties:
@@ -355,9 +352,7 @@ Resources:
                   - "states:SendTaskFailure"
                   - "states:SendTaskSuccess"
                 Resource: "*"
-  # End Lambda that will be invoked by API Gateway
 
-  # Begin state machine that publishes to Lambda and sends an email with the link for approval
   HumanApprovalLambdaStateMachine:
     Type: AWS::StepFunctions::StateMachine
     Properties:
@@ -608,7 +603,6 @@ Resources:
                 Resource:
                   - !Sub "${SNSHumanApprovalEmailTopic}"
 
-# End state machine that publishes to Lambda and sends an email with the link for approval
 Outputs:
   ApiGatewayInvokeURL:
     Value: !Sub "https://${ExecutionApi}.execute-api.${AWS::Region}.amazonaws.com/states"
