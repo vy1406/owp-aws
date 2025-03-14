@@ -6,6 +6,10 @@ Parameters:
     Default: "vladimir.elisavetsky@gmail.com"
     AllowedPattern: "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$"
     ConstraintDescription: Must be a valid email address.
+  ResourceTableName:
+    Type: String
+    Default: "ResourceTable"
+
 Resources:
 
   ExecutionApi:
@@ -15,26 +19,26 @@ Resources:
       Description: "HTTP Endpoint backed by API Gateway and Lambda"
       FailOnWarnings: true
 
-  ResourceTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ResourceTable
-      AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
-        - AttributeName: status
-          AttributeType: S
-      KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-      BillingMode: PAY_PER_REQUEST
-      GlobalSecondaryIndexes:
-        - IndexName: StatusIndex
-          KeySchema:
-            - AttributeName: status
-              KeyType: HASH
-          Projection:
-            ProjectionType: ALL
+  # ResourceTable:
+  #   Type: AWS::DynamoDB::Table
+  #   Properties:
+  #     TableName: ResourceTable
+  #     AttributeDefinitions:
+  #       - AttributeName: id
+  #         AttributeType: S
+  #       - AttributeName: status
+  #         AttributeType: S
+  #     KeySchema:
+  #       - AttributeName: id
+  #         KeyType: HASH
+  #     BillingMode: PAY_PER_REQUEST
+  #     GlobalSecondaryIndexes:
+  #       - IndexName: StatusIndex
+  #         KeySchema:
+  #           - AttributeName: status
+  #             KeyType: HASH
+  #         Projection:
+  #           ProjectionType: ALL
 
   ExecutionPostMethod:
     Type: "AWS::ApiGateway::Method"
@@ -97,6 +101,30 @@ Resources:
         RestApiId: !Ref ExecutionApi
         ParentId: !GetAtt "ExecutionApi.RootResourceId"
         PathPart: retrieve
+
+  RetrieveOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      RestApiId: !Ref ExecutionApi
+      ResourceId: !Ref RetrieveResource
+      HttpMethod: OPTIONS
+      AuthorizationType: NONE
+      Integration:
+        Type: MOCK
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Origin: "'*'"
+            method.response.header.Access-Control-Allow-Methods: "'OPTIONS,GET,POST,PUT,DELETE'"
+            method.response.header.Access-Control-Allow-Headers: "'Content-Type,Authorization'"
 
   RetrieveResourcesMethod:
     Type: "AWS::ApiGateway::Method"
@@ -326,7 +354,7 @@ Resources:
       Runtime: nodejs18.x
       Environment:
         Variables:
-          RESOURCE_TABLE: !Ref ResourceTable
+          RESOURCE_TABLE: !Ref ResourceTableName
 
   InvokeStateMachinePermission:
     Type: AWS::Lambda::Permission
@@ -376,7 +404,7 @@ Resources:
                   - dynamodb:Query
                   - dynamodb:UpdateItem
                   - dynamodb:DeleteItem
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ResourceTable"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${ResourceTableName}"
         - PolicyName: CloudWatchLogsPolicy
           PolicyDocument:
             Statement:
@@ -544,7 +572,7 @@ Resources:
 
       Environment:
         Variables:
-          RESOURCE_TABLE: !Ref ResourceTable
+          RESOURCE_TABLE: !Ref ResourceTableName
 
   RetrieveResourcesFunction:
     Type: "AWS::Lambda::Function"
@@ -597,7 +625,7 @@ Resources:
           };
       Environment:
         Variables:
-          RESOURCE_TABLE: !Ref ResourceTable
+          RESOURCE_TABLE: !Ref ResourceTableName
 
   LambdaStateMachineExecutionRole:
     Type: "AWS::IAM::Role"
@@ -670,7 +698,7 @@ Resources:
                   - dynamodb:UpdateItem
                   - dynamodb:DeleteItem
                   - dynamodb:Scan
-                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ResourceTable"
+                Resource: !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${ResourceTableName}"
         - PolicyName: CloudWatchLogsPolicy
           PolicyDocument:
             Statement:
@@ -713,8 +741,8 @@ Resources:
                   - dynamodb:DeleteItem
                   - dynamodb:Scan
                 Resource:
-                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ResourceTable"
-                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/ResourceTable/index/StatusIndex"
+                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${ResourceTableName}"
+                  - !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${ResourceTableName}/index/StatusIndex"
         - PolicyName: CloudWatchLogsPolicy
           PolicyDocument:
             Statement:
