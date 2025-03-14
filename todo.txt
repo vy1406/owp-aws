@@ -1,11 +1,9 @@
 AWS:
 - make email with the whole template at step function ( 2, 2h )
 - Route 53 to S3 domain ( 1, 1h ) 
-- make sure you remove old applications
 
 REACT:
-- multilanguage support (4, 1h)
-- remove from STUB (3, 1h)
+- multilanguage support (4, 1h) - i18n
 - cleaning (4, 2h )
 - implement recaptcha
 
