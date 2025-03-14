@@ -1,0 +1,1396 @@
+[
+  {
+    "id": "71fba6db-107e-4957-b5cc-4646a6c62f2e",
+    "application_date": "2024-04-04",
+    "biometric_date": "2024-05-10",
+    "decision_date": "",
+    "user_id": "01e29d1e-f282-4ce5-9699-f5ff5f09044a",
+    "status": "Pending",
+    "submission_city": "Winnipeg",
+    "additional_info": "Used immigration consultants ",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T18:08:36.748Z",
+    "updated_at": "2024-06-30T18:08:36.748Z",
+    "user": {
+      "id": "01e29d1e-f282-4ce5-9699-f5ff5f09044a",
+      "username": "Ame"
+    }
+  },
+  {
+    "id": "10ca427c-32b8-4fad-b0cb-b06aaa04397e",
+    "application_date": "2024-06-07",
+    "biometric_date": "2024-06-18",
+    "decision_date": "",
+    "user_id": "c4c97aa2-f265-4c4c-b3d1-96ba70cb81bb",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T18:11:07.778Z",
+    "updated_at": "2024-06-30T18:11:07.778Z",
+    "user": {
+      "id": "c4c97aa2-f265-4c4c-b3d1-96ba70cb81bb",
+      "username": "Wonder"
+    }
+  },
+  {
+    "id": "9172de14-a8ea-416b-bcf1-e49069bc267d",
+    "application_date": "2024-04-25",
+    "biometric_date": "2024-05-01",
+    "decision_date": "",
+    "user_id": "b73de388-accb-46ef-9089-8372b65bb51f",
+    "status": "Pending",
+    "submission_city": "toronto",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T18:14:43.822Z",
+    "updated_at": "2024-06-30T18:15:14.378Z",
+    "user": {
+      "id": "b73de388-accb-46ef-9089-8372b65bb51f",
+      "username": "ragonek"
+    }
+  },
+  {
+    "id": "7085a79d-2033-4b26-9d7f-4aeb3413eec5",
+    "application_date": "2024-05-18",
+    "biometric_date": "2024-05-21",
+    "decision_date": "",
+    "user_id": "62e06110-caec-4bb8-a997-bb0f6904c089",
+    "status": "Pending",
+    "submission_city": "Calgary ",
+    "additional_info": "Pending ",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T18:31:17.494Z",
+    "updated_at": "2024-06-30T18:31:17.494Z",
+    "user": {
+      "id": "62e06110-caec-4bb8-a997-bb0f6904c089",
+      "username": "Rr"
+    }
+  },
+  {
+    "id": "9351cda8-a0d2-434a-beb4-b9e528e90e98",
+    "application_date": "2024-04-27",
+    "biometric_date": "2024-05-07",
+    "decision_date": "",
+    "user_id": "c1699cb1-f89c-46c1-b191-7a06f701313b",
+    "status": "Pending",
+    "submission_city": "Hamilton",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T18:37:27.318Z",
+    "updated_at": "2024-06-30T18:37:27.318Z",
+    "user": {
+      "id": "c1699cb1-f89c-46c1-b191-7a06f701313b",
+      "username": "user231"
+    }
+  },
+  {
+    "id": "1ff61456-1654-428e-b3c6-921155a9fb24",
+    "application_date": "2024-04-02",
+    "biometric_date": "2024-05-08",
+    "decision_date": "",
+    "user_id": "6298edad-ec41-4348-8715-48c8793cdcf5",
+    "status": "Pending",
+    "submission_city": "Vancouver",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T18:39:38.977Z",
+    "updated_at": "2024-06-30T18:39:38.977Z",
+    "user": {
+      "id": "6298edad-ec41-4348-8715-48c8793cdcf5",
+      "username": "valentin"
+    }
+  },
+  {
+    "id": "01ae2784-4ec6-46b5-a1bb-f89fc737e94d",
+    "application_date": "2024-06-05",
+    "biometric_date": "2024-06-20",
+    "decision_date": "",
+    "user_id": "1abe8617-87a0-447b-afe8-3d0a7c29a924",
+    "status": "Pending",
+    "submission_city": "Toronto ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T18:40:33.708Z",
+    "updated_at": "2024-06-30T18:40:33.708Z",
+    "user": {
+      "id": "1abe8617-87a0-447b-afe8-3d0a7c29a924",
+      "username": "Raymondtorch@gmail.com "
+    }
+  },
+  {
+    "id": "aca5c0dc-af80-4dd8-9854-067184ec6f88",
+    "application_date": "2024-04-16",
+    "biometric_date": "2024-04-22",
+    "decision_date": "",
+    "user_id": "427331d0-faae-4279-815e-2eb22557c893",
+    "status": "Pending",
+    "submission_city": "Halifax, NS",
+    "additional_info": "Family, no relatives in Canada, no past status (student, etc..)",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T18:50:23.365Z",
+    "updated_at": "2024-06-30T18:50:23.365Z",
+    "user": {
+      "id": "427331d0-faae-4279-815e-2eb22557c893",
+      "username": "Baba"
+    }
+  },
+  {
+    "id": "50ee1835-3260-4e76-b6a0-824517707419",
+    "application_date": "2024-05-19",
+    "biometric_date": "2024-05-21",
+    "decision_date": "",
+    "user_id": "b86a53ef-65d9-48d9-bc7e-62474359444d",
+    "status": "Pending",
+    "submission_city": "Vaughan",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T18:57:54.880Z",
+    "updated_at": "2024-06-30T18:57:54.880Z",
+    "user": {
+      "id": "b86a53ef-65d9-48d9-bc7e-62474359444d",
+      "username": "Korabel"
+    }
+  },
+  {
+    "id": "8fcf1951-8620-4335-8b39-701a512a3c8f",
+    "application_date": "2024-03-25",
+    "biometric_date": "2024-04-02",
+    "decision_date": "",
+    "user_id": "d5833dbb-d938-492d-9a6c-fdf7ca7cafaf",
+    "status": "Pending",
+    "submission_city": "Calgary",
+    "additional_info": "With Guy ben yaish",
+    "is_self_submitted": false,
+    "created_at": "2024-06-29T04:18:46.050Z",
+    "updated_at": "2024-06-29T04:18:46.050Z",
+    "user": {
+      "id": "d5833dbb-d938-492d-9a6c-fdf7ca7cafaf",
+      "username": "vova"
+    }
+  },
+  {
+    "id": "881b9f2e-3ab3-4598-b32b-b43cd67bef23",
+    "application_date": "2024-03-23",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by a.t",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:21:23.300Z",
+    "updated_at": "2024-06-29T04:21:23.300Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "7a760cdf-63fe-483c-b776-21f37b8c6898",
+    "application_date": "2024-04-29",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by y.t",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:22:01.824Z",
+    "updated_at": "2024-06-29T04:22:01.824Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "9ef25d5b-3fec-4ce8-9ea2-29e5d4cff2a1",
+    "application_date": "2024-03-02",
+    "biometric_date": "2024-04-24",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by y.l",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:22:50.409Z",
+    "updated_at": "2024-06-29T04:22:50.409Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "24ae5c6e-0fac-46cb-a681-e8b099bcc9e0",
+    "application_date": "2024-01-23",
+    "biometric_date": "2024-04-10",
+    "decision_date": "2024-04-25",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "From facebook posts",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:23:48.344Z",
+    "updated_at": "2024-06-29T04:23:48.344Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "81505298-368f-472e-9a28-d17479935c34",
+    "application_date": "2024-02-26",
+    "biometric_date": "2024-02-29",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by o.b.f",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:24:27.329Z",
+    "updated_at": "2024-06-29T04:24:27.329Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "98f21aaa-c2cc-4462-a6dd-a2df40aefc69",
+    "application_date": "2024-04-12",
+    "biometric_date": "2024-04-27",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by i.b.d",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:25:19.786Z",
+    "updated_at": "2024-06-29T04:25:19.786Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "1014610e-34a5-4b16-9450-51aec82e9df9",
+    "application_date": "2024-02-29",
+    "biometric_date": "2024-04-23",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by o.m",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:25:55.431Z",
+    "updated_at": "2024-06-29T04:25:55.431Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "9b63d4c6-eb8f-46f6-9137-47bd5f6459d4",
+    "application_date": "2024-02-23",
+    "biometric_date": "",
+    "decision_date": "2024-06-25",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "From facebook posts, by n.d",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:27:24.257Z",
+    "updated_at": "2024-06-29T04:27:24.257Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "da9784e0-44aa-4692-b748-f6afe7c1a67e",
+    "application_date": "2024-02-28",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook posts by a.p",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T04:27:55.739Z",
+    "updated_at": "2024-06-29T04:27:55.739Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "2e99cd8b-0ab5-4af3-a325-a60fbb384be2",
+    "application_date": "2024-03-09",
+    "biometric_date": "2024-03-27",
+    "decision_date": "",
+    "user_id": "195d923b-96a4-4b90-8b50-ebb2234910e1",
+    "status": "Pending",
+    "submission_city": "Calgary",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T06:55:00.879Z",
+    "updated_at": "2024-06-29T06:55:00.879Z",
+    "user": {
+      "id": "195d923b-96a4-4b90-8b50-ebb2234910e1",
+      "username": "Admin"
+    }
+  },
+  {
+    "id": "08085bc3-284c-4b0a-8d8b-3e74ca88d808",
+    "application_date": "2024-03-05",
+    "biometric_date": "2024-05-16",
+    "decision_date": "",
+    "user_id": "851379c9-1b18-41ea-9746-cb27b2fadacb",
+    "status": "Pending",
+    "submission_city": "Toronto ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-29T08:33:10.334Z",
+    "updated_at": "2024-06-29T08:33:10.334Z",
+    "user": {
+      "id": "851379c9-1b18-41ea-9746-cb27b2fadacb",
+      "username": "Notcanadianyet"
+    }
+  },
+  {
+    "id": "56ed01bd-c90d-45c4-88dc-80b0eba25a38",
+    "application_date": "2024-05-25",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "41435918-facd-44dd-9cde-9b29b412f81d",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T13:00:26.901Z",
+    "updated_at": "2024-06-29T13:00:26.901Z",
+    "user": {
+      "id": "41435918-facd-44dd-9cde-9b29b412f81d",
+      "username": "maybecanada"
+    }
+  },
+  {
+    "id": "072b5dcb-3f1b-49cb-b44a-40f3fc62a593",
+    "application_date": "2024-03-30",
+    "biometric_date": "2024-04-12",
+    "decision_date": "2024-06-29",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "From wassup group by K.",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T16:08:26.834Z",
+    "updated_at": "2024-06-29T16:08:26.834Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "ba9155d7-9e2f-44f3-af35-cbd87b7bd1ac",
+    "application_date": "2024-03-23",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From facebook post, by D.J.",
+    "is_self_submitted": true,
+    "created_at": "2024-06-29T16:10:28.753Z",
+    "updated_at": "2024-06-29T16:10:28.753Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "2ab7ffed-6125-401c-971c-000d60b2b74f",
+    "application_date": "2023-12-26",
+    "biometric_date": "2024-03-20",
+    "decision_date": "2024-04-19",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "Family of 4",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T16:56:10.907Z",
+    "updated_at": "2024-06-30T16:56:10.907Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "71b1de26-713c-4022-89e7-3676e5b5bd9c",
+    "application_date": "2023-12-29",
+    "biometric_date": "2024-03-15",
+    "decision_date": "2024-05-29",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "Family of 4",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T16:58:42.969Z",
+    "updated_at": "2024-06-30T16:58:42.969Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "2dd5fc0f-9b31-4974-9bb4-496364b18edd",
+    "application_date": "2024-02-20",
+    "biometric_date": "2024-04-25",
+    "decision_date": "2024-06-25",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "1 person",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T16:59:53.688Z",
+    "updated_at": "2024-06-30T16:59:53.688Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "47de4ef6-6a3c-4477-8bc7-06b8ede6ba5f",
+    "application_date": "2024-03-13",
+    "biometric_date": "2024-03-18",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T17:00:56.308Z",
+    "updated_at": "2024-06-30T17:00:56.308Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "2f8996af-0368-42bf-a4b4-5a6c89385443",
+    "application_date": "2024-05-18",
+    "biometric_date": "2024-06-01",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T17:02:02.368Z",
+    "updated_at": "2024-06-30T17:02:02.368Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "ff305a71-93f2-4002-bc02-fe87e928121d",
+    "application_date": "2024-06-05",
+    "biometric_date": "2024-07-10",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T17:02:44.845Z",
+    "updated_at": "2024-06-30T17:02:44.845Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "22fdf055-8635-44ea-9d4a-c5d7810eb138",
+    "application_date": "2024-04-08",
+    "biometric_date": "2024-05-02",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T17:03:53.865Z",
+    "updated_at": "2024-06-30T17:03:53.865Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "8ab00263-4314-44ad-9772-00590005c136",
+    "application_date": "2024-05-30",
+    "biometric_date": "2024-06-10",
+    "decision_date": "",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T17:05:27.266Z",
+    "updated_at": "2024-06-30T17:05:27.266Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "6fd21176-3ce8-4cbd-9f96-9e496dbfa8d6",
+    "application_date": "2024-03-10",
+    "biometric_date": "2023-09-30",
+    "decision_date": "",
+    "user_id": "01b4d80f-8318-43e9-a5b6-d64a611721af",
+    "status": "Pending",
+    "submission_city": "Calgary",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T17:44:49.463Z",
+    "updated_at": "2024-06-30T17:44:49.463Z",
+    "user": {
+      "id": "01b4d80f-8318-43e9-a5b6-d64a611721af",
+      "username": "Julia.kotlyarenko@gmail.com"
+    }
+  },
+  {
+    "id": "bc59799f-e5b1-45a9-941c-b33bbde8353f",
+    "application_date": "2024-04-26",
+    "biometric_date": "2024-05-02",
+    "decision_date": "",
+    "user_id": "f394ecab-5698-4d5d-ba0f-ea4bd3040c7e",
+    "status": "Pending",
+    "submission_city": "Ontario ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T17:45:58.384Z",
+    "updated_at": "2024-06-30T17:45:58.384Z",
+    "user": {
+      "id": "f394ecab-5698-4d5d-ba0f-ea4bd3040c7e",
+      "username": "moskvin"
+    }
+  },
+  {
+    "id": "8fc3b22b-2389-423a-a026-ee15e6b74d50",
+    "application_date": "2024-03-07",
+    "biometric_date": "2024-04-26",
+    "decision_date": "",
+    "user_id": "08e3a67a-b014-4476-9175-df1d0c96e610",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T18:04:47.023Z",
+    "updated_at": "2024-06-30T18:04:47.023Z",
+    "user": {
+      "id": "08e3a67a-b014-4476-9175-df1d0c96e610",
+      "username": "Gen"
+    }
+  },
+  {
+    "id": "905a5be7-227f-4947-b504-9c43c70c4bae",
+    "application_date": "2024-04-25",
+    "biometric_date": "2024-06-03",
+    "decision_date": "",
+    "user_id": "0af3bc83-b4b8-46df-933e-9c28ee5d6da7",
+    "status": "Pending",
+    "submission_city": "Maple",
+    "additional_info": "Lol",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T19:33:41.336Z",
+    "updated_at": "2024-06-30T19:33:41.336Z",
+    "user": {
+      "id": "0af3bc83-b4b8-46df-933e-9c28ee5d6da7",
+      "username": "Alikbrun"
+    }
+  },
+  {
+    "id": "06331e41-5b21-441f-8d39-5da626488cb5",
+    "application_date": "2024-05-17",
+    "biometric_date": "2024-06-05",
+    "decision_date": "",
+    "user_id": "47e88028-2de1-4d65-908c-8d2ce443dcc0",
+    "status": "Pending",
+    "submission_city": "Montreal",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T19:43:13.777Z",
+    "updated_at": "2024-06-30T19:43:13.777Z",
+    "user": {
+      "id": "47e88028-2de1-4d65-908c-8d2ce443dcc0",
+      "username": "J"
+    }
+  },
+  {
+    "id": "d3c53680-8976-4656-8c43-a445af5795a8",
+    "application_date": "2024-05-28",
+    "biometric_date": "2024-07-17",
+    "decision_date": "",
+    "user_id": "4583f014-9edc-47b2-a3e9-e1982ecec0d9",
+    "status": "Pending",
+    "submission_city": "Ontario ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T20:00:10.589Z",
+    "updated_at": "2024-06-30T20:00:10.589Z",
+    "user": {
+      "id": "4583f014-9edc-47b2-a3e9-e1982ecec0d9",
+      "username": "ג'נט"
+    }
+  },
+  {
+    "id": "f13553a7-0b47-448b-bcc0-7b6544412f41",
+    "application_date": "2024-05-13",
+    "biometric_date": "2024-06-11",
+    "decision_date": "",
+    "user_id": "a3a4e7e5-79e1-4732-8c0b-dabac101eca5",
+    "status": "Pending",
+    "submission_city": "Edmonton",
+    "additional_info": "Biometrics in Red Deer",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T20:00:40.727Z",
+    "updated_at": "2024-06-30T20:00:40.727Z",
+    "user": {
+      "id": "a3a4e7e5-79e1-4732-8c0b-dabac101eca5",
+      "username": "Tree151"
+    }
+  },
+  {
+    "id": "13363b26-b452-4448-a4eb-2ae71b9f6f1f",
+    "application_date": "2024-03-12",
+    "biometric_date": "2024-05-07",
+    "decision_date": "",
+    "user_id": "7e8f129c-2276-419e-a477-01dd53b01a10",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T20:20:21.041Z",
+    "updated_at": "2024-06-30T20:20:21.041Z",
+    "user": {
+      "id": "7e8f129c-2276-419e-a477-01dd53b01a10",
+      "username": "יבגני"
+    }
+  },
+  {
+    "id": "e0d08f7b-d55e-4f95-959d-2b8154ef1681",
+    "application_date": "2024-04-08",
+    "biometric_date": "2024-05-30",
+    "decision_date": "",
+    "user_id": "a8633106-a1db-4053-a22a-37d6d68d8cb5",
+    "status": "Pending",
+    "submission_city": "North york",
+    "additional_info": "Family",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T20:25:17.727Z",
+    "updated_at": "2024-06-30T20:25:17.727Z",
+    "user": {
+      "id": "a8633106-a1db-4053-a22a-37d6d68d8cb5",
+      "username": "Efrat.back"
+    }
+  },
+  {
+    "id": "41895bf6-36cd-4781-9be8-2e9f85d905e6",
+    "application_date": "2024-05-22",
+    "biometric_date": "2024-06-17",
+    "decision_date": "",
+    "user_id": "b9f49f81-fc50-4e0f-9abd-9ad3e6deb553",
+    "status": "Pending",
+    "submission_city": "Ottawa",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T20:27:32.959Z",
+    "updated_at": "2024-06-30T20:27:32.959Z",
+    "user": {
+      "id": "b9f49f81-fc50-4e0f-9abd-9ad3e6deb553",
+      "username": "Lol"
+    }
+  },
+  {
+    "id": "fc0a5ff3-1055-42af-94e2-19aee19e1bff",
+    "application_date": "2024-05-23",
+    "biometric_date": "2024-05-29",
+    "decision_date": "",
+    "user_id": "a6492e08-e00f-4e5c-a609-b52a9d01dcdd",
+    "status": "Pending",
+    "submission_city": "Ottawa",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T21:54:59.936Z",
+    "updated_at": "2024-06-30T21:54:59.936Z",
+    "user": {
+      "id": "a6492e08-e00f-4e5c-a609-b52a9d01dcdd",
+      "username": "Kaboom"
+    }
+  },
+  {
+    "id": "931f1644-94a4-4663-b25b-a124626efd5c",
+    "application_date": "2024-03-20",
+    "biometric_date": "2024-04-01",
+    "decision_date": "",
+    "user_id": "81e3fb8d-14c0-43c2-9da6-deba7915fdd6",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T23:38:52.210Z",
+    "updated_at": "2024-06-30T23:38:52.210Z",
+    "user": {
+      "id": "81e3fb8d-14c0-43c2-9da6-deba7915fdd6",
+      "username": "Juki"
+    }
+  },
+  {
+    "id": "6af20443-a0ad-4791-9fd6-3c00a823631e",
+    "application_date": "2024-04-16",
+    "biometric_date": "2024-05-17",
+    "decision_date": "",
+    "user_id": "a4f41092-c56b-47d1-a3e8-147557b4f407",
+    "status": "Pending",
+    "submission_city": "Whistler",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T23:41:10.326Z",
+    "updated_at": "2024-06-30T23:41:10.326Z",
+    "user": {
+      "id": "a4f41092-c56b-47d1-a3e8-147557b4f407",
+      "username": "TimR"
+    }
+  },
+  {
+    "id": "a696b634-3577-4ac1-95d3-6ca4f5148491",
+    "application_date": "2024-03-05",
+    "biometric_date": "",
+    "decision_date": "2024-05-10",
+    "user_id": "7dbb4d75-805c-4775-8b6c-83ce1b07ba95",
+    "status": "Rejected",
+    "submission_city": "Toronto ",
+    "additional_info": "Didn't upload receipt by mistake, pay attention to the next button at the end of the page",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T01:04:36.999Z",
+    "updated_at": "2024-07-01T01:04:36.999Z",
+    "user": {
+      "id": "7dbb4d75-805c-4775-8b6c-83ce1b07ba95",
+      "username": "Mimi555"
+    }
+  },
+  {
+    "id": "c603e865-43b7-40eb-ac70-5f4393a8938c",
+    "application_date": "2024-04-29",
+    "biometric_date": "2024-05-07",
+    "decision_date": "",
+    "user_id": "126b22cd-ccc2-4510-854f-8b78e7198b4d",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "My daughter with PR",
+    "is_self_submitted": false,
+    "created_at": "2024-07-01T05:04:21.195Z",
+    "updated_at": "2024-07-01T05:04:21.195Z",
+    "user": {
+      "id": "126b22cd-ccc2-4510-854f-8b78e7198b4d",
+      "username": "Fff"
+    }
+  },
+  {
+    "id": "1d69d7e0-23c1-4f91-aec2-b60842cfb49b",
+    "application_date": "2024-04-24",
+    "biometric_date": "2024-06-11",
+    "decision_date": "",
+    "user_id": "3c65f1de-a628-4620-ba48-e5b3f2b44c65",
+    "status": "Pending",
+    "submission_city": "Grande prairie",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T05:11:49.602Z",
+    "updated_at": "2024-07-01T05:11:49.602Z",
+    "user": {
+      "id": "3c65f1de-a628-4620-ba48-e5b3f2b44c65",
+      "username": "tzvima"
+    }
+  },
+  {
+    "id": "9cd08697-399b-409f-ab72-893bf3562b83",
+    "application_date": "2024-06-10",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "02e3e494-6166-4261-a1f1-6a81e1aecd71",
+    "status": "Pending",
+    "submission_city": "Montreal",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-01T02:21:02.978Z",
+    "updated_at": "2024-07-01T02:25:47.198Z",
+    "user": {
+      "id": "02e3e494-6166-4261-a1f1-6a81e1aecd71",
+      "username": "Wave.plant"
+    }
+  },
+  {
+    "id": "5c9bfa66-f9eb-4baa-a513-d4efb0484ecd",
+    "application_date": "2024-04-29",
+    "biometric_date": "2024-05-01",
+    "decision_date": "",
+    "user_id": "3d26d6b7-7cab-4464-805b-7e26521766bc",
+    "status": "Pending",
+    "submission_city": "Winnipeg",
+    "additional_info": "Family of 4",
+    "is_self_submitted": false,
+    "created_at": "2024-07-01T02:56:56.555Z",
+    "updated_at": "2024-07-01T02:56:56.555Z",
+    "user": {
+      "id": "3d26d6b7-7cab-4464-805b-7e26521766bc",
+      "username": "nanovak"
+    }
+  },
+  {
+    "id": "32839ab8-0cc0-4f12-9601-36f7d337662a",
+    "application_date": "2024-06-05",
+    "biometric_date": "2021-03-01",
+    "decision_date": "",
+    "user_id": "cd8a5456-6cfd-459a-9b4e-ed5c8804fc08",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "Did biometrics 2021 for different visa. ",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T04:09:06.086Z",
+    "updated_at": "2024-07-01T04:09:06.086Z",
+    "user": {
+      "id": "cd8a5456-6cfd-459a-9b4e-ed5c8804fc08",
+      "username": "Chekor"
+    }
+  },
+  {
+    "id": "82f0fd55-e65c-411c-bffb-4257bdb078dd",
+    "application_date": "2024-02-26",
+    "biometric_date": "2024-03-07",
+    "decision_date": "",
+    "user_id": "43588368-a903-4b81-b48e-371645f1f1db",
+    "status": "Pending",
+    "submission_city": "Toronto ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-01T10:13:48.545Z",
+    "updated_at": "2024-07-01T10:13:48.545Z",
+    "user": {
+      "id": "43588368-a903-4b81-b48e-371645f1f1db",
+      "username": "DHZ"
+    }
+  },
+  {
+    "id": "37702891-ef16-4e0d-8956-2cd25d897da9",
+    "application_date": "2024-06-06",
+    "biometric_date": "2024-06-28",
+    "decision_date": "",
+    "user_id": "7dbb4d75-805c-4775-8b6c-83ce1b07ba95",
+    "status": "Pending",
+    "submission_city": "Toronto ",
+    "additional_info": "Canadian family ",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T14:11:37.522Z",
+    "updated_at": "2024-07-01T14:11:37.522Z",
+    "user": {
+      "id": "7dbb4d75-805c-4775-8b6c-83ce1b07ba95",
+      "username": "Mimi555"
+    }
+  },
+  {
+    "id": "0a9e0951-fd56-4080-a4df-6df77a9bac39",
+    "application_date": "2024-04-18",
+    "biometric_date": "2024-05-01",
+    "decision_date": null,
+    "user_id": "388bc8a1-6dce-451b-859c-a3612c2adfbc",
+    "status": "Pending",
+    "submission_city": "Toronto ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-06-30T19:36:52.019Z",
+    "updated_at": "2024-06-30T19:36:52.019Z",
+    "user": {
+      "id": "388bc8a1-6dce-451b-859c-a3612c2adfbc",
+      "username": "Vano"
+    }
+  },
+  {
+    "id": "b8f14da1-c7c9-4cd0-b194-696bc214c154",
+    "application_date": "2024-03-16",
+    "biometric_date": "2024-03-26",
+    "decision_date": "",
+    "user_id": "accee599-5111-49e2-800f-0dcb9a581d76",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "1 person",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T18:45:51.685Z",
+    "updated_at": "2024-07-01T18:45:51.685Z",
+    "user": {
+      "id": "accee599-5111-49e2-800f-0dcb9a581d76",
+      "username": "Karinl"
+    }
+  },
+  {
+    "id": "bf7ad7f1-f5a3-4fde-ae8f-fe828cd9daac",
+    "application_date": "2024-03-18",
+    "biometric_date": "2024-05-02",
+    "decision_date": "",
+    "user_id": "db1e5e02-2dec-45ee-b774-8b6222be0cb7",
+    "status": "Pending",
+    "submission_city": "Winnipeg ",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T23:02:36.812Z",
+    "updated_at": "2024-07-01T23:02:36.812Z",
+    "user": {
+      "id": "db1e5e02-2dec-45ee-b774-8b6222be0cb7",
+      "username": "Vlad"
+    }
+  },
+  {
+    "id": "4baa8687-1dc1-45a6-8d28-aa01cf77cdb3",
+    "application_date": "2024-03-18",
+    "biometric_date": "2024-05-02",
+    "decision_date": "",
+    "user_id": "79b64564-fd38-4bc7-a1e7-e66f52789997",
+    "status": "Pending",
+    "submission_city": "Winnipeg",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-07-01T23:06:26.251Z",
+    "updated_at": "2024-07-01T23:06:26.251Z",
+    "user": {
+      "id": "79b64564-fd38-4bc7-a1e7-e66f52789997",
+      "username": "Susan"
+    }
+  },
+  {
+    "id": "ad8382a0-c8de-4452-b87b-fad18bd2ce93",
+    "application_date": "2024-03-06",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "a887350d-787a-4a82-93f0-adf95798d6dc",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T00:40:57.849Z",
+    "updated_at": "2024-07-02T00:40:57.849Z",
+    "user": {
+      "id": "a887350d-787a-4a82-93f0-adf95798d6dc",
+      "username": "Sewar"
+    }
+  },
+  {
+    "id": "b67e4eab-ef70-48e0-9130-b473129ec228",
+    "application_date": "2024-05-10",
+    "biometric_date": "2024-06-26",
+    "decision_date": "",
+    "user_id": "1f254e9e-1996-41c5-9be0-06bb161f2994",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T01:24:51.982Z",
+    "updated_at": "2024-07-02T01:24:51.982Z",
+    "user": {
+      "id": "1f254e9e-1996-41c5-9be0-06bb161f2994",
+      "username": "Zohar"
+    }
+  },
+  {
+    "id": "90592110-ca77-4604-bb78-86f9981efa00",
+    "application_date": "2024-03-08",
+    "biometric_date": "",
+    "decision_date": "2024-06-20",
+    "user_id": "da8d32f3-cd41-43c0-8a34-4bdc25eb4ce6",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T03:45:19.775Z",
+    "updated_at": "2024-07-02T03:45:19.775Z",
+    "user": {
+      "id": "da8d32f3-cd41-43c0-8a34-4bdc25eb4ce6",
+      "username": "slavik"
+    }
+  },
+  {
+    "id": "15c01716-64a0-4937-9bc6-fa5e4c57e644",
+    "application_date": "2024-02-12",
+    "biometric_date": "2024-02-20",
+    "decision_date": "2024-06-05",
+    "user_id": "02897d5b-6393-491a-9ac0-d8b28b96102a",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T03:47:52.675Z",
+    "updated_at": "2024-07-02T03:47:52.675Z",
+    "user": {
+      "id": "02897d5b-6393-491a-9ac0-d8b28b96102a",
+      "username": "jerome1"
+    }
+  },
+  {
+    "id": "1ef6dd54-010e-4918-84b5-24bca85cbfd4",
+    "application_date": "2024-04-12",
+    "biometric_date": "2024-04-24",
+    "decision_date": "2024-06-02",
+    "user_id": "198fa537-daad-4e63-a477-33f11c6a8a72",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T03:49:22.385Z",
+    "updated_at": "2024-07-02T03:49:22.385Z",
+    "user": {
+      "id": "198fa537-daad-4e63-a477-33f11c6a8a72",
+      "username": "girl_59"
+    }
+  },
+  {
+    "id": "a808a640-45b1-4cb5-8adc-1346f12bce16",
+    "application_date": "2024-01-18",
+    "biometric_date": "2024-02-16",
+    "decision_date": "2024-06-01",
+    "user_id": "a2348694-60a4-4653-beab-492ac466ab2d",
+    "status": "Approved",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T03:51:50.369Z",
+    "updated_at": "2024-07-02T03:51:50.369Z",
+    "user": {
+      "id": "a2348694-60a4-4653-beab-492ac466ab2d",
+      "username": "facebook"
+    }
+  },
+  {
+    "id": "e7e7da09-7ef4-4faf-8d92-4ac84be23156",
+    "application_date": "2024-04-03",
+    "biometric_date": "2024-04-16",
+    "decision_date": "",
+    "user_id": "53d3a631-48b6-4494-9b16-f67a1fb5a4e6",
+    "status": "Pending",
+    "submission_city": "Calgary",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T04:32:36.482Z",
+    "updated_at": "2024-07-02T04:32:36.482Z",
+    "user": {
+      "id": "53d3a631-48b6-4494-9b16-f67a1fb5a4e6",
+      "username": "Bm"
+    }
+  },
+  {
+    "id": "7c467b04-3262-4f61-9444-d768e4d31190",
+    "application_date": "2024-04-08",
+    "biometric_date": "2024-04-19",
+    "decision_date": "",
+    "user_id": "6769ccbb-6e67-4a5b-8cf2-34ecb5c7c9ed",
+    "status": "Pending",
+    "submission_city": "winnipeg",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T04:53:16.101Z",
+    "updated_at": "2024-07-02T04:53:16.101Z",
+    "user": {
+      "id": "6769ccbb-6e67-4a5b-8cf2-34ecb5c7c9ed",
+      "username": "310678016"
+    }
+  },
+  {
+    "id": "5432cc8b-f75f-4607-bf47-9ce19e19906b",
+    "application_date": "2024-03-06",
+    "biometric_date": "2023-03-30",
+    "decision_date": "2024-06-30",
+    "user_id": "40a4b670-f654-4174-92e1-170a4b6c5b83",
+    "status": "Approved",
+    "submission_city": "Toronto ",
+    "additional_info": null,
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T20:55:51.661Z",
+    "updated_at": "2024-06-30T20:55:51.661Z",
+    "user": {
+      "id": "40a4b670-f654-4174-92e1-170a4b6c5b83",
+      "username": "Ranankory"
+    }
+  },
+  {
+    "id": "73f9029a-2b84-41b0-a951-707838cc2038",
+    "application_date": "2024-06-05",
+    "biometric_date": "2024-06-30",
+    "decision_date": null,
+    "user_id": "a8d17657-1650-4197-bef3-07f9cc7dc878",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "From Admin: Dear Xxx, I moved it to Pending, because it didnt make any sence that decision date was before biometric date ( decision date was 13/06/24 ) it broke a bit the styatistic. i believe it was an error :)\n",
+    "is_self_submitted": true,
+    "created_at": "2024-06-30T02:17:46.693Z",
+    "updated_at": "2024-06-30T02:17:46.693Z",
+    "user": {
+      "id": "a8d17657-1650-4197-bef3-07f9cc7dc878",
+      "username": "Xxx"
+    }
+  },
+  {
+    "id": "b918a227-62e7-4e24-86bc-c54fc4a7467c",
+    "application_date": "2024-04-30",
+    "biometric_date": "2024-05-01",
+    "decision_date": "",
+    "user_id": "da424a74-b0a2-4907-a716-cce21825cefd",
+    "status": "Pending",
+    "submission_city": "BC",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-07-02T06:07:22.308Z",
+    "updated_at": "2024-07-02T06:07:22.308Z",
+    "user": {
+      "id": "da424a74-b0a2-4907-a716-cce21825cefd",
+      "username": "Smith"
+    }
+  },
+  {
+    "id": "cab14ef9-ef0d-41bc-9a2f-3c6d852832f4",
+    "application_date": "2024-04-06",
+    "biometric_date": "2024-04-07",
+    "decision_date": "",
+    "user_id": "3d0aaba8-841e-4f04-a07d-7f61b2c2104c",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": true,
+    "created_at": "2024-07-02T06:55:23.569Z",
+    "updated_at": "2024-07-02T06:55:23.569Z",
+    "user": {
+      "id": "3d0aaba8-841e-4f04-a07d-7f61b2c2104c",
+      "username": "Bigger "
+    }
+  },
+  {
+    "id": "ac145c73-8302-4281-8509-5f980246657c",
+    "application_date": "2024-04-25",
+    "biometric_date": "2024-04-30",
+    "decision_date": "",
+    "user_id": "59f3aa64-74cf-4737-a638-6d914ef15a7c",
+    "status": "Pending",
+    "submission_city": "Langley, BC",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T08:25:07.808Z",
+    "updated_at": "2024-07-02T08:25:07.808Z",
+    "user": {
+      "id": "59f3aa64-74cf-4737-a638-6d914ef15a7c",
+      "username": "Eavigur@gmail.com"
+    }
+  },
+  {
+    "id": "abbc50db-e0a6-4e7c-bf49-6b786cc20c37",
+    "application_date": "2024-05-27",
+    "biometric_date": "2024-06-17",
+    "decision_date": "",
+    "user_id": "a8769e63-d4c2-4c0b-866a-d2904ce7fdf3",
+    "status": "Pending",
+    "submission_city": "Scarborough ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T10:36:04.220Z",
+    "updated_at": "2024-07-02T10:36:04.220Z",
+    "user": {
+      "id": "a8769e63-d4c2-4c0b-866a-d2904ce7fdf3",
+      "username": "Choncholoco "
+    }
+  },
+  {
+    "id": "21368570-ef6c-4ad4-b357-adcc5b953faa",
+    "application_date": "2024-04-04",
+    "biometric_date": "2024-04-18",
+    "decision_date": "",
+    "user_id": "15fd3936-4ea4-4f8b-b1a3-2229e0adca5c",
+    "status": "Pending",
+    "submission_city": "Kitchener",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T13:30:18.748Z",
+    "updated_at": "2024-07-02T13:31:02.431Z",
+    "user": {
+      "id": "15fd3936-4ea4-4f8b-b1a3-2229e0adca5c",
+      "username": "noHs"
+    }
+  },
+  {
+    "id": "566cb12b-9fe1-4eaa-8eed-e3ca51ae313a",
+    "application_date": "2024-05-25",
+    "biometric_date": "2024-06-14",
+    "decision_date": "",
+    "user_id": "1e1a03c6-669b-4ae5-bd43-25a1eb56a741",
+    "status": "Pending",
+    "submission_city": "Toronto ",
+    "additional_info": "1 person",
+    "is_self_submitted": true,
+    "created_at": "2024-07-02T13:35:41.298Z",
+    "updated_at": "2024-07-02T13:35:41.298Z",
+    "user": {
+      "id": "1e1a03c6-669b-4ae5-bd43-25a1eb56a741",
+      "username": "Blackelf"
+    }
+  },
+  {
+    "id": "82e7d333-cc13-4dc2-ac47-a8d8c855e9ea",
+    "application_date": "2024-05-07",
+    "biometric_date": "2024-06-24",
+    "decision_date": "",
+    "user_id": "cdc0daaa-3570-4a58-b260-8e283e55d839",
+    "status": "Pending",
+    "submission_city": "Q",
+    "additional_info": "Gatineau ",
+    "is_self_submitted": true,
+    "created_at": "2024-07-02T14:41:28.588Z",
+    "updated_at": "2024-07-02T14:41:28.588Z",
+    "user": {
+      "id": "cdc0daaa-3570-4a58-b260-8e283e55d839",
+      "username": "Metushelach"
+    }
+  },
+  {
+    "id": "c10ede79-bb25-4806-9970-7cbb07a54122",
+    "application_date": "2024-05-16",
+    "biometric_date": "2024-05-30",
+    "decision_date": "",
+    "user_id": "767a9481-446d-4f82-9a99-0959740993f0",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "My husband got his biometrics letter the next day (17/05/24) and I got mine a month later (13/06/24).",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T20:11:28.710Z",
+    "updated_at": "2024-07-02T20:11:28.710Z",
+    "user": {
+      "id": "767a9481-446d-4f82-9a99-0959740993f0",
+      "username": "KseniaM"
+    }
+  },
+  {
+    "id": "fa8a5d3d-e51d-42db-80ab-b676cd7cd1dc",
+    "application_date": "2024-05-15",
+    "biometric_date": "2024-06-20",
+    "decision_date": "",
+    "user_id": "767a9481-446d-4f82-9a99-0959740993f0",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T20:12:56.920Z",
+    "updated_at": "2024-07-02T20:12:56.920Z",
+    "user": {
+      "id": "767a9481-446d-4f82-9a99-0959740993f0",
+      "username": "KseniaM"
+    }
+  },
+  {
+    "id": "64ff2d9d-8aa1-4a15-b1b8-23d3aad6d252",
+    "application_date": "2024-03-20",
+    "biometric_date": "",
+    "decision_date": "",
+    "user_id": "dd707342-4f46-4ead-bdfb-869d940998a1",
+    "status": "Pending",
+    "submission_city": "Vancouver ",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T21:30:48.248Z",
+    "updated_at": "2024-07-02T21:30:48.248Z",
+    "user": {
+      "id": "dd707342-4f46-4ead-bdfb-869d940998a1",
+      "username": "Nl"
+    }
+  },
+  {
+    "id": "b1c5c933-8703-4cef-aace-49352d1bad2d",
+    "application_date": "2024-05-05",
+    "biometric_date": "2024-06-05",
+    "decision_date": "",
+    "user_id": "cee820b1-3bf6-4bc3-b3ae-0017e391ef7c",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-02T23:38:31.016Z",
+    "updated_at": "2024-07-02T23:38:31.016Z",
+    "user": {
+      "id": "cee820b1-3bf6-4bc3-b3ae-0017e391ef7c",
+      "username": "yantiparazi"
+    }
+  },
+  {
+    "id": "078b5345-d492-4fe7-85be-3f7c89396311",
+    "application_date": "2024-05-16",
+    "biometric_date": "2024-05-21",
+    "decision_date": "",
+    "user_id": "25efc81f-350a-4e86-bfa5-4c84aaeb3e48",
+    "status": "Pending",
+    "submission_city": "",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-03T01:28:44.104Z",
+    "updated_at": "2024-07-03T01:28:44.104Z",
+    "user": {
+      "id": "25efc81f-350a-4e86-bfa5-4c84aaeb3e48",
+      "username": "lll"
+    }
+  },
+  {
+    "id": "fdf46020-45e1-4961-86ef-083c6d58c704",
+    "application_date": "2024-03-18",
+    "biometric_date": "2024-03-19",
+    "decision_date": "",
+    "user_id": "2a468ac6-ee47-4e28-976b-297903d5a008",
+    "status": "Pending",
+    "submission_city": "Montreal",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-03T01:36:25.208Z",
+    "updated_at": "2024-07-03T01:36:25.208Z",
+    "user": {
+      "id": "2a468ac6-ee47-4e28-976b-297903d5a008",
+      "username": "test12"
+    }
+  },
+  {
+    "id": "9f4aa958-98fa-4262-8c9e-58e7dc975bd7",
+    "application_date": "2024-03-18",
+    "biometric_date": "2024-03-19",
+    "decision_date": "",
+    "user_id": "2a468ac6-ee47-4e28-976b-297903d5a008",
+    "status": "Pending",
+    "submission_city": "Montreal",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-03T01:36:55.734Z",
+    "updated_at": "2024-07-03T01:36:55.734Z",
+    "user": {
+      "id": "2a468ac6-ee47-4e28-976b-297903d5a008",
+      "username": "test12"
+    }
+  },
+  {
+    "id": "8f67951d-17e2-42a9-9481-4956d637aea0",
+    "application_date": "2024-03-27",
+    "biometric_date": "2024-04-08",
+    "decision_date": "",
+    "user_id": "394b6dd5-5633-4b7f-a122-6d3d1c3bfd70",
+    "status": "Pending",
+    "submission_city": "Toronto",
+    "additional_info": "",
+    "is_self_submitted": false,
+    "created_at": "2024-07-03T01:48:48.416Z",
+    "updated_at": "2024-07-03T01:53:29.696Z",
+    "user": {
+      "id": "394b6dd5-5633-4b7f-a122-6d3d1c3bfd70",
+      "username": "Mh1907"
+    }
+  }
+]
